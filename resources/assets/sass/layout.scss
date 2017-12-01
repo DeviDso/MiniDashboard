@@ -1,0 +1,273 @@
+$lightDark: #3e3e3e;
+$dark: #333;
+$darker: #222;
+$white: #ffffff;
+$green: #41B883;
+$red: #cc0000;
+$orange: #EB5E28;
+$lightBlue: #68B3C8;
+$lightOrange: #F3BB45;
+
+h1{
+    font-size: 28px;
+}
+h2{
+    font-size: 22px;
+}
+label{
+    margin-top: 12px;
+}
+thead{
+    font-weight: 800;
+}
+tr{
+    cursor: pointer;
+}
+.margin-top{
+    margin-top: 25px;
+}
+.desa-sidebar{
+    float: left;
+    display: block;
+    width: 260px;
+    min-height: 100vh;
+    height: auto;
+    background: #3e3e3e;
+}
+.sidebar-logo{
+    text-align: center;
+    margin-top: 25px;
+}
+.sidebar-profile{
+    text-align: center;
+    margin-top: 35px;
+}
+.sidebar-profile img{
+    height: 95px;
+    border-radius: 5px;
+}
+.sidebar-profile p{
+    font-size: 14px;
+    margin-top: 4px;
+    color: $white;
+}
+.sidebar-menu{
+    margin-top: 25px;
+}
+.sidebar-menu ul{
+    list-style-type: none;
+    padding: 0;
+    color: $white;
+}
+.sidebar-menu ul li{
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+}
+.sidebar-menu ul li.active{
+    background: $dark;
+}
+.sidebar-menu ul li:hover{
+    background: $dark;
+}
+.sidebar-menu a{
+    color: $white;
+    text-decoration: none;
+}
+.sidebar-menu .router-link-active li{
+    background: $dark;
+}
+.sidebar-menu .sub{
+    display: none;
+}
+.sidebar-menu .sub a{
+    color: $white;
+}
+.sidebar-menu .sub .router-link-active li::before{
+    font-family: FontAwesome;
+     content: "\f105";
+     padding-right: 12px;
+}
+.sidebar-menu .sub .router-link-active li:hover{
+    text-decoration: none;
+}
+.sidebar-menu .sub li{
+    //background: red;
+    font-size: 12px;
+    margin-left: 15px;
+    padding: 5px;
+}
+.sidebar-menu .sub .router-link-active{
+    background: $darker;
+}
+.sidebar-menu .sub li:hover{
+    background: $darker;
+}
+.sidebar-menu .sub ul li a{
+    color: $white!important;
+}
+.sidebar-menu ul li:first-child::after{
+    content: '';
+}
+.sidebar-menu ul li:last-child::after{
+    content: '';
+}
+.sidebar-menu ul li i{
+    font-size: 15px;
+    width: 25px;
+}
+.sidebar-copyright{
+    bottom: 0;
+    left: 55px;
+    position: relative;
+}
+.desa-content{
+    float: left;
+    width: calc(100% - 260px);
+}
+.desa-content table{
+    width: 100%;
+}
+.desa-content table th{
+    padding-bottom: 12px;
+}
+.desa-content table td{
+    padding: 7px;
+}
+.desa-content table tr:hover{
+    background: #e3e3e3;
+}
+.desa-content table tr:not(:last-child){
+    border-bottom: 1px solid #e3e3e3;
+}
+.desa-content .top{
+    width: 100%;
+    height: 75px;
+    background: $white;
+    box-shadow: #e3e3e3 2px 1px 4px 1px;
+    text-align: right;
+    padding: 25px;
+}
+.desa-content .top ul{
+    list-style-type: none;
+    display: inline-flex;
+}
+.desa-content .top ul li{
+    padding-left: 25px;
+    font-size: 25px;
+}
+.desa-content-main{
+    padding: 35px;
+}
+.desa-small{
+    float: left;
+    width: 25%;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 25px;
+}
+.desa-third{
+    float: left;
+    width: 33.33%;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 25px;
+}
+.desa-mid{
+    float: left;
+    width: 50%;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 25px;
+}
+.desa-almost-full{
+    float: left;
+    width: 75%;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 25px;
+}
+.desa-full{
+    float: left;
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 25px;
+}
+.desa-container{
+    background: $white;
+    box-shadow: #e3e3e3 2px 1px 4px 1px;
+    padding: 25px;
+    border-radius: 5px;
+    float: left;
+    width: 100%;
+}
+.seeAll{
+    text-align: right;
+    margin-top: 7px;
+}
+.seeAll a{
+    color: $lightBlue;
+    font-size: 12px;
+}
+.submitButton{
+    background: transparent;
+    border: none;
+    border: solid 1px $dark;
+    background: $dark;
+    color: #fff;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    padding: 5px 20px 5px 20px;
+    -webkit-transition: background-color 0.4s ease-out;
+     -moz-transition: background-color 0.4s ease-out;
+     -o-transition: background-color 0.4s ease-out;
+     transition: background-color 0.4s ease-out;
+}
+.submitButton:hover{
+    background: $darker;
+    -webkit-transition: background-color 0.4s ease-out;
+     -moz-transition: background-color 0.4s ease-out;
+     -o-transition: background-color 0.4s ease-out;
+     transition: background-color 0.4s ease-out;
+}
+.seperator{
+    border-bottom: 1px solid #e3e3e3;
+    width: 100%;
+    margin-top: 7px;
+}
+.clientInfo tr{
+    width: 25%;
+    text-align: center;
+    font-size: 16px;
+}
+.clientInfo tr:hover{
+    cursor: default;
+    background: #fff!important;
+}
+.clientAction{
+    width: 100%;
+    font-size: 18px;
+    border: solid 1px $darker;
+    background: transparent;
+    margin-bottom: 12px;
+    transition: all 0.3s;
+}
+.clientAction .active{
+    background: $darker!important;
+}
+.clientAction:hover{
+    background: $darker;
+    transition: all 0.5s;
+    color: $white;
+}
+.clientActionDelete{
+    @extend .clientAction;
+    border-color: #cc0000;
+    color: #cc0000;
+}
+.clientActionDelete:hover{
+    background: #cc0000;
+    transition: all 0.5s;
+    color: $white;
+}
