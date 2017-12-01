@@ -19,7 +19,12 @@ class RequestsController extends Controller
     public function index(Request $r)
     {
         $user = User::find($r->input('id'));
-        return $user->clientRequest()->get();
+        return $user->clientRequest()
+                ->with('user')
+                ->with('client')
+                ->with('requestStatus')
+                ->with('requestType')
+                ->get();
     }
 
     /**
@@ -53,9 +58,18 @@ class RequestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $r)
     {
-        //
+        $user = User::firstOrFail($r->input('user_id'));
+
+        return $user->clientRequest()
+                ->where('id', $id)
+                ->with('user')
+                ->with('client')
+                ->with('requestStatus')
+                ->with('requestType')
+                ->first();
+        $request = ClientRequest::find($id);
     }
 
     /**
@@ -67,17 +81,37 @@ class RequestsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'client_id' => 'required',
+            'request_type_id' => 'required',
+            'request_status_id' => 'required',
+            ]);
+
+        if($validator->fails()){
+            return response()->with($validator->errors(), 400);
+        }
+
+        $req = ClientRequest::findOrFail($id);
+        $req->update($request->all());
+
+        return $req;
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from sto2rage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $r)
     {
-        //
+        $user = User::firstOrFail($r->input('user_id'));
+
+        $user->clientRequest()
+            ->where('id', $id)
+            ->delete();
+
+        return '';
     }
 }

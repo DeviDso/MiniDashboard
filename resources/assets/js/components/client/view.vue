@@ -28,7 +28,7 @@
                 <h2>Actions</h2>
                 <hr>
                 <button class="clientAction active">New order</button>
-                <button class="clientAction">New request</button>
+                <button class="clientAction" v-on:click="newRequest()">New request</button>
                 <button class="clientAction" v-on:click="editClient()">Edit client</button>
                 <button class="clientActionDelete" v-on:click="deleteClient()">Delete client</button>
             </div>
@@ -71,6 +71,10 @@ export default{
                     toastr.error('Something wrong, try again.');
                 });
             }
+        },
+        newRequest(){
+            var app = this;
+            app.$router.push({name: 'requestCreateId', params:{id:app.$route.params.id}});
         }
     }
 }

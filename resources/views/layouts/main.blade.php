@@ -44,6 +44,13 @@
                             <router-link :to="{name: 'requestIndex'}"><li>View all</li></router-link>
                         </ul>
                     </li>
+                    <li class="menu-item">
+                        <i class="fa fa-gift"></i></i></i> Products
+                        <ul class="sub">
+                            <router-link :to="{name: 'itemIndex'}"><li>Add new</li></router-link>
+                            <router-link :to="{name: 'itemIndex'}"><li>View All</li></router-link>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div class="sidebar-copyright">

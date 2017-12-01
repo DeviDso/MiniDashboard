@@ -3,23 +3,22 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
 
-use App\Client;
+use App\Http\Controllers\Controller;
+use App\Product;
 use App\User;
 
-class ClientsController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $r)
+    public function index()
     {
-        return Client::all();
+        return Product::all();
     }
 
     /**
@@ -30,18 +29,21 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::find($request->input('user_id'));
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required'
+        $validator = Validator::make($request->all(),[
+            'user_id' => 'required',
+            'category_id' => 'required',
+            'name' => 'required',
+            'quantity' => 'required'
             ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors(), 400);
+            return response()->with($validator->errors(), 400);
         }
-        $client = $user->client()->create($request->all());
 
-        return $client;
+        $user = User::firstOrFail($request->input('user_id'));
+        $product = $user->product()->create($request()->all());
+
+        return $product;
     }
 
     /**
@@ -52,7 +54,9 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        return Client::find($id);
+        $product = Product::firstOrFail($id);
+
+        return $product;
     }
 
     /**
@@ -64,10 +68,16 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = Client::findOrFail($id);
-        $client->update($request->all());
+        $validator = Validator::make($request->all(),[
+            'user_id' => 'required',
+            'category_id' => 'required',
+            'name' => 'required',
+            'quantity' => 'required'
+            ]);
 
-        return $client;
+        if($validator->fails()){
+            return response()->with($validator->errors(), 400);
+        }
     }
 
     /**
@@ -78,10 +88,6 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        $client = Client::findOrFail($id);
-        $client->clientRequest()->delete();
-        $client->delete();
-
-        return '';
+        //
     }
 }

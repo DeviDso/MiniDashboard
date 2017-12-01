@@ -251,7 +251,8 @@ tr {
   font-size: 12px;
 }
 
-.submitButton {
+.submitButton,
+.deleteButton {
   background: transparent;
   border: none;
   border: solid 1px #333;
@@ -264,10 +265,23 @@ tr {
   transition: background-color 0.4s ease-out;
 }
 
-.submitButton:hover {
+.submitButton:hover,
+.deleteButton:hover {
   background: #222;
   -webkit-transition: background-color 0.4s ease-out;
   transition: background-color 0.4s ease-out;
+}
+
+.deleteButton {
+  border: solid 1px #cc0000;
+  color: #cc0000;
+  background: transparent;
+  float: right;
+}
+
+.deleteButton:hover {
+  background: #cc0000;
+  color: #ffffff;
 }
 
 .seperator {
