@@ -22,5 +22,7 @@ Route::group(['prefix' => '/V1', 'namespace' => 'Api\V1', 'as' => 'api.'], funct
     Route::resource('requests', 'RequestsController', ['except' => ['create', 'edit']]);
     Route::resource('requestType', 'requestTypeController', ['except' => ['create', 'edit']]);
     Route::resource('requestStatus', 'requestStatusController', ['except' => ['create', 'edit']]);
+    Route::resource('categories', 'categoriesController', ['except' => ['create', 'edit']]);
+    Route::resource('products', 'productsController', ['except' => ['create', 'edit']]);
     Route::resource('user', 'UserController', ['except' => ['create', 'edit']]);
 });

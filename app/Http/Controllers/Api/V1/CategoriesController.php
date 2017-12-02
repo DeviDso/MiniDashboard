@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-
 use App\Http\Controllers\Controller;
-use App\Product;
-use App\User;
+use App\ProductCategory;
 
-class ProductsController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +15,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return ProductCategory::orderBy('name', 'asc')->get();
     }
 
     /**
@@ -29,19 +26,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'category_id' => 'required',
-            'name' => 'required',
-            'quantity' => 'required'
-            ]);
-
-        if($validator->fails()){
-            return response()->with($validator->errors(), 400);
-        }
-
-        $product = Product::create($request->all());
-
-        return $product;
+        //
     }
 
     /**
@@ -52,9 +37,18 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $product = Product::firstOrFail($id);
+        //
+    }
 
-        return $product;
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -66,16 +60,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(),[
-            'user_id' => 'required',
-            'category_id' => 'required',
-            'name' => 'required',
-            'quantity' => 'required'
-            ]);
-
-        if($validator->fails()){
-            return response()->with($validator->errors(), 400);
-        }
+        //
     }
 
     /**

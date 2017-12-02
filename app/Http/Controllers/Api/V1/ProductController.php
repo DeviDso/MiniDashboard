@@ -30,7 +30,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'user_id' => 'required',
             'category_id' => 'required',
             'name' => 'required',
             'quantity' => 'required'
@@ -40,8 +39,7 @@ class ProductController extends Controller
             return response()->with($validator->errors(), 400);
         }
 
-        $user = User::firstOrFail($request->input('user_id'));
-        $product = $user->product()->create($request()->all());
+        $product = Product::create($request->all());
 
         return $product;
     }

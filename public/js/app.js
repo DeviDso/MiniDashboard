@@ -97,8 +97,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_request_createId_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_request_createId_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_request_view_vue__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_request_view_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_request_view_vue__);
-throw new Error("Cannot find module \"./components/product/index.vue\"");
-throw new Error("Cannot find module \"./components/product/create.vue\"");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_product_index_vue__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_product_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_product_index_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_product_create_vue__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_product_create_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_product_create_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -144,7 +146,7 @@ toastr.options = {
 
 
 
-var routes = [{ path: '/', components: { home: __WEBPACK_IMPORTED_MODULE_1__components_home_index_vue___default.a }, name: 'Home' }, { path: '/client/index', component: __WEBPACK_IMPORTED_MODULE_3__components_client_index_vue___default.a, name: 'clientIndex' }, { path: '/client/create', component: __WEBPACK_IMPORTED_MODULE_2__components_client_create_vue___default.a, name: 'clientCreate' }, { path: '/client/view/:id', component: __WEBPACK_IMPORTED_MODULE_4__components_client_view_vue___default.a, name: 'clientView' }, { path: '/clients/edit/:id', component: __WEBPACK_IMPORTED_MODULE_5__components_client_edit_vue___default.a, name: 'clientEdit' }, { path: '/request/index', component: __WEBPACK_IMPORTED_MODULE_6__components_request_index_vue___default.a, name: 'requestIndex' }, { path: '/request/create', component: __WEBPACK_IMPORTED_MODULE_7__components_request_create_vue___default.a, name: 'requestCreate' }, { path: '/request/create/:id', component: __WEBPACK_IMPORTED_MODULE_8__components_request_createId_vue___default.a, name: 'requestCreateId' }, { path: '/request/view/:id', component: __WEBPACK_IMPORTED_MODULE_9__components_request_view_vue___default.a, name: 'requestView' }, { path: '/product/index', component: __WEBPACK_IMPORTED_MODULE_10__components_product_index_vue___default.a, name: 'productIndex' }, { path: '/product/create', component: __WEBPACK_IMPORTED_MODULE_11__components_product_create_vue___default.a, nane: 'productCreate' }];
+var routes = [{ path: '/', components: { home: __WEBPACK_IMPORTED_MODULE_1__components_home_index_vue___default.a }, name: 'Home' }, { path: '/client/index', component: __WEBPACK_IMPORTED_MODULE_3__components_client_index_vue___default.a, name: 'clientIndex' }, { path: '/client/create', component: __WEBPACK_IMPORTED_MODULE_2__components_client_create_vue___default.a, name: 'clientCreate' }, { path: '/client/view/:id', component: __WEBPACK_IMPORTED_MODULE_4__components_client_view_vue___default.a, name: 'clientView' }, { path: '/clients/edit/:id', component: __WEBPACK_IMPORTED_MODULE_5__components_client_edit_vue___default.a, name: 'clientEdit' }, { path: '/request/index', component: __WEBPACK_IMPORTED_MODULE_6__components_request_index_vue___default.a, name: 'requestIndex' }, { path: '/request/create', component: __WEBPACK_IMPORTED_MODULE_7__components_request_create_vue___default.a, name: 'requestCreate' }, { path: '/request/create/:id', component: __WEBPACK_IMPORTED_MODULE_8__components_request_createId_vue___default.a, name: 'requestCreateId' }, { path: '/request/view/:id', component: __WEBPACK_IMPORTED_MODULE_9__components_request_view_vue___default.a, name: 'requestView' }, { path: '/product/index', component: __WEBPACK_IMPORTED_MODULE_10__components_product_index_vue___default.a, name: 'productIndex' }, { path: '/product/create', component: __WEBPACK_IMPORTED_MODULE_11__components_product_create_vue___default.a, name: 'productCreate' }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({ routes: routes });
 
@@ -48522,6 +48524,492 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-31a13d4e", module.exports)
   }
 }
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(15)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(81)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/product/index.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4ba24baa", Component.options)
+  } else {
+    hotAPI.reload("data-v-4ba24baa", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4ba24baa", module.exports)
+  }
+}
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(15)
+/* script */
+var __vue_script__ = __webpack_require__(84)
+/* template */
+var __vue_template__ = __webpack_require__(83)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/product/create.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d93e941a", Component.options)
+  } else {
+    hotAPI.reload("data-v-d93e941a", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "desa-full" }, [
+    _c("div", { staticClass: "desa-container" }, [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              _vm.sendForm()
+            }
+          }
+        },
+        [
+          _c("h1", [_vm._v("Add new product")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("label", [_vm._v("Product name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.name,
+                  expression: "product.name"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", required: "" },
+              domProps: { value: _vm.product.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("label", [_vm._v("Category")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.product.category_id,
+                    expression: "product.category_id"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { required: "" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.product,
+                      "category_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              _vm._l(_vm.categories, function(category) {
+                return _c("option", { domProps: { value: category.id } }, [
+                  _vm._v(_vm._s(category.name))
+                ])
+              })
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Code")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.product.code,
+                    expression: "product.code"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", required: "" },
+                domProps: { value: _vm.product.code },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.product, "code", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Alternative code")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.product.alternative_code,
+                    expression: "product.alternative_code"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.product.alternative_code },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.product,
+                      "alternative_code",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Quantity")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.product.quantity,
+                    expression: "product.quantity"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", required: "" },
+                domProps: { value: _vm.product.quantity },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.product, "quantity", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Weight")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.product.weight,
+                    expression: "product.weight"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number" },
+                domProps: { value: _vm.product.weight },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.product, "weight", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("label", [_vm._v("Product description")]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.description,
+                  expression: "product.description"
+                }
+              ],
+              staticClass: "form-control",
+              domProps: { value: _vm.product.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "description", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("label", [_vm._v("Price (€)")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.price,
+                  expression: "product.price"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", min: "1", step: "any" },
+              domProps: { value: _vm.product.price },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "price", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(0, false, false)
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("hr"),
+      _vm._v(" "),
+      _c("button", { staticClass: "submitButton", attrs: { type: "submit" } }, [
+        _vm._v("Create")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d93e941a", module.exports)
+  }
+}
+
+/***/ }),
+/* 84 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            product: {
+                category_id: '',
+                name: '',
+                description: '',
+                code: '',
+                alternative_code: '',
+                weight: '',
+                quantity: 1,
+                price: ''
+            },
+            categories: []
+        };
+    },
+    mounted: function mounted() {
+        var app = this;
+
+        axios.get('/api/V1/categories').then(function (res) {
+            app.categories = res.data;
+            console.log(res.data);
+        }).catch(function (err) {
+            toastr.error('Failed to load! ' + err);
+        });
+    },
+
+    methods: {
+        sendForm: function sendForm() {
+            event.preventDefault();
+
+            var app = this;
+
+            axios.post('/api/V1/products', this.product).then(function (res) {
+                console.log(res);
+                toastr.success('Product created!');
+                app.$router.push({ name: 'productIndex' });
+            }).catch(function (err) {
+                console.log(err);
+                toastr.error('Failed to create! ' + err);
+            });
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

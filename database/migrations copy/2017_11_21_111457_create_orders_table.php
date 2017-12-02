@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientsRequestsTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateClientsRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients_requests', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('client_id');
-            $table->integer('request_type_id');
-            $table->integer('request_status_id');
-            $table->text('note')->nullable();
+            $table->integer('status_id');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateClientsRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients_requests');
+        Schema::dropIfExists('orders');
     }
 }

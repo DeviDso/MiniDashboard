@@ -54,7 +54,7 @@ const routes = [
     {path: '/request/create/:id', component:requestCreateId, name: 'requestCreateId'},
     {path: '/request/view/:id', component:requestView, name: 'requestView'},
     {path: '/product/index', component:productIndex, name: 'productIndex'},
-    {path: '/product/create', component:productCreate, nane: 'productCreate'},
+    {path: '/product/create', component:productCreate, name: 'productCreate'},
 ]
 
 const router = new VueRouter({routes});

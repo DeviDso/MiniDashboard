@@ -18,8 +18,7 @@ class CreateClientsRequestsTable extends Migration
             $table->integer('user_id');
             $table->integer('client_id');
             $table->integer('request_type_id');
-            $table->integer('request_status_id');
-            $table->text('note')->nullable();
+            $table->string('title');
             $table->timestamps();
         });
     }

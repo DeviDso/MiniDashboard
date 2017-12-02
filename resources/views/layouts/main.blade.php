@@ -34,21 +34,21 @@
                         <i class="fa fa-user"></i> Clients
                         <ul class="sub">
                             <router-link :to="{name: 'clientCreate'}"><li>Add new</li></router-link>
-                            <router-link :to="{name: 'clientIndex'}"><li>View all</li></router-link>
+                            <router-link :to="{name: 'clientIndex'}"><li>All clients</li></router-link>
                         </ul>
                     </li>
                     <li class="menu-item">
                         <i class="fa fa-comments"></i></i> Requests
                         <ul class="sub">
                             <router-link :to="{name: 'requestCreate'}"><li>Add new</li></router-link>
-                            <router-link :to="{name: 'requestIndex'}"><li>View all</li></router-link>
+                            <router-link :to="{name: 'requestIndex'}"><li>All requests</li></router-link>
                         </ul>
                     </li>
                     <li class="menu-item">
                         <i class="fa fa-gift"></i></i></i> Products
                         <ul class="sub">
-                            <router-link :to="{name: 'itemIndex'}"><li>Add new</li></router-link>
-                            <router-link :to="{name: 'itemIndex'}"><li>View All</li></router-link>
+                            <router-link :to="{name: 'productCreate'}"><li>Add new</li></router-link>
+                            <router-link :to="{name: 'productIndex'}"><li>All products</li></router-link>
                         </ul>
                     </li>
                 </ul>
