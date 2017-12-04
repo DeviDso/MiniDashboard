@@ -50,14 +50,10 @@
     </div>
 </template>
 <script>
-    window.user_id = '{{ Auth::user()->id }}'
-</script>
-<script>
 export default{
     data(){
         return {
             client: {
-                user_id: user_id,
                 name: '',
                 phone: '',
                 email: '',

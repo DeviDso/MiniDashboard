@@ -6,6 +6,10 @@ h2 {
   font-size: 22px;
 }
 
+h3 {
+  font-size: 16px;
+}
+
 label {
   margin-top: 12px;
 }
@@ -29,6 +33,7 @@ tr {
   min-height: 100vh;
   height: auto;
   background: #3e3e3e;
+  position: fixed;
 }
 
 .sidebar-logo {
@@ -143,6 +148,7 @@ tr {
 .desa-content {
   float: left;
   width: calc(100% - 260px);
+  margin-left: 260px;
 }
 
 .desa-content table {
@@ -290,10 +296,21 @@ tr {
   margin-top: 7px;
 }
 
+.clientInfo {
+  width: 100%;
+}
+
+.clientInfo tr td {
+  width: 50%;
+}
+
+.clientInfo tr td i {
+  margin-right: 12px;
+}
+
 .clientInfo tr {
-  width: 25%;
-  text-align: center;
   font-size: 16px;
+  border: none !important;
 }
 
 .clientInfo tr:hover {
@@ -335,5 +352,49 @@ tr {
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
   color: #ffffff;
+}
+
+.orderProducts {
+  height: 300px;
+  overflow: scroll;
+  margin-top: 12px;
+}
+
+.orderProductTable tr {
+  cursor: default;
+}
+
+.orderProductTable span {
+  color: #cc0000;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.orderProducts ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.orderProducts ul li {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.orderProducts ul li:hover {
+  background: #222;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.orderProducts ul li:not(:last-child) {
+  border-bottom: solid 1px #68B3C8;
+}
+
+.orderProducts b {
+  float: right;
+}
+
+.pagination {
+  cursor: pointer;
 }
 

@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-12">
                     <hr>
-                    <button type="submit" class="submitButton">Create</button>
+                    <button type="submit" class="submitButton">Update</button>
                     <button type="button" class="deleteButton" v-on:click="deleteRequest()">Delete</button>
                 </div>
             </form>

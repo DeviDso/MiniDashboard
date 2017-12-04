@@ -21,6 +21,7 @@
     "dependencies": {
         "izitoast": "^1.2.0",
         "toastr": "^2.1.2",
-        "vue-router": "^3.0.1"
+        "vue-router": "^3.0.1",
+        "vuejs-paginator": "^2.0.2"
     }
 }

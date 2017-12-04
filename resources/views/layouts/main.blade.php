@@ -45,6 +45,13 @@
                         </ul>
                     </li>
                     <li class="menu-item">
+                        <i class="fa fa-file"></i></i> Orders
+                        <ul class="sub">
+                            <router-link :to="{name: 'orderCreate'}"><li>Add new</li></router-link>
+                            <router-link :to="{name: 'orderIndex'}"><li>All requests</li></router-link>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
                         <i class="fa fa-gift"></i></i></i> Products
                         <ul class="sub">
                             <router-link :to="{name: 'productCreate'}"><li>Add new</li></router-link>

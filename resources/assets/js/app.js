@@ -42,6 +42,8 @@ import requestCreateId from './components/request/createId.vue';
 import requestView from './components/request/view.vue';
 import productIndex from './components/product/index.vue';
 import productCreate from './components/product/create.vue';
+import orderIndex from './components/order/index.vue';
+import orderCreate from './components/order/create.vue';
 
 const routes = [
     {path: '/',components: {home : homeIndex},name: 'Home'},
@@ -55,6 +57,8 @@ const routes = [
     {path: '/request/view/:id', component:requestView, name: 'requestView'},
     {path: '/product/index', component:productIndex, name: 'productIndex'},
     {path: '/product/create', component:productCreate, name: 'productCreate'},
+    {path: '/order/index', component:orderIndex, name: 'orderIndex'},
+    {path: '/order/create', component:orderCreate, name: 'orderCreate'},
 ]
 
 const router = new VueRouter({routes});

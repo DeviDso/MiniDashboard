@@ -3,23 +3,21 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\Controller;
+use App\Order;
 use App\Client;
-use App\User;
 
-class ClientsController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $r)
+    public function index()
     {
-        return Client::orderBy('name', 'asc')->get();
+        return Order::with('client')->with('status')->get();
     }
 
     /**
@@ -31,15 +29,19 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required'
+            'user_id' => 'required',
+            'client_id' => 'required',
+            'status_id' => 'required',
             ]);
 
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
-        $client = Client::create($request->all());
 
-        return $client;
+        $client = Client::find($request->input('client_id'));
+        $order = $client->orders()->create($request->all());
+
+        return $order;
     }
 
     /**
@@ -50,11 +52,7 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        $client = Client::find($id);
-
-        return $client->with('requests')
-                ->where('id', $id)
-                ->firstOrFail();
+        //
     }
 
     /**
@@ -66,10 +64,7 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = Client::findOrFail($id);
-        $client->update($request->all());
-
-        return $client;
+        //
     }
 
     /**
@@ -80,10 +75,6 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        $client = Client::findOrFail($id);
-        $client->clientRequest()->delete();
-        $client->delete();
-
-        return '';
+        //
     }
 }

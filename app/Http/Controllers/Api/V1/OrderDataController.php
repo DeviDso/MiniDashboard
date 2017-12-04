@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-
 use App\Http\Controllers\Controller;
+use App\OrderData;
 use App\Product;
-use App\User;
 
-class ProductController extends Controller
+class OrderDataController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +16,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -29,19 +37,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'category_id' => 'required',
-            'name' => 'required',
-            'quantity' => 'required'
-            ]);
 
-        if($validator->fails()){
-            return response()->with($validator->errors(), 400);
+        $orderData = $request->all();
+
+        foreach($orderData as $item){
+            OrderData::create($item);
         }
-
-        $product = Product::create($request->all());
-
-        return $product;
+        return response()->json('Added!');
     }
 
     /**
@@ -52,9 +54,18 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::firstOrFail($id);
+        //
+    }
 
-        return $product;
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -66,16 +77,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(),[
-            'user_id' => 'required',
-            'category_id' => 'required',
-            'name' => 'required',
-            'quantity' => 'required'
-            ]);
-
-        if($validator->fails()){
-            return response()->with($validator->errors(), 400);
-        }
+        //
     }
 
     /**
