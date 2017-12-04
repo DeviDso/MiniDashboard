@@ -398,3 +398,30 @@ tr {
   cursor: pointer;
 }
 
+.backButton {
+  border: solid 1px #F3BB45;
+  padding: 5px 12px 5px 12px;
+  font-size: 16px;
+  background: transparent;
+  color: #F3BB45;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.backButton::before {
+  font-family: FontAwesome;
+  content: "\F100   ";
+}
+
+.requestInProgress {
+  color: #92B558;
+}
+
+.requestCanceled {
+  color: #cc0000;
+}
+
+.requestDone {
+  color: #68B3C8;
+}
+

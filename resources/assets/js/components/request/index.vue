@@ -8,13 +8,22 @@
                     <td>Request status</td>
                     <td>Request date</td>
                 </thead>
-                <tr v-for="req, index in requests" v-on:click="openRequest(req.id)">
+                <tr v-for="req, index in paginate(requests)" v-on:click="openRequest(req.id)">
                     <td>{{ req.client.name }}</td>
                     <td>{{ req.request_type.name }}</td>
                     <td>{{ req.request_status.name }}</td>
                     <td>{{ req.created_at }}</td>
                 </tr>
             </table>
+            <div class="col-md-12">
+                <paginate
+                  :page-count="totalPages"
+                  :click-handler="pageResult"
+                  :prev-text="'Prev'"
+                  :next-text="'Next'"
+                  :container-class="'pagination'">
+                </paginate>
+            </div>
         </div>
     </div>
 </template>

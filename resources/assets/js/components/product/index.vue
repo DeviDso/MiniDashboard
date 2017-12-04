@@ -12,7 +12,7 @@
                     <td>Quantity</td>
                     <td>Price</td>
                 </thead>
-                <tr v-for="product, index in products">
+                <tr v-for="(product, index) in paginate(products)">
                     <td>{{ index+1 }}</td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.category.name }}</td>
@@ -21,6 +21,15 @@
                     <td>{{ product.price }} &euro;</td>
                 </tr>
             </table>
+            <div class="col-md-12">
+                <paginate
+                  :page-count="totalPages"
+                  :click-handler="pageResult"
+                  :prev-text="'Prev'"
+                  :next-text="'Next'"
+                  :container-class="'pagination'">
+                </paginate>
+            </div>
         </div>
     </div>
 </template>
@@ -30,7 +39,7 @@
         data(){
             return{
                 loading: true,
-                products: []
+                products: [],
             }
         },
         mounted(){

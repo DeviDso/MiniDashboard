@@ -2,7 +2,7 @@ $lightDark: #3e3e3e;
 $dark: #333;
 $darker: #222;
 $white: #ffffff;
-$green: #41B883;
+$green: #92B558;
 $red: #cc0000;
 $orange: #EB5E28;
 $lightBlue: #68B3C8;
@@ -329,4 +329,26 @@ tr{
 }
 .pagination{
     cursor: pointer;
+}
+.backButton{
+    border: solid 1px $lightOrange;
+    padding: 5px 12px 5px 12px;
+    font-size: 16px;
+    background: transparent;
+    color: $lightOrange;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+.backButton::before{
+    font-family: FontAwesome;
+    content: "\f100 ";
+}
+.requestInProgress{
+    color: $green;
+}
+.requestCanceled{
+    color: #cc0000;
+}
+.requestDone{
+    color: $lightBlue;  
 }

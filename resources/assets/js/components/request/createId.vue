@@ -1,5 +1,6 @@
 <template>
     <div class="desa-full">
+        <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
             <form v-on:submit="sendForm()">
                 <h1>New request</h1>

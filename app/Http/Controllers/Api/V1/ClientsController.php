@@ -53,6 +53,10 @@ class ClientsController extends Controller
         $client = Client::find($id);
 
         return $client->with('requests')
+                ->with('orders')
+                ->with('orders.status')
+                ->with('orders.data')
+                ->with('orders.data.product')
                 ->where('id', $id)
                 ->firstOrFail();
     }

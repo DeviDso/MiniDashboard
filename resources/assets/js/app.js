@@ -8,10 +8,16 @@
 require('./bootstrap');
 
 import VueRouter from 'vue-router';
+import Paginate from 'vuejs-paginate';
+import VueCharts from 'vue-chartjs'
+import { Bar, Line } from 'vue-chartjs'
 
 window.toastr = require('toastr');
 window.Vue = require('vue');
 window.Vue.use(VueRouter);
+// window.charts = require('vue-chartjs');
+
+Vue.component('paginate', Paginate);
 
 toastr.options = {
   "closeButton": true,
@@ -44,6 +50,7 @@ import productIndex from './components/product/index.vue';
 import productCreate from './components/product/create.vue';
 import orderIndex from './components/order/index.vue';
 import orderCreate from './components/order/create.vue';
+import orderCreateId from './components/order/createId.vue';
 
 const routes = [
     {path: '/',components: {home : homeIndex},name: 'Home'},
@@ -59,7 +66,45 @@ const routes = [
     {path: '/product/create', component:productCreate, name: 'productCreate'},
     {path: '/order/index', component:orderIndex, name: 'orderIndex'},
     {path: '/order/create', component:orderCreate, name: 'orderCreate'},
+    {path: '/order/create/:id', component:orderCreateId, name: 'orderCreateId'},
 ]
+
+Vue.mixin({
+    data(){
+        return {
+            itemsList: [],
+            perPage: 20,
+            currentPage: 0,
+            resultsCount: 0,
+            pageNumber: 1,
+        }
+    },
+    methods:{
+        goBack(){
+            this.$router.go(-1);
+        },
+        paginate(list){
+            (list) ? this.resultsCount = list.length : false;
+
+            var index = (this.pageNumber * this.perPage) - 20;
+
+            if(this.pageNumber == 1){
+                index = 0;
+            }
+
+            return (list) ? list.slice(index, index + this.perPage) : false;
+        },
+        pageResult(pageNumber){
+            this.pageNumber = pageNumber;
+            this.paginate(this.orders);
+        },
+    },
+    computed:{
+        totalPages(){
+            return Math.ceil(this.resultsCount/this.perPage);
+        },
+    }
+});
 
 const router = new VueRouter({routes});
 

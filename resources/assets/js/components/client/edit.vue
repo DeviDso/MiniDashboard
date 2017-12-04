@@ -1,5 +1,6 @@
 <template>
     <div class="desa-full">
+        <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
             <form v-on:submit="updateClient()">
                 <h1>Add new company</h1>

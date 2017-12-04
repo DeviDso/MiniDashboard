@@ -9,7 +9,7 @@
                     <td>Contact person</td>
                     <td>Address</td>
                 </thead>
-                <tr v-for="client, index in clients" v-on:click="openClient(client.id)">
+                <tr v-for="client, index in paginate(clients)" v-on:click="openClient(client.id)">
                     <td>{{ client.name }}</td>
                     <td>{{ client.email }}</td>
                     <td>{{ client.phone }}</td>
@@ -17,6 +17,15 @@
                     <td>{{ client.street + ' ' + client.post_code + ', ' + client.city + ', ' + client.country }}</td>
                 </tr>
             </table>
+            <div class="col-md-12">
+                <paginate
+                  :page-count="totalPages"
+                  :click-handler="pageResult"
+                  :prev-text="'Prev'"
+                  :next-text="'Next'"
+                  :container-class="'pagination'">
+                </paginate>
+            </div>
         </div>
     </div>
 </template>
