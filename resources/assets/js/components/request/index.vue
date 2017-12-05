@@ -1,7 +1,13 @@
 <template>
     <div class="desa-full">
+        <div v-if="clientRequests">
+            <button class="backButton" v-on:click="goBack()">Go back</button>
+        </div>
         <div class="desa-container">
-            <table class="col-md-12">
+            <div v-if="loading">
+                <h2>Loading...</h2>
+            </div>
+            <table class="col-md-12" v-if="!loading">
                 <thead>
                     <td>Company</td>
                     <td>Request type</td>
@@ -11,7 +17,7 @@
                 <tr v-for="req, index in paginate(requests)" v-on:click="openRequest(req.id)">
                     <td>{{ req.client.name }}</td>
                     <td>{{ req.request_type.name }}</td>
-                    <td>{{ req.request_status.name }}</td>
+                    <td v-bind:class="requestStatus(req.request_status.id)">{{ req.request_status.name }}</td>
                     <td>{{ req.created_at }}</td>
                 </tr>
             </table>
@@ -32,7 +38,9 @@
 export default{
     data: function(){
         return {
-            requests: []
+            requests: [],
+            loading: true,
+            clientRequests: false,
         }
     },
     mounted(){
@@ -40,7 +48,16 @@ export default{
 
         axios.get('/api/V1/requests', {params: { id: user_id}}).then(function(res){
             app.requests = res.data;
-            console.log(res.data);
+            if(app.$route.query.clientID && app.$route.query.action == 'active'){
+                app.requests = app.requests.filter(req => req.client_id == app.$route.query.clientID && req.request_status_id == 1)
+                app.clientRequests = true;
+            }
+            if(app.$route.query.clientID && app.$route.query.action == 'history'){
+                app.requests = app.requests.filter(req => req.client_id == app.$route.query.clientID && req.request_status_id != 1)
+                app.clientRequests = true;
+            }
+            app.loading = false;
+            // console.log(res.data);
         }).catch(function(err){
             toastr.error('Failed to load');
         });
@@ -48,7 +65,16 @@ export default{
     methods:{
         openRequest(id){
             this.$router.push({name: 'requestView', params: {id:id}})
-        }
+        },
+        requestStatus(el){
+            if(el == 1){
+                return 'requestInProgress';
+            } else if (el == 2){
+                return 'requestDone';
+            } else if (el == 3){
+                return 'requestCanceled';
+            }
+        },
     }
 }
 </script>

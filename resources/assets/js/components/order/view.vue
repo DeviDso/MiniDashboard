@@ -2,17 +2,17 @@
     <div class="desa-full">
         <div class="desa-container">
             <form v-on:submit="sendForm()">
-                <h1>New order</h1>
+                <!-- <h1>New order</h1> -->
                 <div class="col-md-8">
                     <div class="col-md-6">
                         <label>Client</label>
-                        <select v-model="order.client_id" class="form-control" required>
-                            <option v-for="client in clients" v-bind:value="client.id">{{ client.name }}</option>
+                        <select v-model="orderData.client_id" class="form-control" disabled>
+                            <option v-bind:value="orderData.client_id">{{ orderData.client.name }}</option>
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label>Order status</label>
-                        <select v-model="order.status_id" class="form-control" required>
+                        <select v-model="orderData.status_id" class="form-control" required>
                             <option v-for="status in orderStatus" v-bind:value="status.id">{{ status.name }}</option>
                         </select>
                     </div>
@@ -26,11 +26,11 @@
                                 <td>Quantity</td>
                                 <td></td>
                             </thead>
-                            <tr v-for="product, index in order.data">
-                                <td>{{ product.name }}</td>
-                                <td>{{ product.code }}</td>
-                                <td><input type="number" v-model="product.price" step="0.01"></td>
-                                <td><input type="number" v-model="product.quantity = 1"></td>
+                            <tr v-for="item, index in orderData.data">
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.code }}</td>
+                                <td><input type="number" v-model="item.price" step="0.01"></td>
+                                <td><input type="number" v-model="item.quantity"></td>
                                 <td><span v-on:click="removeItem(index)">X</span></td>
                             </tr>
                         </table>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-12">
                     <hr>
-                    <button type="submit" class="submitButton">Create</button>
+                    <button type="submit" class="submitButton">Update</button>
                 </div>
             </form>
         </div>
@@ -59,41 +59,60 @@
     export default{
         data(){
             return{
-                clients: [],
+                client: [],
                 products: [],
                 orderStatus: [],
                 orderProducts: [],
                 searchText: '',
                 showResults: false,
-                showProducts: false,
-                order: {
+                showProducts: true,
+                order: [],
+                orderData: {
                     user_id: user_id,
                     client_id: '',
                     status_id: '',
+                    client: [],
+                    status: [],
                     data: [],
-                },
-                orderData: []
+                }
             }
         },
         mounted(){
             var app = this;
 
             axios.all([
-                axios.get('/api/V1/clients'),
+                axios.get('/api/V1/orders/' + app.$route.params.id),
                 axios.get('/api/V1/orderStatus'),
                 axios.get('/api/V1/products'),
-            ]).then(axios.spread((clients, orderStatus, products) => {
-                app.clients = clients.data;
+            ]).then(axios.spread((order, orderStatus, products) => {
+                app.order = order.data;
                 app.orderStatus = orderStatus.data;
                 app.products = products.data;
+
+                app.orderData.client_id = order.data.client_id;
+                app.orderData.status_id = order.data.status_id;
+                app.orderData.client = order.data.client;
+                app.orderData.status = order.data.status;
+
+                order.data.data.forEach(res =>{
+                    var item = {
+                        product_id: res.product_id,
+                        quantity: res.quantity,
+                        name: res.product.name,
+                        price: res.price,
+                        code: res.product.code,
+                    }
+                    app.orderData.data.push(item);
+                })
+
+                console.log(app.orderData);
             })).catch(function(err){
                 toastr.error('Failed to load! ' +err);
             });
         },
         methods:{
             addToList(product, index){
-                if(!this.order.data.includes(product.code)){
-                    console.log(product);
+                if(!this.orderData.data.includes(product.code)){
                     var item = {
                         product_id: product.id,
                         quantity: product.quantity,
@@ -101,28 +120,25 @@
                         price: product.price,
                         code: product.code,
                     }
-                    this.order.data.push(item)
+                    this.orderData.data.push(item)
                     this.productsList.splice(index, 1)
                     this.showProducts = true
                 }
             },
             removeItem(index){
-                this.order.data.splice(index, 1);
-                (this.order.data.length == 0) ? this.showProducts = false : this.showProducts = true;
+                this.orderData.data.splice(index, 1);
+                (this.orderData.data.length == 0) ? this.showProducts = false : this.showProducts = true;
             },
             sendForm(){
                 event.preventDefault();
                 var app = this;
 
-                console.log(app.order);
-                // return true;
-
-                if(app.order.data.length == 0){
+                if(app.orderData.data.length == 0){
                     toastr.error('Do not forget to add products!');
                 } else {
-                    axios.post('/api/V1/orders', app.order).then(function(res){
-                        toastr.success('Order created!');
-                        app.$router.push({name:'clientView', params:{id:app.order.client_id}})
+                    axios.patch('/api/V1/orders/' +app.order.id, app.orderData).then(function(res){
+                        toastr.success('Order updated!');
+                        app.$router.push({name:'clientView',params:{id:app.orderData.client_id}})
                     }).catch(function(err){
                         toastr.error('Failed to save data! ' +err);
                         console.log(err);

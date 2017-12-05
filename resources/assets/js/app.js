@@ -51,6 +51,7 @@ import productCreate from './components/product/create.vue';
 import orderIndex from './components/order/index.vue';
 import orderCreate from './components/order/create.vue';
 import orderCreateId from './components/order/createId.vue';
+import orderView from './components/order/view.vue';
 
 const routes = [
     {path: '/',components: {home : homeIndex},name: 'Home'},
@@ -67,6 +68,7 @@ const routes = [
     {path: '/order/index', component:orderIndex, name: 'orderIndex'},
     {path: '/order/create', component:orderCreate, name: 'orderCreate'},
     {path: '/order/create/:id', component:orderCreateId, name: 'orderCreateId'},
+    {path: '/order/view/:id', component:orderView, name: 'orderView'},
 ]
 
 Vue.mixin({

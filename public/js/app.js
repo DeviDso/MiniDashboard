@@ -11374,6 +11374,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_order_create_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_order_create_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_order_createId_vue__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_order_createId_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_order_createId_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_order_view_vue__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_order_view_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_order_view_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -11428,7 +11430,8 @@ toastr.options = {
 
 
 
-var routes = [{ path: '/', components: { home: __WEBPACK_IMPORTED_MODULE_3__components_home_index_vue___default.a }, name: 'Home' }, { path: '/client/index', component: __WEBPACK_IMPORTED_MODULE_5__components_client_index_vue___default.a, name: 'clientIndex' }, { path: '/client/create', component: __WEBPACK_IMPORTED_MODULE_4__components_client_create_vue___default.a, name: 'clientCreate' }, { path: '/client/view/:id', component: __WEBPACK_IMPORTED_MODULE_6__components_client_view_vue___default.a, name: 'clientView' }, { path: '/clients/edit/:id', component: __WEBPACK_IMPORTED_MODULE_7__components_client_edit_vue___default.a, name: 'clientEdit' }, { path: '/request/index', component: __WEBPACK_IMPORTED_MODULE_8__components_request_index_vue___default.a, name: 'requestIndex' }, { path: '/request/create', component: __WEBPACK_IMPORTED_MODULE_9__components_request_create_vue___default.a, name: 'requestCreate' }, { path: '/request/create/:id', component: __WEBPACK_IMPORTED_MODULE_10__components_request_createId_vue___default.a, name: 'requestCreateId' }, { path: '/request/view/:id', component: __WEBPACK_IMPORTED_MODULE_11__components_request_view_vue___default.a, name: 'requestView' }, { path: '/product/index', component: __WEBPACK_IMPORTED_MODULE_12__components_product_index_vue___default.a, name: 'productIndex' }, { path: '/product/create', component: __WEBPACK_IMPORTED_MODULE_13__components_product_create_vue___default.a, name: 'productCreate' }, { path: '/order/index', component: __WEBPACK_IMPORTED_MODULE_14__components_order_index_vue___default.a, name: 'orderIndex' }, { path: '/order/create', component: __WEBPACK_IMPORTED_MODULE_15__components_order_create_vue___default.a, name: 'orderCreate' }, { path: '/order/create/:id', component: __WEBPACK_IMPORTED_MODULE_16__components_order_createId_vue___default.a, name: 'orderCreateId' }];
+
+var routes = [{ path: '/', components: { home: __WEBPACK_IMPORTED_MODULE_3__components_home_index_vue___default.a }, name: 'Home' }, { path: '/client/index', component: __WEBPACK_IMPORTED_MODULE_5__components_client_index_vue___default.a, name: 'clientIndex' }, { path: '/client/create', component: __WEBPACK_IMPORTED_MODULE_4__components_client_create_vue___default.a, name: 'clientCreate' }, { path: '/client/view/:id', component: __WEBPACK_IMPORTED_MODULE_6__components_client_view_vue___default.a, name: 'clientView' }, { path: '/clients/edit/:id', component: __WEBPACK_IMPORTED_MODULE_7__components_client_edit_vue___default.a, name: 'clientEdit' }, { path: '/request/index', component: __WEBPACK_IMPORTED_MODULE_8__components_request_index_vue___default.a, name: 'requestIndex' }, { path: '/request/create', component: __WEBPACK_IMPORTED_MODULE_9__components_request_create_vue___default.a, name: 'requestCreate' }, { path: '/request/create/:id', component: __WEBPACK_IMPORTED_MODULE_10__components_request_createId_vue___default.a, name: 'requestCreateId' }, { path: '/request/view/:id', component: __WEBPACK_IMPORTED_MODULE_11__components_request_view_vue___default.a, name: 'requestView' }, { path: '/product/index', component: __WEBPACK_IMPORTED_MODULE_12__components_product_index_vue___default.a, name: 'productIndex' }, { path: '/product/create', component: __WEBPACK_IMPORTED_MODULE_13__components_product_create_vue___default.a, name: 'productCreate' }, { path: '/order/index', component: __WEBPACK_IMPORTED_MODULE_14__components_order_index_vue___default.a, name: 'orderIndex' }, { path: '/order/create', component: __WEBPACK_IMPORTED_MODULE_15__components_order_create_vue___default.a, name: 'orderCreate' }, { path: '/order/create/:id', component: __WEBPACK_IMPORTED_MODULE_16__components_order_createId_vue___default.a, name: 'orderCreateId' }, { path: '/order/view/:id', component: __WEBPACK_IMPORTED_MODULE_17__components_order_view_vue___default.a, name: 'orderView' }];
 
 Vue.mixin({
     data: function data() {
@@ -46852,6 +46855,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -46867,7 +46879,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 requests: []
             },
             chartData: [],
-            reqStatistics: false
+            reqStatistics: false,
+            activeMore: false,
+            historyMore: false,
+            orderMore: false
         };
     },
     mounted: function mounted() {
@@ -46891,13 +46906,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
 
                 if (index + 1 == app.client.requests.length) {
-                    console.log('done');
+                    // console.log('done');
                     app.chartData.push(cd1);
                     app.chartData.push(cd2);
                     app.chartData.push(cd3);
                     app.reqStatistics = true;
                 }
-                console.log(app.reqStatistics);
+                // console.log(app.reqStatistics);
             });
         }).catch(function (err) {
             toastr.error('Failed to load! ' + err);
@@ -46952,6 +46967,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     count++;
                 }
             }
+            count > 4 ? this.activeMore = true : false;
+
             return temp;
         },
         history: function history(list) {
@@ -46964,6 +46981,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     count++;
                 }
             }
+
+            count > 4 ? this.historyMore = true : false;
             return temp;
         },
         countOrderValue: function countOrderValue(list) {
@@ -46972,6 +46991,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 value += Number(el.product.price);
             });
             return value;
+        },
+        openRequest: function openRequest(id) {
+            var app = this;
+
+            app.$router.push({ name: 'requestView', params: { id: id } });
+        },
+        orders: function orders(list) {
+            var temp = [];
+            var count = 0;
+
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].request_status_id != 1 && count < 5) {
+                    temp.push(list[i]);
+                    count++;
+                }
+            }
+
+            count > 4 ? this.ordersMore = true : false;
+            return temp;
+        },
+        viewMore: function viewMore(opt) {
+            var app = this;
+
+            switch (opt) {
+                case 'history':
+                    app.$router.push({ name: 'requestIndex', query: { clientID: this.client.id, action: 'history' } });
+                    break;
+                case 'active':
+                    app.$router.push({ name: 'requestIndex', query: { clientID: this.client.id, action: 'active' } });
+                    break;
+                case 'orders':
+                    app.$router.push({ name: 'orderIndex', query: { clientID: this.client.id } });
+                    break;
+            }
+        },
+        openOrder: function openOrder(id) {
+            this.$router.push({ name: 'orderView', params: { id: id } });
         }
     }
 });
@@ -47065,21 +47121,51 @@ var render = function() {
               _vm._m(0, false, false),
               _vm._v(" "),
               _vm._l(_vm.active(_vm.client.requests), function(request, index) {
-                return _c("tr", [
-                  _c("td", [_vm._v(_vm._s(request.request_type.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(request.created_at.substr(0, 10)))]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { class: _vm.requestStatus(request.request_status.id) },
-                    [_vm._v(" " + _vm._s(request.request_status.name))]
-                  )
-                ])
+                return _c(
+                  "tr",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.openRequest(request.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("td", [_vm._v(_vm._s(request.request_type.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(request.created_at.substr(0, 10)))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { class: _vm.requestStatus(request.request_status.id) },
+                      [_vm._v(" " + _vm._s(request.request_status.name))]
+                    )
+                  ]
+                )
               })
             ],
             2
-          )
+          ),
+          _vm._v(" "),
+          _vm.activeMore
+            ? _c("div", { staticClass: "col-md-12" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "viewMore",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.viewMore("active")
+                      }
+                    }
+                  },
+                  [_vm._v("View all")]
+                )
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6" }, [
@@ -47095,21 +47181,51 @@ var render = function() {
                 request,
                 index
               ) {
-                return _c("tr", [
-                  _c("td", [_vm._v(_vm._s(request.request_type.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(request.created_at.substr(0, 10)))]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { class: _vm.requestStatus(request.request_status.id) },
-                    [_vm._v(" " + _vm._s(request.request_status.name))]
-                  )
-                ])
+                return _c(
+                  "tr",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.openRequest(request.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("td", [_vm._v(_vm._s(request.request_type.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(request.created_at.substr(0, 10)))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { class: _vm.requestStatus(request.request_status.id) },
+                      [_vm._v(" " + _vm._s(request.request_status.name))]
+                    )
+                  ]
+                )
               })
             ],
             2
-          )
+          ),
+          _vm._v(" "),
+          _vm.historyMore
+            ? _c("div", { staticClass: "col-md-12" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "viewMore",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.viewMore("history")
+                      }
+                    }
+                  },
+                  [_vm._v("View all")]
+                )
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
@@ -47123,24 +47239,52 @@ var render = function() {
             [
               _vm._m(2, false, false),
               _vm._v(" "),
-              _vm._l(_vm.client.orders, function(order, index) {
-                return _c("tr", [
-                  _c("td", [_vm._v(_vm._s(index + 1))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(order.status.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(order.data.length))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(_vm._s(_vm.countOrderValue(order.data)) + " €")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(order.created_at.substr(0, 10)))])
-                ])
+              _vm._l(_vm.orders(_vm.client.orders), function(order, index) {
+                return _c(
+                  "tr",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.openOrder(order.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("td", [_vm._v(_vm._s(index + 1))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(order.status.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(order.data.length))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm.countOrderValue(order.data)) + " €")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(order.created_at.substr(0, 10)))])
+                  ]
+                )
               })
             ],
             2
-          )
+          ),
+          _vm._v(" "),
+          _vm.ordersMore
+            ? _c("div", { staticClass: "col-md-12" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "viewMore",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.viewMore("orders")
+                      }
+                    }
+                  },
+                  [_vm._v("View all")]
+                )
+              ])
+            : _vm._e()
         ])
       ])
     ]),
@@ -47781,11 +47925,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            requests: []
+            requests: [],
+            loading: true,
+            clientRequests: false
         };
     },
     mounted: function mounted() {
@@ -47793,7 +47945,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         axios.get('/api/V1/requests', { params: { id: user_id } }).then(function (res) {
             app.requests = res.data;
-            console.log(res.data);
+            if (app.$route.query.clientID && app.$route.query.action == 'active') {
+                app.requests = app.requests.filter(function (req) {
+                    return req.client_id == app.$route.query.clientID && req.request_status_id == 1;
+                });
+                app.clientRequests = true;
+            }
+            if (app.$route.query.clientID && app.$route.query.action == 'history') {
+                app.requests = app.requests.filter(function (req) {
+                    return req.client_id == app.$route.query.clientID && req.request_status_id != 1;
+                });
+                app.clientRequests = true;
+            }
+            app.loading = false;
+            // console.log(res.data);
         }).catch(function (err) {
             toastr.error('Failed to load');
         });
@@ -47802,6 +47967,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         openRequest: function openRequest(id) {
             this.$router.push({ name: 'requestView', params: { id: id } });
+        },
+        requestStatus: function requestStatus(el) {
+            if (el == 1) {
+                return 'requestInProgress';
+            } else if (el == 2) {
+                return 'requestDone';
+            } else if (el == 3) {
+                return 'requestCanceled';
+            }
         }
     }
 });
@@ -47815,37 +47989,62 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "desa-full" }, [
-    _c("div", { staticClass: "desa-container" }, [
-      _c(
-        "table",
-        { staticClass: "col-md-12" },
-        [
-          _vm._m(0, false, false),
-          _vm._v(" "),
-          _vm._l(_vm.paginate(_vm.requests), function(req, index) {
-            return _c(
-              "tr",
-              {
-                on: {
-                  click: function($event) {
-                    _vm.openRequest(req.id)
-                  }
+    _vm.clientRequests
+      ? _c("div", [
+          _c(
+            "button",
+            {
+              staticClass: "backButton",
+              on: {
+                click: function($event) {
+                  _vm.goBack()
                 }
-              },
-              [
-                _c("td", [_vm._v(_vm._s(req.client.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(req.request_type.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(req.request_status.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(req.created_at))])
-              ]
-            )
-          })
-        ],
-        2
-      ),
+              }
+            },
+            [_vm._v("Go back")]
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "desa-container" }, [
+      _vm.loading ? _c("div", [_c("h2", [_vm._v("Loading...")])]) : _vm._e(),
+      _vm._v(" "),
+      !_vm.loading
+        ? _c(
+            "table",
+            { staticClass: "col-md-12" },
+            [
+              _vm._m(0, false, false),
+              _vm._v(" "),
+              _vm._l(_vm.paginate(_vm.requests), function(req, index) {
+                return _c(
+                  "tr",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.openRequest(req.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("td", [_vm._v(_vm._s(req.client.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(req.request_type.name))]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { class: _vm.requestStatus(req.request_status.id) },
+                      [_vm._v(_vm._s(req.request_status.name))]
+                    ),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(req.created_at))])
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
@@ -48668,6 +48867,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -48698,7 +48898,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             event.preventDefault();
 
             axios.patch('/api/V1/requests/' + this.$route.params.id, this.request).then(function (res) {
-                app.$router.push({ name: 'requestIndex' });
+                app.$router.push({ name: 'clientView', params: { id: app.request.client_id } });
                 toastr.success('Request successfully updated!');
             }).catch(function (err) {
                 console.log('Error' + err);
@@ -48710,7 +48910,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var app = this;
 
                 axios.delete('/api/V1/requests/' + this.$route.params.id, { params: { id: user_id } }).then(function (res) {
-                    app.$router.push({ name: 'requestIndex' });
+                    app.$router.push({ name: 'clientView', params: { id: app.request.client_id } });
                     toastr.success('Request deleted!');
                 }).catch(function (err) {
                     toastr.error('Something wrong ' + err);
@@ -48729,6 +48929,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "desa-full" }, [
+    _c(
+      "button",
+      {
+        staticClass: "backButton",
+        on: {
+          click: function($event) {
+            _vm.goBack()
+          }
+        }
+      },
+      [_vm._v("Go back")]
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "desa-container" }, [
       _c(
         "form",
@@ -49633,6 +49846,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -49641,7 +49857,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             perPage: 20,
             currentPage: 0,
             resultsCount: 0,
-            pageNumber: 1
+            pageNumber: 1,
+            clientOrders: false
         };
     },
     mounted: function mounted() {
@@ -49649,6 +49866,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         axios.get('/api/V1/orders').then(function (res) {
             app.orders = res.data;
+            if (app.$route.query.clientID) {
+                app.orders = app.orders.filter(function (res) {
+                    return res.client_id == app.$route.query.clientID;
+                });
+                app.clientOrders = true;
+            }
         }).catch(function (err) {
             toastr.error('Failed to load! ' + err.data);
         });
@@ -49688,6 +49911,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (a.id > b.id) return 1;
                 return 0;
             }));
+        },
+        openOrder: function openOrder(id) {
+            this.$router.push({ name: 'orderView', params: { id: id } });
         }
     }
 });
@@ -49701,6 +49927,23 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "desa-full" }, [
+    _vm.clientOrders
+      ? _c("div", [
+          _c(
+            "button",
+            {
+              staticClass: "backButton",
+              on: {
+                click: function($event) {
+                  _vm.goBack()
+                }
+              }
+            },
+            [_vm._v("Go back")]
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("div", { staticClass: "desa-container" }, [
       _c(
         "table",
@@ -49737,15 +49980,25 @@ var render = function() {
           ]),
           _vm._v(" "),
           _vm._l(_vm.paginate(_vm.orders), function(order) {
-            return _c("tr", [
-              _c("td", [_vm._v(_vm._s(order.id))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(order.client.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(order.status.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(order.created_at.substr(0, 10)))])
-            ])
+            return _c(
+              "tr",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.openOrder(order.id)
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v(_vm._s(order.id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(order.client.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(order.status.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(order.created_at.substr(0, 10)))])
+              ]
+            )
           })
         ],
         2
@@ -49905,7 +50158,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             order: {
                 user_id: user_id,
                 client_id: '',
-                status_id: ''
+                status_id: '',
+                data: []
             },
             orderData: []
         };
@@ -49924,39 +50178,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         addToList: function addToList(product, index) {
-            if (!this.orderProducts.includes(product.code)) {
-                this.orderProducts.push(product);
+            if (!this.order.data.includes(product.code)) {
+                console.log(product);
+                var item = {
+                    product_id: product.id,
+                    quantity: product.quantity,
+                    name: product.name,
+                    price: product.price,
+                    code: product.code
+                };
+                this.order.data.push(item);
                 this.productsList.splice(index, 1);
                 this.showProducts = true;
             }
         },
         removeItem: function removeItem(index) {
-            this.orderProducts.splice(index, 1);
-            this.orderProducts.length == 0 ? this.showProducts = false : this.showProducts = true;
+            this.order.data.splice(index, 1);
+            this.order.data.length == 0 ? this.showProducts = false : this.showProducts = true;
         },
         sendForm: function sendForm() {
             event.preventDefault();
             var app = this;
 
-            if (app.orderProducts.length == 0) {
+            console.log(app.order);
+            // return true;
+
+            if (app.order.data.length == 0) {
                 toastr.error('Do not forget to add products!');
             } else {
                 axios.post('/api/V1/orders', app.order).then(function (res) {
-                    console.log(res);
-                    for (var i = 0; i < app.orderProducts.length; i++) {
-                        app.orderData.push({
-                            order_id: res.data.id,
-                            product_id: app.orderProducts[i].id,
-                            quantity: app.orderProducts[i].quantity
-                        });
-                    }
-                    axios.post('/api/V1/orderData', app.orderData).then(function (res) {
-                        toastr.success('Order was created!');
-                        app.$router.push({ name: 'orderIndex' });
-                    }).catch(function (err) {
-                        console.log(err);
-                    });
-                    console.log(app.orderData);
+                    toastr.success('Order created!');
+                    app.$router.push({ name: 'clientView', params: { id: app.order.client_id } });
                 }).catch(function (err) {
                     toastr.error('Failed to save data! ' + err);
                     console.log(err);
@@ -50102,7 +50354,7 @@ var render = function() {
                     [
                       _vm._m(0, false, false),
                       _vm._v(" "),
-                      _vm._l(_vm.orderProducts, function(product, index) {
+                      _vm._l(_vm.order.data, function(product, index) {
                         return _c("tr", [
                           _c("td", [_vm._v(_vm._s(product.name))]),
                           _vm._v(" "),
@@ -50118,7 +50370,7 @@ var render = function() {
                                   expression: "product.price"
                                 }
                               ],
-                              attrs: { type: "number" },
+                              attrs: { type: "number", step: "0.01" },
                               domProps: { value: product.price },
                               on: {
                                 input: function($event) {
@@ -84342,7 +84594,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   extends: __WEBPACK_IMPORTED_MODULE_0_vue_chartjs__["b" /* Pie */],
   props: ['data'],
   mounted: function mounted() {
-    console.log(this.data);
+    // console.log(this.data);
     this.renderChart({
       labels: ['In progress', 'Done', 'Canceled'],
       datasets: [{
@@ -84352,6 +84604,520 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }, { responsive: true, maintainAspectRatio: false });
   }
 });
+
+/***/ }),
+/* 289 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(290)
+/* template */
+var __vue_template__ = __webpack_require__(291)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/order/view.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4495131d", Component.options)
+  } else {
+    hotAPI.reload("data-v-4495131d", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 290 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            client: [],
+            products: [],
+            orderStatus: [],
+            orderProducts: [],
+            searchText: '',
+            showResults: false,
+            showProducts: true,
+            order: [],
+            orderData: {
+                user_id: user_id,
+                client_id: '',
+                status_id: '',
+                client: [],
+                status: [],
+                data: []
+            }
+        };
+    },
+    mounted: function mounted() {
+        var app = this;
+
+        axios.all([axios.get('/api/V1/orders/' + app.$route.params.id), axios.get('/api/V1/orderStatus'), axios.get('/api/V1/products')]).then(axios.spread(function (order, orderStatus, products) {
+            app.order = order.data;
+            app.orderStatus = orderStatus.data;
+            app.products = products.data;
+
+            app.orderData.client_id = order.data.client_id;
+            app.orderData.status_id = order.data.status_id;
+            app.orderData.client = order.data.client;
+            app.orderData.status = order.data.status;
+
+            order.data.data.forEach(function (res) {
+                var item = {
+                    product_id: res.product_id,
+                    quantity: res.quantity,
+                    name: res.product.name,
+                    price: res.price,
+                    code: res.product.code
+                };
+                app.orderData.data.push(item);
+            });
+
+            console.log(app.orderData);
+        })).catch(function (err) {
+            toastr.error('Failed to load! ' + err);
+        });
+    },
+
+    methods: {
+        addToList: function addToList(product, index) {
+            if (!this.orderData.data.includes(product.code)) {
+                var item = {
+                    product_id: product.id,
+                    quantity: product.quantity,
+                    name: product.name,
+                    price: product.price,
+                    code: product.code
+                };
+                this.orderData.data.push(item);
+                this.productsList.splice(index, 1);
+                this.showProducts = true;
+            }
+        },
+        removeItem: function removeItem(index) {
+            this.orderData.data.splice(index, 1);
+            this.orderData.data.length == 0 ? this.showProducts = false : this.showProducts = true;
+        },
+        sendForm: function sendForm() {
+            event.preventDefault();
+            var app = this;
+
+            if (app.orderData.data.length == 0) {
+                toastr.error('Do not forget to add products!');
+            } else {
+                axios.patch('/api/V1/orders/' + app.order.id, app.orderData).then(function (res) {
+                    toastr.success('Order updated!');
+                    app.$router.push({ name: 'clientView', params: { id: app.orderData.client_id } });
+                }).catch(function (err) {
+                    toastr.error('Failed to save data! ' + err);
+                    console.log(err);
+                });
+            }
+        }
+    },
+    computed: {
+        productsList: function productsList() {
+            var _this = this;
+
+            this.showResults = true;
+            return this.products.filter(function (product) {
+                return product.code.includes(_this.searchText);
+            });
+        }
+    },
+    watch: {
+        searchText: function searchText() {
+            this.searchText != '' ? this.showResults = true : this.showResults = false;
+        }
+    }
+});
+
+/***/ }),
+/* 291 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "desa-full" }, [
+    _c("div", { staticClass: "desa-container" }, [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              _vm.sendForm()
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "col-md-8" }, [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Client")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.orderData.client_id,
+                      expression: "orderData.client_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { disabled: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.orderData,
+                        "client_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    { domProps: { value: _vm.orderData.client_id } },
+                    [_vm._v(_vm._s(_vm.orderData.client.name))]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Order status")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.orderData.status_id,
+                      expression: "orderData.status_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.orderData,
+                        "status_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.orderStatus, function(status) {
+                  return _c("option", { domProps: { value: status.id } }, [
+                    _vm._v(_vm._s(status.name))
+                  ])
+                })
+              )
+            ]),
+            _vm._v(" "),
+            _vm.showProducts
+              ? _c("div", [
+                  _c("label", [_vm._v("Products")]),
+                  _vm._v(" "),
+                  _c(
+                    "table",
+                    { staticClass: "col-md-12 orderProductTable" },
+                    [
+                      _vm._m(0, false, false),
+                      _vm._v(" "),
+                      _vm._l(_vm.orderData.data, function(item, index) {
+                        return _c("tr", [
+                          _c("td", [_vm._v(_vm._s(item.name))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(item.code))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: item.price,
+                                  expression: "item.price"
+                                }
+                              ],
+                              attrs: { type: "number", step: "0.01" },
+                              domProps: { value: item.price },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(item, "price", $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: item.quantity,
+                                  expression: "item.quantity"
+                                }
+                              ],
+                              attrs: { type: "number" },
+                              domProps: { value: item.quantity },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    item,
+                                    "quantity",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "span",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.removeItem(index)
+                                  }
+                                }
+                              },
+                              [_vm._v("X")]
+                            )
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("label", [_vm._v("Product search")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.searchText,
+                  expression: "searchText"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "search", placeholder: "Search product by code" },
+              domProps: { value: _vm.searchText },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.searchText = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "orderProducts" }, [
+              _vm.showResults
+                ? _c(
+                    "ul",
+                    _vm._l(_vm.productsList, function(product, index) {
+                      return _c(
+                        "li",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.addToList(product, index)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(product.name.substr(0, 25)) +
+                              " "
+                          ),
+                          _c("b", [_vm._v(_vm._s(product.code))])
+                        ]
+                      )
+                    })
+                  )
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(1, false, false)
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("td", [_vm._v("Product")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Code")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Price")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Quantity")]),
+      _vm._v(" "),
+      _c("td")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("hr"),
+      _vm._v(" "),
+      _c("button", { staticClass: "submitButton", attrs: { type: "submit" } }, [
+        _vm._v("Update")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4495131d", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

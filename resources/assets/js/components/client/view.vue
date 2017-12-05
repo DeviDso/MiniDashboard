@@ -32,12 +32,15 @@
                             <td>Date</td>
                             <td>Status</td>
                         </thead>
-                        <tr v-for="(request, index) in active(client.requests)">
+                        <tr v-for="(request, index) in active(client.requests)" v-on:click="openRequest(request.id)">
                             <td>{{ request.request_type.name }}</td>
                             <td>{{ request.created_at.substr(0, 10) }}</td>
                             <td v-bind:class="requestStatus(request.request_status.id)"> {{request.request_status.name}}</td>
                         </tr>
                     </table>
+                    <div class="col-md-12" v-if="activeMore">
+                        <button type="button" v-on:click="viewMore('active')" class="viewMore">View all</button>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <h3>History</h3>
@@ -47,12 +50,15 @@
                             <td>Date</td>
                             <td>Status</td>
                         </thead>
-                        <tr v-for="(request, index) in history(client.requests)">
+                        <tr v-for="(request, index) in history(client.requests)" v-on:click="openRequest(request.id)">
                             <td>{{ request.request_type.name }}</td>
                             <td>{{ request.created_at.substr(0, 10) }}</td>
                             <td v-bind:class="requestStatus(request.request_status.id)"> {{request.request_status.name}}</td>
                         </tr>
                     </table>
+                    <div class="col-md-12" v-if="historyMore">
+                        <button type="button" v-on:click="viewMore('history')" class="viewMore">View all</button>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <hr>
@@ -65,7 +71,7 @@
                             <td>Total value</td>
                             <td>Date</td>
                         </thead>
-                        <tr v-for="(order, index) in client.orders">
+                        <tr v-for="(order, index) in orders(client.orders)" v-on:click="openOrder(order.id)">
                             <td>{{ index+1 }}</td>
                             <td>{{ order.status.name }}</td>
                             <td>{{ order.data.length }}</td>
@@ -73,6 +79,9 @@
                             <td>{{ order.created_at.substr(0,10) }}</td>
                         </tr>
                     </table>
+                    <div class="col-md-12" v-if="ordersMore">
+                        <button type="button" v-on:click="viewMore('orders')" class="viewMore">View all</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,6 +114,9 @@ export default{
             },
             chartData: [],
             reqStatistics: false,
+            activeMore: false,
+            historyMore: false,
+            orderMore: false,
         }
     },
     mounted(){
@@ -125,13 +137,13 @@ export default{
                 }
 
                 if(index+1 == app.client.requests.length){
-                    console.log('done');
+                    // console.log('done');
                     app.chartData.push(cd1);
                     app.chartData.push(cd2);
                     app.chartData.push(cd3);
                     app.reqStatistics = true;
                 }
-                console.log(app.reqStatistics);
+                // console.log(app.reqStatistics);
             });
         }).catch(function(err){
             toastr.error('Failed to load! ' +err);
@@ -185,6 +197,8 @@ export default{
                     count++;
                 }
             }
+            (count > 4) ? this.activeMore = true : false;
+
             return temp;
         },
         history(list){
@@ -197,6 +211,8 @@ export default{
                     count++;
                 }
             }
+
+            (count > 4) ? this.historyMore = true : false;
             return temp;
         },
         countOrderValue(list){
@@ -205,6 +221,43 @@ export default{
                 value += Number(el.product.price);
             });
             return value;
+        },
+        openRequest(id){
+            var app = this;
+
+            app.$router.push({name:'requestView', params:{id:id}});
+        },
+        orders(list){
+            var temp = [];
+            var count = 0;
+
+            for(var i = 0; i < list.length; i++){
+                if(list[i].request_status_id != 1 && count < 5) {
+                    temp.push(list[i]);
+                    count++;
+                }
+            }
+
+            (count > 4) ? this.ordersMore = true : false;
+            return temp;
+        },
+        viewMore(opt){
+            var app = this;
+
+            switch(opt){
+                case 'history':
+                app.$router.push({name:'requestIndex', query:{clientID:this.client.id, action:'history'}});
+                break;
+                case 'active':
+                app.$router.push({name:'requestIndex', query:{clientID:this.client.id, action:'active'}});
+                break;
+                case 'orders':
+                app.$router.push({name:'orderIndex', query:{clientID:this.client.id}});
+                break;
+            }
+        },
+        openOrder(id){
+            this.$router.push({name:'orderView', params:{id:id}});
         }
     }
 }

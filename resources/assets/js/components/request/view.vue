@@ -1,5 +1,6 @@
 <template>
     <div class="desa-full">
+        <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
             <form v-on:submit="sendForm()">
                 <h1>Client request</h1>
@@ -69,7 +70,7 @@ export default{
             event.preventDefault();
 
             axios.patch('/api/V1/requests/' +this.$route.params.id, this.request).then(function(res){
-                app.$router.push({name: 'requestIndex'});
+                app.$router.push({name: 'clientView', params:{id:app.request.client_id}});
                 toastr.success('Request successfully updated!');
             }).catch(function(err){
                 console.log('Error' +err);
@@ -81,7 +82,7 @@ export default{
                 var app = this;
 
                 axios.delete('/api/V1/requests/' +this.$route.params.id, {params:{id:user_id}}).then(function(res){
-                    app.$router.push({name: 'requestIndex'});
+                    app.$router.push({name: 'clientView', params:{id:app.request.client_id}});
                     toastr.success('Request deleted!');
                 }).catch(function(err){
                     toastr.error('Something wrong ' +err);

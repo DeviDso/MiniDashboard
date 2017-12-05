@@ -5,7 +5,7 @@ export default {
   extends: Pie,
   props: ['data'],
   mounted () {
-  console.log(this.data);
+  // console.log(this.data);
     this.renderChart({
       labels: ['In progress', 'Done', 'Canceled'],
       datasets: [

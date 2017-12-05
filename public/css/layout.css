@@ -81,6 +81,10 @@ tr {
   background: #333;
 }
 
+.sidebar-menu ul li span {
+  float: right;
+}
+
 .sidebar-menu a {
   color: #ffffff;
   text-decoration: none;
@@ -329,9 +333,11 @@ tr {
   transition: all 0.3s;
 }
 
-.clientAction .active,
-.clientActionDelete .active {
-  background: #222 !important;
+.clientAction.active,
+.active.clientActionDelete {
+  background: #92B558;
+  border-color: #92B558;
+  color: #ffffff;
 }
 
 .clientAction:hover,
@@ -423,5 +429,27 @@ tr {
 
 .requestDone {
   color: #68B3C8;
+}
+
+.viewMore {
+  border: solid 1px #68B3C8;
+  padding: 5px 12px 5px 12px;
+  font-size: 16px;
+  background: transparent;
+  color: #68B3C8;
+  margin-bottom: 12px;
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+  margin-top: 12px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.viewMore:hover {
+  background: rgba(104, 179, 200, 0.57);
+  color: white;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 

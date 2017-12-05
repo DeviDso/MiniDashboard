@@ -40,6 +40,7 @@ class OrderController extends Controller
 
         $client = Client::find($request->input('client_id'));
         $order = $client->orders()->create($request->all());
+        $orderData = $order->data()->createMany($request->input('data'));
 
         return $order;
     }
@@ -52,7 +53,12 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        return Order::with('client')
+                ->where('id', $id)
+                ->with('status')
+                ->with('data')
+                ->with('data.product')
+                ->firstOrFail();
     }
 
     /**
@@ -64,7 +70,26 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'client_id' => 'required',
+            'status_id' => 'required',
+            ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $order = Order::find($id);
+
+        $order->update($request->all());
+        $order->data()->delete();
+        $order->data()->createMany($request->input('data'));
+        // $client = Client::find($request->input('client_id'));
+        // $order = $client->orders()->where('order.id', $id)->update($request->all());
+        // $orderData = $order->data()->createMany($request->input('data'));
+
+        return $order;
     }
 
     /**

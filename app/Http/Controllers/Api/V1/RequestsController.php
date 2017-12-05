@@ -18,13 +18,12 @@ class RequestsController extends Controller
      */
     public function index(Request $r)
     {
-        $user = User::find($r->input('id'));
-        return $user->clientRequest()
-                ->with('user')
-                ->with('client')
+        $cr = ClientRequest::with('client')
                 ->with('requestStatus')
                 ->with('requestType')
                 ->get();
+
+        return $cr;
     }
 
     /**
@@ -58,18 +57,15 @@ class RequestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $r)
+    public function show($id)
     {
-        $user = User::firstOrFail($r->input('user_id'));
+        $cr = ClientRequest::find($id);
 
-        return $user->clientRequest()
-                ->where('id', $id)
-                ->with('user')
-                ->with('client')
+        return $cr->with('client')
                 ->with('requestStatus')
                 ->with('requestType')
-                ->first();
-        $request = ClientRequest::find($id);
+                ->where('id', $id)
+                ->firstOrFail();
     }
 
     /**

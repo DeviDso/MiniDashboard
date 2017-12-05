@@ -1,5 +1,8 @@
 <template>
     <div class="desa-full">
+        <div v-if="clientOrders">
+            <button class="backButton" v-on:click="goBack()">Go back</button>
+        </div>
         <div class="desa-container">
             <table class="col-md-12">
                 <thead>
@@ -8,7 +11,7 @@
                     <td>Status</td>
                     <td>Date</td>
                 </thead>
-                <tr v-for="order in paginate(orders)">
+                <tr v-for="order in paginate(orders)" v-on:click="openOrder(order.id)">
                     <td>{{ order.id }}</td>
                     <td>{{ order.client.name }}</td>
                     <td>{{ order.status.name }}</td>
@@ -36,6 +39,7 @@ export default{
             currentPage: 0,
             resultsCount: 0,
             pageNumber: 1,
+            clientOrders: false,
         }
     },
     mounted(){
@@ -43,6 +47,10 @@ export default{
 
         axios.get('/api/V1/orders').then(function(res){
             app.orders = res.data;
+            if(app.$route.query.clientID){
+                app.orders = app.orders.filter(res => res.client_id == app.$route.query.clientID);
+                app.clientOrders = true;
+            }
         }).catch(function(err){
             toastr.error('Failed to load! ' +err.data);
         });
@@ -82,6 +90,9 @@ export default{
                 return 0;
             }));
         },
+        openOrder(id){
+            this.$router.push({name: 'orderView', params:{id:id}});
+        }
     }
 }
 </script>

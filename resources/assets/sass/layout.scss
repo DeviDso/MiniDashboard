@@ -74,6 +74,9 @@ tr{
 .sidebar-menu ul li:hover{
     background: $dark;
 }
+.sidebar-menu ul li span{
+    float: right;
+}
 .sidebar-menu a{
     color: $white;
     text-decoration: none;
@@ -277,8 +280,10 @@ tr{
     margin-bottom: 12px;
     transition: all 0.3s;
 }
-.clientAction .active{
-    background: $darker!important;
+.clientAction.active{
+    background: $green;
+    border-color: $green;
+    color: $white;
 }
 .clientAction:hover{
     background: $darker;
@@ -350,5 +355,23 @@ tr{
     color: #cc0000;
 }
 .requestDone{
-    color: $lightBlue;  
+    color: $lightBlue;
+}
+.viewMore{
+    border: solid 1px $lightBlue;
+    padding: 5px 12px 5px 12px;
+    font-size: 16px;
+    background: transparent;
+    color: $lightBlue;
+    margin-bottom: 12px;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    margin-top: 12px;
+    transition: all 0.3s;
+}
+.viewMore:hover{
+    background: rgba(104, 179, 200, 0.57);
+    color: white;
+    transition: all 0.3s;
 }

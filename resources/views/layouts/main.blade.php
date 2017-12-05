@@ -32,27 +32,31 @@
                     </router-link>
                     <li class="menu-item">
                         <i class="fa fa-user"></i> Clients
+                        <span class="itemDirection"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
                         <ul class="sub">
                             <router-link :to="{name: 'clientCreate'}"><li>Add new</li></router-link>
                             <router-link :to="{name: 'clientIndex'}"><li>All clients</li></router-link>
                         </ul>
                     </li>
                     <li class="menu-item">
-                        <i class="fa fa-comments"></i></i> Requests
+                        <i class="fa fa-comments"></i> Requests
+                        <span class="itemDirection"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
                         <ul class="sub">
                             <router-link :to="{name: 'requestCreate'}"><li>Add new</li></router-link>
                             <router-link :to="{name: 'requestIndex'}"><li>All requests</li></router-link>
                         </ul>
                     </li>
                     <li class="menu-item">
-                        <i class="fa fa-file"></i></i> Orders
+                        <i class="fa fa-file"></i> Orders
+                        <span class="itemDirection"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
                         <ul class="sub">
                             <router-link :to="{name: 'orderCreate'}"><li>Add new</li></router-link>
-                            <router-link :to="{name: 'orderIndex'}"><li>All requests</li></router-link>
+                            <router-link :to="{name: 'orderIndex'}"><li>All orders</li></router-link>
                         </ul>
                     </li>
                     <li class="menu-item">
-                        <i class="fa fa-gift"></i></i></i> Products
+                        <i class="fa fa-gift"></i> Products
+                        <span class="itemDirection"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
                         <ul class="sub">
                             <router-link :to="{name: 'productCreate'}"><li>Add new</li></router-link>
                             <router-link :to="{name: 'productIndex'}"><li>All products</li></router-link>
