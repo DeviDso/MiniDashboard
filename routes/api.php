@@ -27,5 +27,5 @@ Route::group(['prefix' => '/V1', 'namespace' => 'Api\V1', 'as' => 'api.'], funct
     Route::resource('orderStatus', 'orderStatusController', ['except' => ['create', 'edit']]);
     Route::resource('orders', 'orderController', ['except' => ['create', 'edit']]);
     Route::resource('orderData', 'orderDataController', ['except' => ['create', 'edit']]);
-    Route::resource('user', 'UserController', ['except' => ['create', 'edit']]);
+    Route::resource('users', 'UserController', ['except' => ['create', 'edit']]);
 });

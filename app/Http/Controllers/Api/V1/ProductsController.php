@@ -53,7 +53,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $product = Product::firstOrFail($id);
+        $product = Product::find($id);
 
         return $product;
     }
@@ -68,15 +68,19 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
-            'user_id' => 'required',
             'category_id' => 'required',
             'name' => 'required',
             'quantity' => 'required'
             ]);
 
         if($validator->fails()){
-            return response()->with($validator->errors(), 400);
+            return response()->json($validator->errors(), 400);
         }
+
+        $product = Product::find($id);
+        $product->update($request->all());
+
+        return $product;
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterOrderDataTable extends Migration
+class AlterUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterOrderDataTable extends Migration
      */
     public function up()
     {
-        Schema::table('orders_data', function($table){
-            $table->double('price')->nullable()->after('quantity');
+        Schema::table('users', function($table){
+            $table->string('photo')->default('https://www.popvox.com/images/user-avatar-grey.png')->after('role_id');
         });
     }
 
@@ -25,8 +25,8 @@ class AlterOrderDataTable extends Migration
      */
     public function down()
     {
-        Schema::table('orders_data', function($table){
-            $table->dropColumn('price');
+        Schema::table('users', function($table){
+            $table->dropColumn('photo');
         });
     }
 }

@@ -20,6 +20,10 @@ class Client extends Model
     }
 
     public function orders(){
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)
+                    ->orderBy('created_at', 'dsc')
+                    ->with('data')
+                    ->with('data.product')
+                    ->with('status');
     }
 }

@@ -48,10 +48,14 @@ import requestCreateId from './components/request/createId.vue';
 import requestView from './components/request/view.vue';
 import productIndex from './components/product/index.vue';
 import productCreate from './components/product/create.vue';
+import productView from './components/product/view.vue';
 import orderIndex from './components/order/index.vue';
 import orderCreate from './components/order/create.vue';
 import orderCreateId from './components/order/createId.vue';
 import orderView from './components/order/view.vue';
+import search from './components/search.vue';
+import searchPage from './components/searchPage.vue';
+import settingsProfile from './components/settings/profile.vue';
 
 const routes = [
     {path: '/',components: {home : homeIndex},name: 'Home'},
@@ -64,14 +68,20 @@ const routes = [
     {path: '/request/create/:id', component:requestCreateId, name: 'requestCreateId'},
     {path: '/request/view/:id', component:requestView, name: 'requestView'},
     {path: '/product/index', component:productIndex, name: 'productIndex'},
+    {path: '/product/view/:id', component:productView, name: 'productView'},
     {path: '/product/create', component:productCreate, name: 'productCreate'},
     {path: '/order/index', component:orderIndex, name: 'orderIndex'},
     {path: '/order/create', component:orderCreate, name: 'orderCreate'},
     {path: '/order/create/:id', component:orderCreateId, name: 'orderCreateId'},
     {path: '/order/view/:id', component:orderView, name: 'orderView'},
+    {path: '/search', component:searchPage, name: 'search'},
+    {path: '/settings/profile', component:settingsProfile, name: 'settingsProfile'},
 ]
 
 Vue.mixin({
+    components:{
+        search:search
+    },
     data(){
         return {
             itemsList: [],
@@ -105,7 +115,7 @@ Vue.mixin({
         totalPages(){
             return Math.ceil(this.resultsCount/this.perPage);
         },
-    }
+    },
 });
 
 const router = new VueRouter({routes});

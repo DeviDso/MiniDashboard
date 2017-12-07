@@ -15,52 +15,62 @@
                     </tr>
                 </table>
                 <hr>
-                <h2>Statistics</h2>
-                <div class="col-md-6" v-if="reqStatistics">
-                    <request-statistics :data="chartData" :height="275"/>
+                <div class="col-md-12" v-if="!requestSection">
+                    <h3>No request records!</h3>
+                    <hr>
                 </div>
-                <div class="col-md-6">
-                    <sale-statistics :height="275"/>
-                </div>
-                <hr>
-                <h2>Requests</h2>
-                <div class="col-md-6">
-                    <h3>Active</h3>
-                    <table class="col-md-12">
-                        <thead>
-                            <td>Request</td>
-                            <td>Date</td>
-                            <td>Status</td>
-                        </thead>
-                        <tr v-for="(request, index) in active(client.requests)" v-on:click="openRequest(request.id)">
-                            <td>{{ request.request_type.name }}</td>
-                            <td>{{ request.created_at.substr(0, 10) }}</td>
-                            <td v-bind:class="requestStatus(request.request_status.id)"> {{request.request_status.name}}</td>
-                        </tr>
-                    </table>
-                    <div class="col-md-12" v-if="activeMore">
-                        <button type="button" v-on:click="viewMore('active')" class="viewMore">View all</button>
+                <div class="col-md-12" v-if="requestSection">
+                    <h2>Statistics</h2>
+                    <div class="col-md-6" v-if="reqStatistics">
+                        <request-statistics :data="chartData" :height="275"/>
+                    </div>
+                    <div class="col-md-6">
+                        <sale-statistics :height="275"/>
+                    </div>
+                    <hr>
+                    <h2>Requests</h2>
+                    <div class="col-md-6">
+                        <h3>Active</h3>
+                        <table class="col-md-12">
+                            <thead>
+                                <td>Request</td>
+                                <td>Date</td>
+                                <td>Status</td>
+                            </thead>
+                            <tr v-for="(request, index) in active(client.requests)" v-on:click="openRequest(request.id)">
+                                <td>{{ request.request_type.name }}</td>
+                                <td>{{ request.created_at.substr(0, 10) }}</td>
+                                <td v-bind:class="requestStatus(request.request_status.id)"> {{request.request_status.name}}</td>
+                            </tr>
+                        </table>
+                        <div class="col-md-12" v-if="activeMore">
+                            <button type="button" v-on:click="viewMore('active')" class="viewMore">View all</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>History</h3>
+                        <table class="col-md-12">
+                            <thead>
+                                <td>Request</td>
+                                <td>Date</td>
+                                <td>Status</td>
+                            </thead>
+                            <tr v-for="(request, index) in history(client.requests)" v-on:click="openRequest(request.id)">
+                                <td>{{ request.request_type.name }}</td>
+                                <td>{{ request.created_at.substr(0, 10) }}</td>
+                                <td v-bind:class="requestStatus(request.request_status.id)"> {{request.request_status.name}}</td>
+                            </tr>
+                        </table>
+                        <div class="col-md-12" v-if="historyMore">
+                            <button type="button" v-on:click="viewMore('history')" class="viewMore">View all</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <h3>History</h3>
-                    <table class="col-md-12">
-                        <thead>
-                            <td>Request</td>
-                            <td>Date</td>
-                            <td>Status</td>
-                        </thead>
-                        <tr v-for="(request, index) in history(client.requests)" v-on:click="openRequest(request.id)">
-                            <td>{{ request.request_type.name }}</td>
-                            <td>{{ request.created_at.substr(0, 10) }}</td>
-                            <td v-bind:class="requestStatus(request.request_status.id)"> {{request.request_status.name}}</td>
-                        </tr>
-                    </table>
-                    <div class="col-md-12" v-if="historyMore">
-                        <button type="button" v-on:click="viewMore('history')" class="viewMore">View all</button>
-                    </div>
+                <div class="col-md-12" v-if="!ordersSection">
+                    <h3>No order records!</h3>
+                    <hr>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" v-if="ordersSection">
                     <hr>
                     <h2>Orders</h2>
                     <table class="col-md-12">
@@ -117,13 +127,18 @@ export default{
             activeMore: false,
             historyMore: false,
             orderMore: false,
+            ordersSection: false,
+            requestSection: false,
         }
     },
     mounted(){
         var app = this;
 
         axios.get('/api/V1/clients/' +this.$route.params.id).then(function(res){
+            console.log(res.data);
             app.client = res.data;
+            (app.client.orders.length) ? app.ordersSection = true : app.ordersSection = false;
+            (app.client.requests.length) ? app.requestSection = true : app.requestSection = false;
             var index = 0, cd1 = 0, cd2 = 0, cd3 = 0
 
             app.client.requests.forEach(res => {

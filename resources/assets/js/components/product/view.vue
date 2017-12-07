@@ -3,7 +3,7 @@
         <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
             <form v-on:submit="sendForm()">
-                <h1>Add new product</h1>
+                <h1>{{product.name}}</h1>
                 <div class="col-md-6">
                     <label>Product name</label>
                     <input type="text" v-model="product.name" class="form-control" required>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-md-12">
                     <hr>
-                    <button type="submit" class="submitButton">Create</button>
+                    <button type="submit" class="submitButton">Update</button>
                 </div>
             </form>
         </div>
@@ -62,13 +62,17 @@ export default{
     },
     mounted(){
         var app = this;
-
-        axios.get('/api/V1/categories').then(function(res){
-            app.categories = res.data;
-            console.log(res.data);
-        }).catch(function(err){
+        axios.all([
+            axios.get('/api/V1/products/' + this.$route.params.id),
+            axios.get('/api/V1/categories')
+        ]).then(axios.spread((product, categories) =>{
+            this.product = product.data;
+            this.categories = categories.data;
+        })).catch(function(err){
             toastr.error('Failed to load! ' +err);
         });
+
+
     },
     methods:{
         sendForm(){
@@ -76,8 +80,7 @@ export default{
 
             var app = this;
 
-            axios.post('/api/V1/products', this.product).then(function(res){
-                console.log(res);
+            axios.patch('/api/V1/products/' +this.$route.params.id, this.product).then(function(res){
                 toastr.success('Product created!');
                 app.$router.push({name: 'productIndex'});
             }).catch(function(err){

@@ -12,7 +12,7 @@
                     <td>Quantity</td>
                     <td>Price</td>
                 </thead>
-                <tr v-for="(product, index) in paginate(products)">
+                <tr v-for="(product, index) in paginate(products)" v-on:click="openProduct(product.id)">
                     <td>{{ index+1 }}</td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.category.name }}</td>
@@ -51,6 +51,11 @@
             }).catch(function(err){
                 toastr.error('Failed to load! ' +err);
             });
+        },
+        methods:{
+            openProduct(id){
+                this.$router.push({name:'productView', params:{id:id}});
+            }
         }
     }
 </script>

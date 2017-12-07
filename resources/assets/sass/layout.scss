@@ -150,7 +150,8 @@ tr{
 }
 .desa-content .top{
     width: 100%;
-    height: 75px;
+    min-height: 75px;
+    height: auto;
     background: $white;
     box-shadow: #e3e3e3 2px 1px 4px 1px;
     text-align: right;
@@ -209,6 +210,7 @@ tr{
     border-radius: 5px;
     float: left;
     width: 100%;
+    margin-bottom: 25px;
 }
 .seeAll{
     text-align: right;
@@ -374,4 +376,35 @@ tr{
     background: rgba(104, 179, 200, 0.57);
     color: white;
     transition: all 0.3s;
+}
+.searchResults{
+    position: absolute;
+    background: $white;
+    border: solid 1px $lightDark;
+    height: 225px;
+    display: block;
+    z-index:9999;
+    // width: calc(100% - 260px);
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0
+}
+#employeeStatistics table tr{
+    cursor: default;
+}
+.logout{
+    font-size: 12px;
+    color: $white;
+}
+@media(max-width: 768px){
+    .desa-content{
+        width: 100%;
+        margin: 0;
+    }
+    .desa-sidebar{
+        display: none;
+    }
 }

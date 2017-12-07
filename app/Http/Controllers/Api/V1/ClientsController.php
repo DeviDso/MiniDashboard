@@ -19,6 +19,12 @@ class ClientsController extends Controller
      */
     public function index(Request $r)
     {
+        if($r->input('all')){
+            return Client::orderBy('name', 'asc')
+                    ->with('orders')
+                    ->with('requests')
+                    ->get();
+        }
         return Client::orderBy('name', 'asc')->get();
     }
 

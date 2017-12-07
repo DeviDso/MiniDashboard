@@ -19,11 +19,11 @@
     <div id="app">
         <div class="desa-sidebar">
             <div class="sidebar-logo">
-                {{-- <img src="https://desamedia.lt/wp-content/uploads/2017/10/logo-white.png" height="35"> --}}
+                <img src="http://www.powerpartspro.co.uk/themes/powerparts/assets/images/logo.png" height="55">
             </div>
             <div class="sidebar-profile">
-                {{-- <img src="https://lh3.googleusercontent.com/-XYhBmobHM8I/AAAAAAAAAAI/AAAAAAAAAAA/fXUYd9YPhCE/s128-c-k/photo.jpg"> --}}
-                <p>{{ Auth::user()->name }}</p>
+                <img src="{{ Auth::user()->photo }}">
+                <p>{{ Auth::user()->name }} {{ Auth::user()->surname}}</p>
             </div>
             <div class="sidebar-menu">
                 <ul>
@@ -62,7 +62,18 @@
                             <router-link :to="{name: 'productIndex'}"><li>All products</li></router-link>
                         </ul>
                     </li>
+                    <router-link :to="{name: 'settingsProfile'}">
+                        <li class="menu-item">
+                            <i class="fa fa-gears"></i> Settings
+                        </li>
+                    </router-link>
+                    <li class="menu-item" onclick="(confirm('Do you realy want to log out?')) ? document.getElementById('logout-form').submit() : false;">
+                        <i class="fa fa-sign-out"></i> Logout
+                    </li>
                 </ul>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </div>
             <div class="sidebar-copyright">
                 Power Parts Pro
@@ -70,12 +81,15 @@
         </div>
         <div class="desa-content">
             <div class="top">
-                <ul>
+                <search />
+                {{-- <b>{{ Auth::user()->name . ' ' . Auth::user()->surname }}</b> --}}
+
+                {{-- <ul>
                     <li><i class="fa fa-search"></i></li>
                     <li><i class="fa fa-envelope"></i></li>
                     <li><i class="fa fa-bell"></i></li>
                     <li><i class="fa fa-weixin"></i></li>
-                </ul>
+                </ul> --}}
             </div>
             <div class="desa-content-main">
                 @yield('content')
@@ -89,6 +103,6 @@
         window.api_token = '{{ Auth::user()->api_token}}'
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://use.fontawesome.com/31ce0d6872.js"></script>
+    {{-- <script src="https://use.fontawesome.com/31ce0d6872.js"></script> --}}
 </body>
 </html>
