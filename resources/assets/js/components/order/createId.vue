@@ -1,6 +1,5 @@
 <template>
     <div class="desa-full">
-        <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
             <form v-on:submit="sendForm()">
                 <h1>New order</h1>
@@ -8,7 +7,7 @@
                     <div class="col-md-6">
                         <label>Client</label>
                         <select v-model="order.client_id" class="form-control" required>
-                            <option v-bind:value="client.id" selected="selected">{{ client.name }}</option>
+                            <option v-bind:value="client.id">{{ client.name }}</option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -27,10 +26,10 @@
                                 <td>Quantity</td>
                                 <td></td>
                             </thead>
-                            <tr v-for="product, index in orderProducts">
+                            <tr v-for="product, index in order.data">
                                 <td>{{ product.name }}</td>
                                 <td>{{ product.code }}</td>
-                                <td><input type="number" v-model="product.price"></td>
+                                <td><input type="number" v-model="product.price" step="0.01"></td>
                                 <td><input type="number" v-model="product.quantity = 1"></td>
                                 <td><span v-on:click="removeItem(index)">X</span></td>
                             </tr>
@@ -71,6 +70,7 @@
                     user_id: user_id,
                     client_id: '',
                     status_id: '',
+                    data: [],
                 },
                 orderData: []
             }
@@ -79,12 +79,12 @@
             var app = this;
 
             axios.all([
-                axios.get('/api/V1/clients/' + this.$route.params.id),
+                axios.get('/api/V1/clients/' +this.$route.params.id),
                 axios.get('/api/V1/orderStatus'),
                 axios.get('/api/V1/products'),
             ]).then(axios.spread((client, orderStatus, products) => {
-                app.client = client.data;
                 app.order.client_id = client.data.id;
+                app.client = client.data;
                 app.orderStatus = orderStatus.data;
                 app.products = products.data;
             })).catch(function(err){
@@ -93,39 +93,37 @@
         },
         methods:{
             addToList(product, index){
-                if(!this.orderProducts.includes(product.code)){
-                    this.orderProducts.push(product)
+                if(!this.order.data.includes(product.code)){
+                    console.log(product);
+                    var item = {
+                        product_id: product.id,
+                        quantity: product.quantity,
+                        name: product.name,
+                        price: product.price,
+                        code: product.code,
+                    }
+                    this.order.data.push(item)
                     this.productsList.splice(index, 1)
                     this.showProducts = true
                 }
             },
             removeItem(index){
-                this.orderProducts.splice(index, 1);
-                (this.orderProducts.length == 0) ? this.showProducts = false : this.showProducts = true;
+                this.order.data.splice(index, 1);
+                (this.order.data.length == 0) ? this.showProducts = false : this.showProducts = true;
             },
             sendForm(){
                 event.preventDefault();
                 var app = this;
 
-                if(app.orderProducts.length == 0){
+                console.log(app.order);
+                // return true;
+
+                if(app.order.data.length == 0){
                     toastr.error('Do not forget to add products!');
                 } else {
                     axios.post('/api/V1/orders', app.order).then(function(res){
-                        console.log(res);
-                        for(var i = 0; i < app.orderProducts.length; i++){
-                            app.orderData.push({
-                                order_id: res.data.id,
-                                product_id: app.orderProducts[i].id,
-                                quantity: app.orderProducts[i].quantity,
-                            });
-                        }
-                        axios.post('/api/V1/orderData', app.orderData).then(function(res){
-                            toastr.success('Order was created!');
-                            app.$router.push({name:'clientView', params:{id:this.$route.params.id}});
-                        }).catch(function(err){
-                            console.log(err);
-                        });
-                    console.log(app.orderData);
+                        toastr.success('Order created!');
+                        app.$router.push({name:'clientView', params:{id:app.order.client_id}})
                     }).catch(function(err){
                         toastr.error('Failed to save data! ' +err);
                         console.log(err);

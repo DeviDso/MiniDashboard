@@ -20,12 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => '/V1', 'namespace' => 'Api\V1', 'as' => 'api.'], function(){
     Route::resource('clients', 'ClientsController', ['except' => ['create', 'edit']]);
     Route::resource('requests', 'RequestsController', ['except' => ['create', 'edit']]);
-    Route::resource('requestType', 'requestTypeController', ['except' => ['create', 'edit']]);
-    Route::resource('requestStatus', 'requestStatusController', ['except' => ['create', 'edit']]);
-    Route::resource('categories', 'categoriesController', ['except' => ['create', 'edit']]);
-    Route::resource('products', 'productsController', ['except' => ['create', 'edit']]);
-    Route::resource('orderStatus', 'orderStatusController', ['except' => ['create', 'edit']]);
-    Route::resource('orders', 'orderController', ['except' => ['create', 'edit']]);
-    Route::resource('orderData', 'orderDataController', ['except' => ['create', 'edit']]);
+    Route::resource('requestType', 'RequestTypeController', ['except' => ['create', 'edit']]);
+    Route::resource('requestStatus', 'RequestStatusController', ['except' => ['create', 'edit']]);
+    Route::resource('categories', 'CategoriesController', ['except' => ['create', 'edit']]);
+    Route::resource('products', 'ProductsController', ['except' => ['create', 'edit']]);
+    Route::resource('orderStatus', 'OrderStatusController', ['except' => ['create', 'edit']]);
+    Route::resource('orders', 'OrderController', ['except' => ['create', 'edit']]);
+    Route::resource('orderData', 'OrderDataController', ['except' => ['create', 'edit']]);
     Route::resource('users', 'UserController', ['except' => ['create', 'edit']]);
 });

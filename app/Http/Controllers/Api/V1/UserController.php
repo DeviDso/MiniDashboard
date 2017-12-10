@@ -50,7 +50,7 @@ class UserController extends Controller
             }
             $file = $request->file('photo')->store('photos');
             $user = User::find($request->input('user_id'));
-            $user->photo = $file;
+            $user->photo = 'storage/' . $file;
             $user->save();
 
             return $file;

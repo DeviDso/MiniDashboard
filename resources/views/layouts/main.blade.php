@@ -75,9 +75,9 @@
                     {{ csrf_field() }}
                 </form>
             </div>
-            <div class="sidebar-copyright">
+            {{-- <div class="sidebar-copyright">
                 Power Parts Pro
-            </div>
+            </div> --}}
         </div>
         <div class="desa-content">
             <div class="top">

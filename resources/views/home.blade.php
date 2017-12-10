@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <transition>
+    <transition name="fade">
         <router-view name="home"></router-view>
         <router-view></router-view>
     </transition>

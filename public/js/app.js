@@ -84678,7 +84678,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -84693,7 +84692,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             order: {
                 user_id: user_id,
                 client_id: '',
-                status_id: ''
+                status_id: '',
+                data: []
             },
             orderData: []
         };
@@ -84702,8 +84702,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var app = this;
 
         axios.all([axios.get('/api/V1/clients/' + this.$route.params.id), axios.get('/api/V1/orderStatus'), axios.get('/api/V1/products')]).then(axios.spread(function (client, orderStatus, products) {
-            app.client = client.data;
             app.order.client_id = client.data.id;
+            app.client = client.data;
             app.orderStatus = orderStatus.data;
             app.products = products.data;
         })).catch(function (err) {
@@ -84713,39 +84713,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         addToList: function addToList(product, index) {
-            if (!this.orderProducts.includes(product.code)) {
-                this.orderProducts.push(product);
+            if (!this.order.data.includes(product.code)) {
+                console.log(product);
+                var item = {
+                    product_id: product.id,
+                    quantity: product.quantity,
+                    name: product.name,
+                    price: product.price,
+                    code: product.code
+                };
+                this.order.data.push(item);
                 this.productsList.splice(index, 1);
                 this.showProducts = true;
             }
         },
         removeItem: function removeItem(index) {
-            this.orderProducts.splice(index, 1);
-            this.orderProducts.length == 0 ? this.showProducts = false : this.showProducts = true;
+            this.order.data.splice(index, 1);
+            this.order.data.length == 0 ? this.showProducts = false : this.showProducts = true;
         },
         sendForm: function sendForm() {
             event.preventDefault();
             var app = this;
 
-            if (app.orderProducts.length == 0) {
+            console.log(app.order);
+            // return true;
+
+            if (app.order.data.length == 0) {
                 toastr.error('Do not forget to add products!');
             } else {
                 axios.post('/api/V1/orders', app.order).then(function (res) {
-                    console.log(res);
-                    for (var i = 0; i < app.orderProducts.length; i++) {
-                        app.orderData.push({
-                            order_id: res.data.id,
-                            product_id: app.orderProducts[i].id,
-                            quantity: app.orderProducts[i].quantity
-                        });
-                    }
-                    axios.post('/api/V1/orderData', app.orderData).then(function (res) {
-                        toastr.success('Order was created!');
-                        app.$router.push({ name: 'clientView', params: { id: this.$route.params.id } });
-                    }).catch(function (err) {
-                        console.log(err);
-                    });
-                    console.log(app.orderData);
+                    toastr.success('Order created!');
+                    app.$router.push({ name: 'clientView', params: { id: app.order.client_id } });
                 }).catch(function (err) {
                     toastr.error('Failed to save data! ' + err);
                     console.log(err);
@@ -84779,19 +84777,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "desa-full" }, [
-    _c(
-      "button",
-      {
-        staticClass: "backButton",
-        on: {
-          click: function($event) {
-            _vm.goBack()
-          }
-        }
-      },
-      [_vm._v("Go back")]
-    ),
-    _vm._v(" "),
     _c("div", { staticClass: "desa-container" }, [
       _c(
         "form",
@@ -84843,14 +84828,9 @@ var render = function() {
                   }
                 },
                 [
-                  _c(
-                    "option",
-                    {
-                      attrs: { selected: "selected" },
-                      domProps: { value: _vm.client.id }
-                    },
-                    [_vm._v(_vm._s(_vm.client.name))]
-                  )
+                  _c("option", { domProps: { value: _vm.client.id } }, [
+                    _vm._v(_vm._s(_vm.client.name))
+                  ])
                 ]
               )
             ]),
@@ -84909,7 +84889,7 @@ var render = function() {
                     [
                       _vm._m(0, false, false),
                       _vm._v(" "),
-                      _vm._l(_vm.orderProducts, function(product, index) {
+                      _vm._l(_vm.order.data, function(product, index) {
                         return _c("tr", [
                           _c("td", [_vm._v(_vm._s(product.name))]),
                           _vm._v(" "),
@@ -84925,7 +84905,7 @@ var render = function() {
                                   expression: "product.price"
                                 }
                               ],
-                              attrs: { type: "number" },
+                              attrs: { type: "number", step: "0.01" },
                               domProps: { value: product.price },
                               on: {
                                 input: function($event) {

@@ -464,14 +464,17 @@ tr {
   z-index: 9999;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  -webkit-transition: opacity .5s;
-  transition: opacity .5s;
+.fade-leave-active .fade-leave,
+.fade-leave-to {
+  display: none;
 }
 
-.fade-enter,
-.fade-leave-to {
+.fade-enter-active {
+  -webkit-transition: opacity .7s;
+  transition: opacity .7s;
+}
+
+.fade-enter {
   opacity: 0;
 }
 
