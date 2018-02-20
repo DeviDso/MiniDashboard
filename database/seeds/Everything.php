@@ -11,6 +11,13 @@ class Everything extends Seeder
      */
     public function run()
     {
+        DB::table('users')->insert([
+            'name' => 'David',
+            'email' => 'dsadeckas@gmail.com',
+            'password' => bcrypt('asdasd'),
+            'api_token' => str_random(60),
+        ]);
+
         $this->call(CategoriesSeeder::class);
         $this->call(OrderStatusSeeder::class);
         $this->call(RequestStatusSeeder::class);

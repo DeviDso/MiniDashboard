@@ -19,7 +19,7 @@
     <div id="app">
         <div class="desa-sidebar">
             <div class="sidebar-logo">
-                <img src="http://www.powerpartspro.co.uk/themes/powerparts/assets/images/logo.png" height="55">
+                <img src="https://www.powerpartspro.com/template/img/logo.png" height="55">
             </div>
             <div class="sidebar-profile">
                 <img src="{{ Auth::user()->photo }}">
@@ -39,13 +39,21 @@
                         </ul>
                     </li>
                     <li class="menu-item">
+                        <i class="fa fa-comments"></i> Quotes
+                        <span class="itemDirection"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+                        <ul class="sub">
+                            <router-link :to="{name: 'quotesCreate'}"><li>Add new</li></router-link>
+                            <router-link :to="{name: 'quotesIndex'}"><li>All products</li></router-link>
+                        </ul>
+                    </li>
+                    {{-- <li class="menu-item">
                         <i class="fa fa-comments"></i> Requests
                         <span class="itemDirection"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
                         <ul class="sub">
                             <router-link :to="{name: 'requestCreate'}"><li>Add new</li></router-link>
                             <router-link :to="{name: 'requestIndex'}"><li>All requests</li></router-link>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li class="menu-item">
                         <i class="fa fa-file"></i> Orders
                         <span class="itemDirection"><i class="fa fa-angle-left" aria-hidden="true"></i></span>

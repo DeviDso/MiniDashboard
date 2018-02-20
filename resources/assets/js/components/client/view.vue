@@ -21,14 +21,14 @@
                 </div>
                 <div class="col-md-12" v-if="requestSection">
                     <h2>Statistics</h2>
-                    <div class="col-md-6" v-if="reqStatistics">
+                    <!-- <div class="col-md-6" v-if="reqStatistics">
                         <request-statistics :data="chartData" :height="275"/>
-                    </div>
-                    <div class="col-md-6">
+                    </div> -->
+                    <div class="col-md-12">
                         <sale-statistics :height="275"/>
                     </div>
                     <hr>
-                    <h2>Requests</h2>
+                    <!-- <h2>Requests</h2>
                     <div class="col-md-6">
                         <h3>Active</h3>
                         <table class="col-md-12">
@@ -64,11 +64,15 @@
                         <div class="col-md-12" v-if="historyMore">
                             <button type="button" v-on:click="viewMore('history')" class="viewMore">View all</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-12" v-if="!ordersSection">
                     <h3>No order records!</h3>
                     <hr>
+                </div>
+                <div class="col-md-12">
+                    <hr>
+                    <h2>Quotes</h2>
                 </div>
                 <div class="col-md-12" v-if="ordersSection">
                     <hr>

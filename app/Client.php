@@ -26,4 +26,8 @@ class Client extends Model
                     ->with('data.product')
                     ->with('status');
     }
+
+    public function quote(){
+        return $this->hasMany(Quotes::class);
+    }
 }

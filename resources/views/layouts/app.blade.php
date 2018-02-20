@@ -16,7 +16,7 @@
     <div id="app">
         <div class="desa-sidebar">
             <div class="sidebar-logo">
-                <img src="http://www.powerpartspro.co.uk/themes/powerparts/assets/images/logo.png" height="55">
+                <img src="https://www.powerpartspro.com/template/img/logo.png" height="55">
             </div>
             <div class="sidebar-profile">
                 {{-- <img src="https://lh3.googleusercontent.com/-XYhBmobHM8I/AAAAAAAAAAI/AAAAAAAAAAA/fXUYd9YPhCE/s128-c-k/photo.jpg"> --}}

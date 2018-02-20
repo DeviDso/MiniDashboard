@@ -24,15 +24,25 @@
                         <input type="number" v-model="product.quantity" class="form-control" required>
                     </div>
                     <div class="col-md-6">
-                        <label>Weight</label>
-                        <input type="number" v-model="product.weight" class="form-control">
+                        <label>Price (&euro;)</label>
+                        <input type="number" v-model="product.price" class="form-control" min="1" step="any">
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                        <h4>Weight</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Bruto</label>
+                        <input type="number" v-model="product.bruto" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Netto</label>
+                        <input type="number" v-model="product.netto" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label>Product description</label>
-                    <textarea v-model="product.description" class="form-control"></textarea>
-                    <label>Price (&euro;)</label>
-                    <input type="number" v-model="product.price" class="form-control" min="1" step="any">
+                    <textarea v-model="product.description" class="form-control" rows="5"></textarea>
                 </div>
                 <div class="col-md-12">
                     <hr>
@@ -53,7 +63,8 @@ export default{
                 description: '',
                 code: '',
                 alternative_code: '',
-                weight: '',
+                bruto: '',
+                netto: '',
                 quantity: 1,
                 price: ''
             },

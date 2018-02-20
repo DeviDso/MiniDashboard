@@ -56,6 +56,9 @@ import orderView from './components/order/view.vue';
 import search from './components/search.vue';
 import searchPage from './components/searchPage.vue';
 import settingsProfile from './components/settings/profile.vue';
+import quotesCreate from './components/quotes/create.vue';
+import quotesIndex from './components/quotes/index.vue';
+import quotesView from './components/quotes/view.vue';
 
 const routes = [
     {path: '/',components: {home : homeIndex},name: 'Home'},
@@ -76,6 +79,9 @@ const routes = [
     {path: '/order/view/:id', component:orderView, name: 'orderView'},
     {path: '/search', component:searchPage, name: 'search'},
     {path: '/settings/profile', component:settingsProfile, name: 'settingsProfile'},
+    {path: '/quotes/new', component:quotesCreate, name: 'quotesCreate'},
+    {path: '/quotes/index', component:quotesIndex, name: 'quotesIndex'},
+    {path: '/quotes/view/:id', component:quotesView, name: 'quotesView'},
 ]
 
 Vue.mixin({
