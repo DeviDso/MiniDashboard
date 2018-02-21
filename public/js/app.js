@@ -79839,22 +79839,7 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-6" }, [
-      _vm.showTotalRequests
-        ? _c(
-            "div",
-            { staticClass: "desa-container" },
-            [
-              _c("h2", [_vm._v("Total requests")]),
-              _vm._v(" "),
-              _c("total-requests", { attrs: { data: _vm.totalRequests } })
-            ],
-            1
-          )
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-6" }, [
+    _c("div", { staticClass: "col-md-12" }, [
       _vm.employeeStatistics
         ? _c(
             "div",
@@ -80708,6 +80693,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -80738,31 +80742,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(res.data);
             app.client = res.data;
             app.client.orders.length ? app.ordersSection = true : app.ordersSection = false;
-            app.client.requests.length ? app.requestSection = true : app.requestSection = false;
+            // (app.client.requests.length) ? app.requestSection = true : app.requestSection = false;
             var index = 0,
                 cd1 = 0,
                 cd2 = 0,
                 cd3 = 0;
 
-            app.client.requests.forEach(function (res) {
-                index++;
-                if (res.request_status.id == 1) {
-                    cd1 = cd1 + 1;
-                } else if (res.request_status.id == 2) {
-                    cd2 = cd2 + 1;
-                } else if (res.request_status.id == 3) {
-                    cd3 = cd3 + 1;
-                }
-
-                if (index + 1 == app.client.requests.length) {
-                    // console.log('done');
-                    app.chartData.push(cd1);
-                    app.chartData.push(cd2);
-                    app.chartData.push(cd3);
-                    app.reqStatistics = true;
-                }
-                // console.log(app.reqStatistics);
-            });
+            // app.client.requests.forEach(res => {
+            //     index++;
+            //     if(res.request_status.id == 1){
+            //         cd1 = cd1+1
+            //     } else if(res.request_status.id == 2){
+            //         cd2 = cd2+1
+            //     } else if(res.request_status.id == 3){
+            //         cd3 = cd3+1
+            //     }
+            //
+            //     if(index+1 == app.client.requests.length){
+            //         // console.log('done');
+            //         app.chartData.push(cd1);
+            //         app.chartData.push(cd2);
+            //         app.chartData.push(cd3);
+            //         app.reqStatistics = true;
+            //     }
+            //     // console.log(app.reqStatistics);
+            // });
         }).catch(function (err) {
             toastr.error('Failed to load! ' + err);
             console.log(err);
@@ -80798,9 +80802,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         },
-        newRequest: function newRequest() {
+        newQuote: function newQuote() {
             var app = this;
-            app.$router.push({ name: 'requestCreateId', params: { id: app.$route.params.id } });
+            app.$router.push({ name: 'quotesCreate', params: { id: app.$route.params.id } });
         },
         newOrder: function newOrder() {
             var app = this;
@@ -80837,14 +80841,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         countOrderValue: function countOrderValue(list) {
             var value = 0;
             list.forEach(function (el) {
-                value += Number(el.product.price);
+                value += Number(el.price);
             });
             return value;
         },
-        openRequest: function openRequest(id) {
+        openQuote: function openQuote(id) {
             var app = this;
 
-            app.$router.push({ name: 'requestView', params: { id: id } });
+            app.$router.push({ name: 'quotesView', params: { id: id } });
         },
         orders: function orders(list) {
             var temp = [];
@@ -81110,7 +81114,46 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm._m(0, false, false),
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("hr"),
+          _vm._v(" "),
+          _c("h2", [_vm._v("Quotes")]),
+          _vm._v(" "),
+          _c(
+            "table",
+            { staticClass: "col-md-12" },
+            [
+              _vm._m(0, false, false),
+              _vm._v(" "),
+              _vm._l(_vm.client.quote, function(quote, index) {
+                return _c(
+                  "tr",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.openQuote(quote.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("td", [_vm._v(_vm._s(index + 1))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(quote.delivery_price) + " €")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(quote.data.length))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm.countOrderValue(quote.data)) + " €")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(quote.created_at.substr(0, 10)))])
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ]),
         _vm._v(" "),
         _vm.ordersSection
           ? _c("div", { staticClass: "col-md-12" }, [
@@ -81202,11 +81245,11 @@ var render = function() {
             staticClass: "clientAction",
             on: {
               click: function($event) {
-                _vm.newRequest()
+                _vm.newQuote()
               }
             }
           },
-          [_vm._v("New request")]
+          [_vm._v("New quote")]
         ),
         _vm._v(" "),
         _c(
@@ -81243,10 +81286,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("hr"),
+    return _c("thead", [
+      _c("td", [_vm._v("#")]),
       _vm._v(" "),
-      _c("h2", [_vm._v("Quotes")])
+      _c("td", [_vm._v("Delivery price")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Number of products")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Total value")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Date")])
     ])
   },
   function() {
@@ -83595,19 +83644,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.product.weight,
-                    expression: "product.weight"
+                    value: _vm.product.bruto,
+                    expression: "product.bruto"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "number" },
-                domProps: { value: _vm.product.weight },
+                domProps: { value: _vm.product.bruto },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.product, "weight", $event.target.value)
+                    _vm.$set(_vm.product, "bruto", $event.target.value)
                   }
                 }
               })
@@ -83621,19 +83670,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.product.weight,
-                    expression: "product.weight"
+                    value: _vm.product.netto,
+                    expression: "product.netto"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "number" },
-                domProps: { value: _vm.product.weight },
+                domProps: { value: _vm.product.netto },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.product, "weight", $event.target.value)
+                    _vm.$set(_vm.product, "netto", $event.target.value)
                   }
                 }
               })
@@ -86285,6 +86334,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             list.forEach(function (item) {
                 if (temp.length == 10) return temp;
                 item.name.toLowerCase().includes(text) ? temp.push(item) : false;
+                item.code.toLowerCase().includes(text) ? temp.push(item) : false;
             });
 
             return temp;
@@ -87845,10 +87895,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            csrf: csrf,
             client: [],
             products: [],
             orderStatus: [],
@@ -87867,6 +87931,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
+        // this.csrf = window.laravel.csrfToken;
         var app = this;
 
         axios.all([axios.get('/api/V1/quotes/' + app.$route.params.id),
@@ -87879,17 +87944,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             app.quoteData.client_id = quote.data.client_id;
             app.quoteData.client = quote.data.client;
 
-            // quote.data.data.forEach(res =>{
-            //     var item = {
-            //         product_id: res.product_id,
-            //         quantity: res.quantity,
-            //         // name: res.product.name,
-            //         price: res.price,
-            //         code: res.product.code,
-            //     }
-            //     app.quote.data.push(item);
-            // })
-
             console.log(app.orderData);
         })).catch(function (err) {
             toastr.error('Failed to load! ' + err);
@@ -87897,6 +87951,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        generatePDF: function generatePDF(id) {
+            axios.post('/api/V1/pdf', this.quoteData).then(function (res) {
+                console.log(res);
+            }).catch(function () {
+                console.log(err);
+            });
+        },
         newProduct: function newProduct() {
             var item = {
                 product_id: '',
@@ -87985,6 +88046,39 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "desa-container" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c(
+          "form",
+          {
+            attrs: {
+              action: "http://powerpartspro.test/generate/pdf",
+              method: "post"
+            }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "quote_id" },
+              domProps: { value: _vm.quote.id }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: this.csrf }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submite" } },
+              [_vm._v("Generate PDF")]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(0, false, false),
+      _vm._v(" "),
+      _vm._m(1, false, false),
+      _vm._v(" "),
       _c(
         "form",
         {
@@ -88076,7 +88170,7 @@ var render = function() {
                     "table",
                     { staticClass: "col-md-12 orderProductTable" },
                     [
-                      _vm._m(0, false, false),
+                      _vm._m(2, false, false),
                       _vm._v(" "),
                       _vm._l(_vm.quote.data, function(product, index) {
                         return _c("tr", [
@@ -88300,13 +88394,31 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(1, false, false)
+          _vm._m(3, false, false)
         ]
       )
     ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6 text-right" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-danger", attrs: { type: "button" } },
+        [_vm._v("Delete quote")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [_c("hr")])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -28,6 +28,6 @@ class Client extends Model
     }
 
     public function quote(){
-        return $this->hasMany(Quotes::class);
+        return $this->hasMany(Quotes::class)->with('data');
     }
 }

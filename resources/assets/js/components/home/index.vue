@@ -6,13 +6,13 @@
                 <total-sales :labels="labels" :data="sales" />
             </div>
         </div>
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
             <div class="desa-container" v-if="showTotalRequests">
                 <h2>Total requests</h2>
                 <total-requests :data="totalRequests" />
             </div>
-        </div>
-        <div class="col-md-6">
+        </div> -->
+        <div class="col-md-12">
             <div class="desa-container" v-if="employeeStatistics" id="employeeStatistics">
                 <h2>Employees Statistics</h2>
                 <table>

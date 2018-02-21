@@ -109,6 +109,7 @@
     <script>
         window.user_id = '{{ Auth::user()->id }}'
         window.api_token = '{{ Auth::user()->api_token}}'
+        window.csrf = '{{ csrf_token() }}'
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
     {{-- <script src="https://use.fontawesome.com/31ce0d6872.js"></script> --}}

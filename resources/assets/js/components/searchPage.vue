@@ -70,6 +70,7 @@
                 list.forEach((item) => {
                     if(temp.length == 10) return temp;
                     (item.name.toLowerCase().includes(text)) ? temp.push(item) : false;
+                    (item.code.toLowerCase().includes(text)) ? temp.push(item) : false;
                 });
 
                 return temp;

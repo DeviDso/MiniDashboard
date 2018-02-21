@@ -32,11 +32,11 @@
                     </div>
                     <div class="col-md-6">
                         <label>Bruto</label>
-                        <input type="number" v-model="product.weight" class="form-control">
+                        <input type="number" v-model="product.bruto" class="form-control">
                     </div>
                     <div class="col-md-6">
                         <label>Netto</label>
-                        <input type="number" v-model="product.weight" class="form-control">
+                        <input type="number" v-model="product.netto" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6">

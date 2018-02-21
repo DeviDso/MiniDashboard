@@ -22,7 +22,7 @@ class ClientsController extends Controller
         if($r->input('all')){
             return Client::orderBy('name', 'asc')
                     ->with('orders')
-                    ->with('requests')
+                    ->with('quotes')
                     ->get();
         }
         return Client::orderBy('name', 'asc')->get();
@@ -58,7 +58,7 @@ class ClientsController extends Controller
     {
         $client = Client::find($id);
 
-        return $client->with('requests')
+        return $client->with('quote')
                 ->with('orders')
                 ->with('orders.status')
                 ->with('orders.data')

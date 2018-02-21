@@ -2,6 +2,19 @@
     <div class="desa-full">
         <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
+            <div class="col-md-6">
+                <form action="http://powerpartspro.test/generate/pdf" method="post">
+                    <input type="hidden" name="quote_id" :value="quote.id">
+                    <input type="hidden" name="_token" :value="this.csrf">
+                    <button type="submite" class="btn btn-primary">Generate PDF</button>
+                </form>
+            </div>
+            <div class="col-md-6 text-right">
+                <button type="button" class="btn btn-danger">Delete quote</button>
+            </div>
+            <div class="col-md-12">
+                <hr>
+            </div>
             <form v-on:submit="sendForm()">
                 <!-- <h1>New order</h1> -->
                 <div class="col-md-8">
@@ -69,6 +82,7 @@
     export default{
         data(){
             return{
+                csrf: csrf,
                 client: [],
                 products: [],
                 orderStatus: [],
@@ -87,6 +101,7 @@
             }
         },
         mounted(){
+            // this.csrf = window.laravel.csrfToken;
             var app = this;
 
             axios.all([
@@ -101,23 +116,19 @@
                 app.quoteData.client_id = quote.data.client_id;
                 app.quoteData.client = quote.data.client;
 
-                // quote.data.data.forEach(res =>{
-                //     var item = {
-                //         product_id: res.product_id,
-                //         quantity: res.quantity,
-                //         // name: res.product.name,
-                //         price: res.price,
-                //         code: res.product.code,
-                //     }
-                //     app.quote.data.push(item);
-                // })
-
                 console.log(app.orderData);
             })).catch(function(err){
                 toastr.error('Failed to load! ' +err);
             });
         },
         methods:{
+            generatePDF(id){
+                axios.post('/api/V1/pdf', this.quoteData).then(function(res){
+                    console.log(res);
+                }).catch(function(){
+                    console.log(err);
+                });
+            },
             newProduct(){
                 var item = {
                     product_id: '',

@@ -73,6 +73,25 @@
                 <div class="col-md-12">
                     <hr>
                     <h2>Quotes</h2>
+                    <table class="col-md-12">
+                        <thead>
+                            <td>#</td>
+                            <td>Delivery price</td>
+                            <td>Number of products</td>
+                            <td>Total value</td>
+                            <td>Date</td>
+                        </thead>
+                        <tr v-for="(quote, index) in client.quote" v-on:click="openQuote(quote.id)">
+                            <td>{{ index+1 }}</td>
+                            <td>{{ quote.delivery_price }} &euro;</td>
+                            <td>{{ quote.data.length }}</td>
+                            <td>{{ countOrderValue(quote.data) }} &euro;</td>
+                            <td>{{ quote.created_at.substr(0,10) }}</td>
+                        </tr>
+                    </table>
+                    <!-- <div class="col-md-12" v-if="ordersMore">
+                        <button type="button" v-on:click="viewMore('orders')" class="viewMore">View all</button>
+                    </div> -->
                 </div>
                 <div class="col-md-12" v-if="ordersSection">
                     <hr>
@@ -104,7 +123,7 @@
                 <h2>Actions</h2>
                 <hr>
                 <button class="clientAction active" v-on:click="newOrder()">New order</button>
-                <button class="clientAction" v-on:click="newRequest()">New request</button>
+                <button class="clientAction" v-on:click="newQuote()">New quote</button>
                 <button class="clientAction" v-on:click="editClient()">Edit client</button>
                 <button class="clientActionDelete" v-on:click="deleteClient()">Delete client</button>
             </div>
@@ -142,28 +161,28 @@ export default{
             console.log(res.data);
             app.client = res.data;
             (app.client.orders.length) ? app.ordersSection = true : app.ordersSection = false;
-            (app.client.requests.length) ? app.requestSection = true : app.requestSection = false;
+            // (app.client.requests.length) ? app.requestSection = true : app.requestSection = false;
             var index = 0, cd1 = 0, cd2 = 0, cd3 = 0
 
-            app.client.requests.forEach(res => {
-                index++;
-                if(res.request_status.id == 1){
-                    cd1 = cd1+1
-                } else if(res.request_status.id == 2){
-                    cd2 = cd2+1
-                } else if(res.request_status.id == 3){
-                    cd3 = cd3+1
-                }
-
-                if(index+1 == app.client.requests.length){
-                    // console.log('done');
-                    app.chartData.push(cd1);
-                    app.chartData.push(cd2);
-                    app.chartData.push(cd3);
-                    app.reqStatistics = true;
-                }
-                // console.log(app.reqStatistics);
-            });
+            // app.client.requests.forEach(res => {
+            //     index++;
+            //     if(res.request_status.id == 1){
+            //         cd1 = cd1+1
+            //     } else if(res.request_status.id == 2){
+            //         cd2 = cd2+1
+            //     } else if(res.request_status.id == 3){
+            //         cd3 = cd3+1
+            //     }
+            //
+            //     if(index+1 == app.client.requests.length){
+            //         // console.log('done');
+            //         app.chartData.push(cd1);
+            //         app.chartData.push(cd2);
+            //         app.chartData.push(cd3);
+            //         app.reqStatistics = true;
+            //     }
+            //     // console.log(app.reqStatistics);
+            // });
         }).catch(function(err){
             toastr.error('Failed to load! ' +err);
             console.log(err);
@@ -198,9 +217,9 @@ export default{
                 });
             }
         },
-        newRequest(){
+        newQuote(){
             var app = this;
-            app.$router.push({name: 'requestCreateId', params:{id:app.$route.params.id}});
+            app.$router.push({name: 'quotesCreate', params:{id:app.$route.params.id}});
         },
         newOrder(){
             var app = this;
@@ -237,14 +256,14 @@ export default{
         countOrderValue(list){
             var value = 0;
             list.forEach(el =>{
-                value += Number(el.product.price);
+                value += Number(el.price);
             });
             return value;
         },
-        openRequest(id){
+        openQuote(id){
             var app = this;
 
-            app.$router.push({name:'requestView', params:{id:id}});
+            app.$router.push({name:'quotesView', params:{id:id}});
         },
         orders(list){
             var temp = [];
