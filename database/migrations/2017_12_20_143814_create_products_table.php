@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('code')->uniqiue();
             $table->string('alternative_code')->nullable();
-            $table->integer('bruto')->nullable();
-            $table->integer('netto')->nullable();
+            $table->decimal('bruto', 12, 2)->nullable();
+            $table->decimal('netto', 12, 2)->nullable();
             $table->integer('quantity');
             $table->decimal('price', 8, 2)->nullable();
             $table->text('description')->nullable();

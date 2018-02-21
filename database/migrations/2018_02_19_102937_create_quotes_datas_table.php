@@ -21,9 +21,11 @@ class CreateQuotesDatasTable extends Migration
             $table->foreign('quote_id')->references('id')->on('quotes')->onDelete('cascade');
             // $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->string('code')->nullable();
-            $table->double('price');
+            $table->decimal('price', 12, 2);
             $table->integer('quantity');
             $table->string('note')->nullable();
+            $table->decimal('bruto', 12, 2)->nullable();
+            $table->decimal('netto', 12, 2)->nullable();
             $table->timestamps();
         });
     }

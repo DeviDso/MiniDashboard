@@ -2,6 +2,10 @@
     <div class="desa-full">
         <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
+            <div class="col-md-12 text-right">
+                <button type="button" class="btn btn-danger" v-on:click="deleteOrder(order.id)">Delete order</button>
+                <hr>
+            </div>
             <form v-on:submit="sendForm()">
                 <!-- <h1>New order</h1> -->
                 <div class="col-md-8">
@@ -112,6 +116,19 @@
             });
         },
         methods:{
+            deleteOrder(id){
+                var app = this;
+
+                if(confirm('Do you realy want to delete this order?')){
+                    axios.delete('/api/V1/orders/' +id).then(function(res){
+                        app.$router.push({name: 'orderIndex'});
+                        toastr.success('Order was deleted!');
+                    }).catch(function(err){
+                        console.log(err);
+                        toastr.error('Something wrong, try again.');
+                    });
+                }
+            },
             addToList(product, index){
                 if(!this.orderData.data.includes(product.code)){
                     var item = {

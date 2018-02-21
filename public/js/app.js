@@ -85625,6 +85625,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -85678,6 +85682,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        deleteOrder: function deleteOrder(id) {
+            var app = this;
+
+            if (confirm('Do you realy want to delete this order?')) {
+                axios.delete('/api/V1/orders/' + id).then(function (res) {
+                    app.$router.push({ name: 'orderIndex' });
+                    toastr.success('Order was deleted!');
+                }).catch(function (err) {
+                    console.log(err);
+                    toastr.error('Something wrong, try again.');
+                });
+            }
+        },
         addToList: function addToList(product, index) {
             if (!this.orderData.data.includes(product.code)) {
                 var item = {
@@ -85753,6 +85770,24 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "desa-container" }, [
+      _c("div", { staticClass: "col-md-12 text-right" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-danger",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.deleteOrder(_vm.order.id)
+              }
+            }
+          },
+          [_vm._v("Delete order")]
+        ),
+        _vm._v(" "),
+        _c("hr")
+      ]),
+      _vm._v(" "),
       _c(
         "form",
         {
@@ -86975,6 +87010,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -87168,7 +87207,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { rows: "4" },
+              attrs: { rows: "4", required: "" },
               domProps: { value: _vm.quote.note },
               on: {
                 input: function($event) {
@@ -87327,6 +87366,62 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: product.bruto,
+                                  expression: "product.bruto"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "number" },
+                              domProps: { value: product.bruto },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    product,
+                                    "bruto",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: product.netto,
+                                  expression: "product.netto"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "number" },
+                              domProps: { value: product.netto },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    product,
+                                    "netto",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
                             _c(
                               "span",
                               {
@@ -87471,6 +87566,10 @@ var staticRenderFns = [
       _c("td", [_vm._v("Quantity")]),
       _vm._v(" "),
       _c("td", [_vm._v("Note")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Bruto (Kg)")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Netto (Kg)")]),
       _vm._v(" "),
       _c("td")
     ])
@@ -87908,6 +88007,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -87951,6 +88054,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        deleteQuote: function deleteQuote(id) {
+            var app = this;
+
+            if (confirm('Do you realy want to delete this quote?')) {
+                axios.delete('/api/V1/quotes/' + id).then(function (res) {
+                    app.$router.push({ name: 'homeIndex' });
+                    toastr.success('Quote was deleted!');
+                }).catch(function (err) {
+                    console.log(err);
+                    toastr.error('Something wrong, try again.');
+                });
+            }
+        },
         generatePDF: function generatePDF(id) {
             axios.post('/api/V1/pdf', this.quoteData).then(function (res) {
                 console.log(res);
@@ -88075,9 +88191,23 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._m(0, false, false),
+      _c("div", { staticClass: "col-md-6 text-right" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-danger",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.deleteQuote(_vm.quote.id)
+              }
+            }
+          },
+          [_vm._v("Delete quote")]
+        )
+      ]),
       _vm._v(" "),
-      _vm._m(1, false, false),
+      _vm._m(0, false, false),
       _vm._v(" "),
       _c(
         "form",
@@ -88170,7 +88300,7 @@ var render = function() {
                     "table",
                     { staticClass: "col-md-12 orderProductTable" },
                     [
-                      _vm._m(2, false, false),
+                      _vm._m(1, false, false),
                       _vm._v(" "),
                       _vm._l(_vm.quote.data, function(product, index) {
                         return _c("tr", [
@@ -88187,7 +88317,7 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control",
-                              attrs: { type: "text" },
+                              attrs: { type: "text", required: "" },
                               domProps: { value: product.name },
                               on: {
                                 input: function($event) {
@@ -88258,13 +88388,13 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: (product.quantity = 1),
-                                  expression: "product.quantity = 1"
+                                  value: product.quantity,
+                                  expression: "product.quantity"
                                 }
                               ],
                               staticClass: "form-control",
                               attrs: { type: "number" },
-                              domProps: { value: (product.quantity = 1) },
+                              domProps: { value: product.quantity },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
@@ -88272,7 +88402,7 @@ var render = function() {
                                   }
                                   _vm.$set(
                                     product,
-                                    "quantity = 1",
+                                    "quantity",
                                     $event.target.value
                                   )
                                 }
@@ -88299,6 +88429,62 @@ var render = function() {
                                     return
                                   }
                                   _vm.$set(product, "note", $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: product.bruto,
+                                  expression: "product.bruto"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "number" },
+                              domProps: { value: product.bruto },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    product,
+                                    "bruto",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: product.netto,
+                                  expression: "product.netto"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text" },
+                              domProps: { value: product.netto },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    product,
+                                    "netto",
+                                    $event.target.value
+                                  )
                                 }
                               }
                             })
@@ -88394,25 +88580,13 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(3, false, false)
+          _vm._m(2, false, false)
         ]
       )
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6 text-right" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-danger", attrs: { type: "button" } },
-        [_vm._v("Delete quote")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -88435,6 +88609,10 @@ var staticRenderFns = [
       _c("td", [_vm._v("Quantity")]),
       _vm._v(" "),
       _c("td", [_vm._v("Note")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Bruto (Kg)")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Netto (Kg)")]),
       _vm._v(" "),
       _c("td")
     ])

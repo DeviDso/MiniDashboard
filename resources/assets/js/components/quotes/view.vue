@@ -10,7 +10,7 @@
                 </form>
             </div>
             <div class="col-md-6 text-right">
-                <button type="button" class="btn btn-danger">Delete quote</button>
+                <button type="button" class="btn btn-danger" v-on:click="deleteQuote(quote.id)">Delete quote</button>
             </div>
             <div class="col-md-12">
                 <hr>
@@ -40,19 +40,23 @@
                                 <td>Price</td>
                                 <td>Quantity</td>
                                 <td>Note</td>
+                                <td>Bruto (Kg)</td>
+                                <td>Netto (Kg)</td>
                                 <td></td>
                             </thead>
                             <tr v-for="product, index in quote.data">
                                 <td>{{ index+1 }}</td>
                                 <!-- <td v-if="product.name != ''">{{ product.name }}</td> -->
-                                <td><input type="text" class="form-control" v-model="product.name"></td>
+                                <td><input type="text" class="form-control" v-model="product.name" required></td>
                                 <!--  -->
                                 <!-- <td v-if="product.code != ''">{{ product.code }}</td> -->
                                 <td><input type="text" class="form-control" v-model="product.code"></td>
                                 <!--  -->
                                 <td><input type="number" class="form-control" v-model="product.price" step="0.01"></td>
-                                <td><input type="number" class="form-control" v-model="product.quantity = 1"></td>
+                                <td><input type="number" class="form-control" v-model="product.quantity"></td>
                                 <td><input type="text" class="form-control" v-model="product.note"></td>
+                                <td><input type="number" class="form-control" v-model="product.bruto"></td>
+                                <td><input type="text" class="form-control" v-model="product.netto"></td>
                                 <td><span v-on:click="removeItem(index)">X</span></td>
                             </tr>
                         </table>
@@ -122,6 +126,19 @@
             });
         },
         methods:{
+            deleteQuote(id){
+                var app = this;
+
+                if(confirm('Do you realy want to delete this quote?')){
+                    axios.delete('/api/V1/quotes/' +id).then(function(res){
+                        app.$router.push({name: 'homeIndex'});
+                        toastr.success('Quote was deleted!');
+                    }).catch(function(err){
+                        console.log(err);
+                        toastr.error('Something wrong, try again.');
+                    });
+                }
+            },
             generatePDF(id){
                 axios.post('/api/V1/pdf', this.quoteData).then(function(res){
                     console.log(res);

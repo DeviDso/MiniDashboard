@@ -96,6 +96,9 @@ class QuotesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $quote = Quotes::findOrFail($id);
+        $quote->delete();
+
+        return '';
     }
 }

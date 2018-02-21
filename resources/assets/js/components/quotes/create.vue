@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-md-7">
                     <label>Note</label>
-                    <textarea class="form-control" v-model="quote.note" rows="4"></textarea>
+                    <textarea class="form-control" v-model="quote.note" rows="4" required></textarea>
                 </div>
                 <div class="col-md-12">
                     <hr>
@@ -31,6 +31,8 @@
                                 <td>Price</td>
                                 <td>Quantity</td>
                                 <td>Note</td>
+                                <td>Bruto (Kg)</td>
+                                <td>Netto (Kg)</td>
                                 <td></td>
                             </thead>
                             <tr v-for="product, index in quote.data">
@@ -44,6 +46,8 @@
                                 <td><input type="number" class="form-control" v-model="product.price" step="0.01"></td>
                                 <td><input type="number" class="form-control" v-model="product.quantity = 1"></td>
                                 <td><input type="text" class="form-control" v-model="product.note"></td>
+                                <td><input type="number" class="form-control" v-model="product.bruto"></td>
+                                <td><input type="number" class="form-control" v-model="product.netto"></td>
                                 <td><span v-on:click="removeItem(index)">X</span></td>
                             </tr>
                         </table>
