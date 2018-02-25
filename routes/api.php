@@ -30,4 +30,5 @@ Route::group(['prefix' => '/V1', 'namespace' => 'Api\V1', 'as' => 'api.'], funct
     Route::resource('users', 'UserController', ['except' => ['create', 'edit']]);
     Route::resource('quotes', 'QuotesController', ['except' => ['create', 'edit']]);
     Route::resource('pdf', 'PDFController', ['except' => ['create', 'edit']]);
+    Route::resource('warehouses', 'WarehousesController', ['except' => ['create', 'edit']]);
 });

@@ -30,7 +30,7 @@
         </style>
     </head>
     @php
-        $totalWeight = 1.00;
+        $totalWeight = 0.00;
     @endphp
     <body>
         <div class="center">

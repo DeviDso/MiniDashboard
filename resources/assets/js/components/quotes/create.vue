@@ -11,11 +11,11 @@
                     </select>
 
                     <label>Delivery price (&euro;)</label>
-                    <input class="form-control" type="number" name="delivery_price" value="0" v-model="quote.delivery_price">
+                    <input class="form-control" type="number" name="delivery_price" v-model="quote.delivery_price" step="0.01" min="0">
                 </div>
                 <div class="col-md-7">
                     <label>Note</label>
-                    <textarea class="form-control" v-model="quote.note" rows="4" required></textarea>
+                    <textarea class="form-control" v-model="quote.note" rows="4"></textarea>
                 </div>
                 <div class="col-md-12">
                     <hr>
@@ -46,8 +46,8 @@
                                 <td><input type="number" class="form-control" v-model="product.price" step="0.01"></td>
                                 <td><input type="number" class="form-control" v-model="product.quantity = 1"></td>
                                 <td><input type="text" class="form-control" v-model="product.note"></td>
-                                <td><input type="number" class="form-control" v-model="product.bruto"></td>
-                                <td><input type="number" class="form-control" v-model="product.netto"></td>
+                                <td><input type="number" class="form-control" v-model="product.bruto" step="0.01" min="0"></td>
+                                <td><input type="number" class="form-control" v-model="product.netto" step="0.01" min="0"></td>
                                 <td><span v-on:click="removeItem(index)">X</span></td>
                             </tr>
                         </table>

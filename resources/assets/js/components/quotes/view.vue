@@ -1,9 +1,9 @@
-<template>
+        <template>
     <div class="desa-full">
         <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
             <div class="col-md-6">
-                <form action="http://powerpartspro.test/generate/pdf" method="post">
+                <form target="print_popup" action="/generate/pdf" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
                     <input type="hidden" name="quote_id" :value="quote.id">
                     <input type="hidden" name="_token" :value="this.csrf">
                     <button type="submite" class="btn btn-primary">Generate PDF</button>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-md-6">
                         <label>Delivery Price</label>
-                        <input class="form-control" type="number" name="delivery_price" value="0" v-model="quote.delivery_price">
+                        <input class="form-control" type="number" name="delivery_price" v-model="quote.delivery_price" step="0.01" min="0">
                     </div>
                     <div v-if="showProducts" class="col-md-12">
                         <hr>
@@ -55,8 +55,8 @@
                                 <td><input type="number" class="form-control" v-model="product.price" step="0.01"></td>
                                 <td><input type="number" class="form-control" v-model="product.quantity"></td>
                                 <td><input type="text" class="form-control" v-model="product.note"></td>
-                                <td><input type="number" class="form-control" v-model="product.bruto"></td>
-                                <td><input type="text" class="form-control" v-model="product.netto"></td>
+                                <td><input type="number" class="form-control" v-model="product.bruto" step="0.01" min="0"></td>
+                                <td><input type="number" class="form-control" v-model="product.netto" step="0.01" min="0"></td>
                                 <td><span v-on:click="removeItem(index)">X</span></td>
                             </tr>
                         </table>

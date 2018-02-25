@@ -24,24 +24,40 @@
                     </div>
                     <div class="col-md-6">
                         <label>Price (&euro;)</label>
-                        <input type="number" v-model="product.price" class="form-control" min="1" step="any" value="0.00">
+                        <input type="number" v-model="product.price" class="form-control" min="0.01" step="0.01" value="0.00">
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                        <h4>Product location</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Warehouse</label>
+                        <select v-model="product.warehouse" class="form-control" required>
+                            <option v-for="warehouse in warehouses" :value="warehouse.id">{{ warehouse.name }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Location</label>
+                        <input type="number" v-model="product.warehouse_location" class="form-control">
                     </div>
                     <div class="col-md-12">
                         <hr>
                         <h4>Weight</h4>
                     </div>
                     <div class="col-md-6">
-                        <label>Bruto</label>
-                        <input type="number" v-model="product.bruto" class="form-control">
+                        <label>Bruto (Kg)</label>
+                        <input type="number" v-model="product.bruto" class="form-control" step="0.01">
                     </div>
                     <div class="col-md-6">
-                        <label>Netto</label>
-                        <input type="number" v-model="product.netto" class="form-control">
+                        <label>Netto (Kg)</label>
+                        <input type="number" v-model="product.netto" class="form-control" step="0.01">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label>Product description</label>
                     <textarea v-model="product.description" class="form-control" rows="5"></textarea>
+                    <label>Note</label>
+                    <textarea v-model="product.note" class="form-control" rows="5"></textarea>
                 </div>
                 <div class="col-md-12">
                     <hr>
@@ -57,17 +73,21 @@ export default{
     data(){
         return {
             product: {
-                category_id: '',
+                category_id: 1,
                 name: '',
                 description: '',
                 code: '',
                 alternative_code: '',
-                bruto: '',
-                netto: '',
+                bruto: '0.00',
+                netto: '0.00',
                 quantity: 1,
-                price: ''
+                price: '',
+                warehouse_location: '',
+                warehouse: 1,
+                note: '',
             },
             categories: [],
+            warehouses: [],
         }
     },
     mounted(){
@@ -75,6 +95,12 @@ export default{
 
         axios.get('/api/V1/categories').then(function(res){
             app.categories = res.data;
+            console.log(res.data);
+        }).catch(function(err){
+            toastr.error('Failed to load! ' +err);
+        });
+        axios.get('/api/V1/warehouses').then(function(res){
+            app.warehouses = res.data;
             console.log(res.data);
         }).catch(function(err){
             toastr.error('Failed to load! ' +err);

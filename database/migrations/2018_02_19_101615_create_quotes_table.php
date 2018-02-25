@@ -20,7 +20,7 @@ class CreateQuotesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->decimal('delivery_price', 12, 2);
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

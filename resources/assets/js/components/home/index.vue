@@ -12,7 +12,7 @@
                 <total-requests :data="totalRequests" />
             </div>
         </div> -->
-        <div class="col-md-12">
+        <!-- <div class="col-md-12">
             <div class="desa-container" v-if="employeeStatistics" id="employeeStatistics">
                 <h2>Employees Statistics</h2>
                 <table>
@@ -28,7 +28,7 @@
                     </tr>
                 </table>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>

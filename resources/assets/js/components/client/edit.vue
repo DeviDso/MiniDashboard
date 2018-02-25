@@ -3,7 +3,7 @@
         <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
             <form v-on:submit="updateClient()">
-                <h1>Add new company</h1>
+                <h1>Edit client information</h1>
                 <!-- Company info -->
                 <div class="col-md-4">
                     <label>Company name</label>
@@ -20,6 +20,43 @@
                 <div class="col-md-4">
                     <label>Contact person</label>
                     <input type="text" class="form-control" v-model="client.contact_person" placeholder="John Doe">
+                </div>
+                <div class="col-md-4">
+                    <label>VAT</label>
+                    <input type="text" class="form-control" v-model="client.vat" placeholder="LT100006906012">
+                    <a href="http://ec.europa.eu/taxation_customs/vies/" target="_blank">Check VAT</a>
+                </div>
+                <div class="col-md-4">
+                    <label>Note</label>
+                    <textarea v-model="client.note" rows="2" class="form-control"></textarea>
+                </div>
+                <div class="col-md-12">
+                    <hr>
+                    <h2>Delivery & credit</h2>
+                </div>
+                <div class="col-md-4">
+                    <label>Credit amount</label>
+                    <select v-model="client.credit_amount" class="form-control" required>
+                        <option :value="5">5 days</option>
+                        <option :value="7">7 days</option>
+                        <option :value="10">10 days</option>
+                        <option :value="14">14 days</option>
+                        <option :value="30">30 days</option>
+                        <option :value="45">45 days</option>
+                        <option :value="90">90 days</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label>Payment term</label>
+                    <select v-model="client.payment_term" class="form-control" required>
+                        <option value="Advance payment">Advance payment</option>
+                        <option value="Payment before delivery">Payment before delivery</option>
+                        <option value="Credit">Credit</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label>Courier account</label>
+                    <input type="text" class="form-control" v-model="client.courier_account" placeholder="DHL">
                 </div>
                 <div class="col-md-12">
                     <hr>
@@ -42,6 +79,28 @@
                     <label>Country</label>
                     <input type="text" class="form-control" v-model="client.country" placeholder="United states">
                 </div>
+                <div>
+                    <div class="col-md-12">
+                        <hr>
+                        <h2>Delivery address</h2>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Street</label>
+                        <input type="text" class="form-control" v-model="client.delivery_street" placeholder="St. Louise 31">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Post code</label>
+                        <input type="text" class="form-control" v-model="client.delivery_post_code" placeholder="9822">
+                    </div>
+                    <div class="col-md-3">
+                        <label>City</label>
+                        <input type="text" class="form-control" v-model="client.delivery_city" placeholder="Kansas">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Country</label>
+                        <input type="text" class="form-control" v-model="client.delivery_country" placeholder="United states">
+                    </div>
+                </div>
                 <div class="col-md-12">
                     <hr>
                     <button type="submit" class="submitButton">Save</button>
@@ -59,14 +118,6 @@ export default{
         return {
             client: {
                 user_id: user_id,
-                name: '',
-                phone: '',
-                email: '',
-                contact_person: '',
-                street: '',
-                city: '',
-                post_code: '',
-                country: ''
             },
             countries: []
         }

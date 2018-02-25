@@ -12,6 +12,9 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'netto' => $faker->numberBetween($minx = 1, $max = $bruto),
         'quantity' => $faker->numberBetween(1, 20),
         'price' => $faker->numberBetween($min = 100, $max = 5000),
+        'warehouse' => $faker->numberBetween($min = 1, $max = 2),
+        'warehouse_location' => $faker->randomLetter . $faker->numberBetween($min = 1, $max = 10),
         'description' => $faker->text($maxNbChars = 200),
+        'note' => $faker->text($maxNbChars = 50),
     ];
 });

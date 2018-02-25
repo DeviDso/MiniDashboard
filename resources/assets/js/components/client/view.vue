@@ -11,14 +11,26 @@
                     </tr>
                     <tr>
                         <td><i class="fa fa-envelope"></i>{{ client.email }}</td>
-                        <td><i class="fa fa-map-marker"></i>{{ client.street + ' ' + client.post_code + ', ' + client.city + ', ' + client.country }}</td>
+                        <td><i class="fa fa-home"></i>{{ client.street + ' ' + client.post_code + ', ' + client.city + ', ' + client.country }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-id-card"></i>{{ client.vat }}</td>
+                        <td><i class="fa fa-map-marker"></i>{{ client.delivery_street + ' ' + client.delivery_post_code + ', ' + client.delivery_city + ', ' + client.delivery_country }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-calendar-plus-o"></i>{{ client.payment_term }}</td>
+                        <td><i class="fa fa-credit-card"></i>{{ client.credit_amount }} days</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa fa-truck"></i>{{ client.courier_account }}</td>
+                        <td><i class="fa fa-sticky-note"></i>{{ client.note }}</td>
                     </tr>
                 </table>
-                <hr>
-                <div class="col-md-12" v-if="!requestSection">
+                <!-- <hr> -->
+                <!-- <div class="col-md-12" v-if="!requestSection">
                     <h3>No request records!</h3>
                     <hr>
-                </div>
+                </div> -->
                 <div class="col-md-12" v-if="requestSection">
                     <h2>Statistics</h2>
                     <!-- <div class="col-md-6" v-if="reqStatistics">

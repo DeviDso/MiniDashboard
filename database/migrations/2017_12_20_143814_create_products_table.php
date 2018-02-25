@@ -25,6 +25,10 @@ class CreateProductsTable extends Migration
             $table->integer('quantity');
             $table->decimal('price', 8, 2)->nullable();
             $table->text('description')->nullable();
+            $table->text('note')->nullable();
+            $table->string('warehouse_location')->nullable();
+            $table->integer('warehouse')->unsigned()->nullable();
+            $table->foreign('warehouse')->references('id')->on('warehouses')->onDlete('set null');
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class Everything extends Seeder
             'api_token' => str_random(60),
         ]);
 
+        $this->call(WarehouseSeeder::class);
         $this->call(CategoriesSeeder::class);
         $this->call(OrderStatusSeeder::class);
         $this->call(RequestStatusSeeder::class);

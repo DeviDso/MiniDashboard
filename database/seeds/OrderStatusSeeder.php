@@ -16,6 +16,7 @@ class OrderStatusSeeder extends Seeder
             ['name' => 'Pending', 'description' => ''],
             ['name' => 'Awaiting Payment', 'description' => ''],
             ['name' => 'Awaiting Fulfillment', 'description' => ''],
+            ['name' => 'Awaiting Confirmation', 'description' => ''],
             ['name' => 'Awaiting Shipment', 'description' => ''],
             ['name' => 'Awaiting Pickup', 'description' => ''],
             ['name' => 'Partially Shipped', 'description' => ''],
