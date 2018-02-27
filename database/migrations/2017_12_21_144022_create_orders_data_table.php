@@ -16,11 +16,15 @@ class CreateOrdersDataTable extends Migration
         Schema::create('orders_data', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->unsigned();
-            $table->integer('product_id')->unsigned();
+            $table->string('name');
+            $table->integer('product_id')->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->string('code')->nullable();
+            $table->decimal('price', 12, 2);
             $table->integer('quantity');
-            $table->double('price');
+            $table->string('note')->nullable();
+            $table->decimal('bruto', 12, 2)->nullable();
+            $table->decimal('netto', 12, 2)->nullable();
             $table->timestamps();
         });
     }

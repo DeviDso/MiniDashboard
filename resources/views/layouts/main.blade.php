@@ -43,7 +43,7 @@
                         <span class="itemDirection"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
                         <ul class="sub">
                             <router-link :to="{name: 'quotesCreate'}"><li>Add new</li></router-link>
-                            <router-link :to="{name: 'quotesIndex'}"><li>All products</li></router-link>
+                            <router-link :to="{name: 'quotesIndex'}"><li>All quotes</li></router-link>
                         </ul>
                     </li>
                     {{-- <li class="menu-item">

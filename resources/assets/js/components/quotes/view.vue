@@ -3,16 +3,22 @@
         <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
             <div class="col-md-6">
-                <form target="print_popup" action="/generate/pdf" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+                <button type="submite" class="btn btn-success" v-on:click="createOrder()">Create order</button>
+                <form id="pdfen" target="print_popup" action="/generate/pdf/quote/english" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
                     <input type="hidden" name="quote_id" :value="quote.id">
                     <input type="hidden" name="_token" :value="this.csrf">
-                    <button type="submite" class="btn btn-primary">Generate PDF</button>
                 </form>
             </div>
             <div class="col-md-6 text-right">
                 <button type="button" class="btn btn-danger" v-on:click="deleteQuote(quote.id)">Delete quote</button>
             </div>
             <div class="col-md-12">
+                <hr>
+                <h4>PDF</h4>
+            </div>
+            <div class="col-md-12">
+                <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">English</button>
+                <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">Lietuviškai</button>
                 <hr>
             </div>
             <form v-on:submit="sendForm()">
@@ -61,7 +67,7 @@
                             </tr>
                         </table>
                     </div>
-                    <button class="btn btn-success" type="button" v-on:click="newProduct()">+ new product</button>
+                    <button class="btn btn-info" type="button" v-on:click="newProduct()">+ new product</button>
                 </div>
                 <div class="col-md-4">
                     <label>Product search</label>
@@ -101,6 +107,9 @@
                     delivery_price: '',
                     note: '',
                     data: [],
+                },
+                order: {
+                    order_id: this.$route.params.id,
                 }
             }
         },
@@ -126,6 +135,16 @@
             });
         },
         methods:{
+            createOrder(){
+                var app = this;
+
+                axios.post('/api/V1/orders', app.order).then(function(res){
+                    app.$router.push({name:'orderView', params:{id:app.order.order_id}})
+                    toastr.success('Order from quote successfully created!');
+                }).catch(function(err){
+                    console.log(err);
+                });
+            },
             deleteQuote(id){
                 var app = this;
 
@@ -186,7 +205,7 @@
                 } else {
                     axios.patch('/api/V1/quotes/' +app.quote.id, app.quote).then(function(res){
                         toastr.success('Quote updated!');
-                        app.$router.push({name:'clientView',params:{id:app.quote.client_id}})
+                        // app.$router.push({name:'clientView',params:{id:app.quote.client_id}})
                     }).catch(function(err){
                         toastr.error('Failed to save data! ' +err);
                         console.log(err);

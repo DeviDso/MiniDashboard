@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-md-6">
                         <label>Location</label>
-                        <input type="number" v-model="product.warehouse_location" class="form-control">
+                        <input type="text" v-model="product.warehouse_location" class="form-control">
                     </div>
                     <div class="col-md-12">
                         <hr>

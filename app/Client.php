@@ -17,19 +17,17 @@ class Client extends Model
     public function requests(){
         return $this->hasMany(ClientRequest::class)
                     ->orderBy('created_at', 'dsc')
-                    ->with('requestStatus')
-                    ->with('requestType');
+                    ->with(['requestStatus', 'requestType']);
     }
 
     public function orders(){
         return $this->hasMany(Order::class)
                     ->orderBy('created_at', 'dsc')
-                    ->with('data')
-                    ->with('data.product')
-                    ->with('status');
+                    ->with(['data', 'data.product', 'status'])
+                    ->where('confirmed', 1);
     }
 
     public function quote(){
-        return $this->hasMany(Quotes::class)->with('data');
+        return $this->hasMany(Order::class)->with('data')->where('confirmed', 0);
     }
 }

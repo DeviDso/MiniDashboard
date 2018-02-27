@@ -13,13 +13,12 @@ class CreateQuotesDatasTable extends Migration
      */
     public function up()
     {
-        Schema::create('quotes_datas', function (Blueprint $table) {
+        Schema::create('quotes_data', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('quote_id')->unsigned();
             $table->string('name');
             $table->integer('product_id')->nullable();
             $table->foreign('quote_id')->references('id')->on('quotes')->onDelete('cascade');
-            // $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->string('code')->nullable();
             $table->decimal('price', 12, 2);
             $table->integer('quantity');
@@ -37,6 +36,6 @@ class CreateQuotesDatasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotes_datas');
+        Schema::dropIfExists('quotes_data');
     }
 }

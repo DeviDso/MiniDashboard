@@ -19,19 +19,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/generate/pdf', 'PDFController@generate')->name('generatePDF');
+Route::post('/generate/pdf/quote/english', 'PDFController@generate')->name('generateQuotePDFen');
 
 
-Route::get('/by', function(){
-    $country1 = 'PL';
-// $country2 = 'PL';
-$vatnum1 = '123456';
-// $vatnum2 = '789012';
-
-//Prepare the URL
-$url = 'http://ec.europa.eu/taxation_customs/vies/viesquer.do?ms='.$country1.'&iso='.$country1.'&vat='.$vatnum1;
-
-$response = file_get_contents($url);
-// Do sth with the response
-echo $response;
-});
+// Route::get('/by', function(){
+//     $country1 = 'PL';
+// // $country2 = 'PL';
+// $vatnum1 = '123456';
+// // $vatnum2 = '789012';
+//
+// //Prepare the URL
+// $url = 'http://ec.europa.eu/taxation_customs/vies/viesquer.do?ms='.$country1.'&iso='.$country1.'&vat='.$vatnum1;
+//
+// $response = file_get_contents($url);
+// // Do sth with the response
+// echo $response;
+// });

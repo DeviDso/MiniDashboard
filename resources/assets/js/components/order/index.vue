@@ -46,6 +46,7 @@ export default{
         var app = this;
 
         axios.get('/api/V1/orders').then(function(res){
+            console.log(res);
             app.orders = res.data;
             if(app.$route.query.clientID){
                 app.orders = app.orders.filter(res => res.client_id == app.$route.query.clientID);

@@ -17,7 +17,7 @@ class OrderController extends Controller
      */
     public function index(Request $r)
     {
-        return Order::with('client')->with('status')->with('data')->get();
+        return Order::where('confirmed', 1)->with(['client', 'status', 'data'])->get();
     }
 
     /**
@@ -29,18 +29,18 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
-            'client_id' => 'required',
-            'status_id' => 'required',
+            'order_id' => 'required',
             ]);
 
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
 
-        $client = Client::find($request->input('client_id'));
-        $order = $client->orders()->create($request->all());
-        $orderData = $order->data()->createMany($request->input('data'));
+        $order = Order::findOrFail($request->input('order_id'));
+        $order->update([
+            'confirmed' => 1,
+            'status_id' => 1,
+        ]);
 
         return $order;
     }
@@ -55,9 +55,7 @@ class OrderController extends Controller
     {
         return Order::with('client')
                 ->where('id', $id)
-                ->with('status')
-                ->with('data')
-                ->with('data.product')
+                ->with(['status', 'data', 'data.product'])
                 ->firstOrFail();
     }
 

@@ -17,10 +17,13 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('client_id')->unsigned();
-            $table->integer('status_id')->unsigned();
+            $table->integer('status_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('status_id')->references('id')->on('order_status')->onDelete('cascade');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('status_id')->references('id')->on('order_status')->onDelete('cascade');
+            $table->decimal('delivery_price', 12, 2);
+            $table->text('note')->nullable();
+            $table->integer('confirmed')->default(0);
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\api\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Quotes;
+use App\Order;
 use App\Client;
 use Validator;
 
@@ -17,7 +17,7 @@ class QuotesController extends Controller
      */
     public function index()
     {
-        return Quotes::with(['data', 'client'])->get();
+        return Order::where('confirmed', 0)->with(['data', 'client'])->get();
     }
 
     /**
@@ -38,7 +38,7 @@ class QuotesController extends Controller
         }
 
         $client = Client::find($request->input('client_id'));
-        $quote = $client->quote()->create($request->all());
+        $quote = $client->orders()->create($request->all());
 
         if($request->input('data')){
             $quoteData = $quote->data()->createMany($request->input('data'));
@@ -55,9 +55,8 @@ class QuotesController extends Controller
      */
     public function show($id)
     {
-        return Quotes::where('id', $id)
-                ->with('data')
-                ->with('client')
+        return Order::where('id', $id)
+                ->with(['data', 'client'])
                 ->firstOrFail();
     }
 
@@ -79,7 +78,7 @@ class QuotesController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $quote = Quotes::find($id);
+        $quote = Order::find($id);
 
         $quote->update($request->all());
         $quote->data()->delete();
@@ -96,7 +95,7 @@ class QuotesController extends Controller
      */
     public function destroy($id)
     {
-        $quote = Quotes::findOrFail($id);
+        $quote = Order::findOrFail($id);
         $quote->delete();
 
         return '';

@@ -3,6 +3,7 @@
         <div class="col-md-9">
             <div class="desa-container">
                 <h1>{{ client.name }}</h1>
+                <p>{{ client.note }}</p>
                 <hr>
                 <table class="clientInfo">
                     <tr>
@@ -17,15 +18,17 @@
                         <td><i class="fa fa-id-card"></i>{{ client.vat }}</td>
                         <td><i class="fa fa-map-marker"></i>{{ client.delivery_street + ' ' + client.delivery_post_code + ', ' + client.delivery_city + ', ' + client.delivery_country }}</td>
                     </tr>
-                    <tr>
-                        <td><i class="fa fa-calendar-plus-o"></i>{{ client.payment_term }}</td>
-                        <td><i class="fa fa-credit-card"></i>{{ client.credit_amount }} days</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-truck"></i>{{ client.courier_account }}</td>
-                        <td><i class="fa fa-sticky-note"></i>{{ client.note }}</td>
-                    </tr>
                 </table>
+                <div class="col-md-12">
+                    <hr>
+                    <table class="clientInfo text-center">
+                        <tr>
+                            <td style="width: 33%!important"><i class="fa fa-calendar-plus-o"></i>{{ client.payment_term }}</td>
+                            <td style="width: 33%!important"><i class="fa fa-credit-card"></i>{{ client.credit_amount }} days</td>
+                            <td style="width: 33%!important"><i class="fa fa-truck"></i>{{ client.courier_account }}</td>
+                        </tr>
+                    </table>
+                </div>
                 <!-- <hr> -->
                 <!-- <div class="col-md-12" v-if="!requestSection">
                     <h3>No request records!</h3>
@@ -78,10 +81,6 @@
                         </div>
                     </div> -->
                 </div>
-                <div class="col-md-12" v-if="!ordersSection">
-                    <h3>No order records!</h3>
-                    <hr>
-                </div>
                 <div class="col-md-12">
                     <hr>
                     <h2>Quotes</h2>
@@ -105,7 +104,7 @@
                         <button type="button" v-on:click="viewMore('orders')" class="viewMore">View all</button>
                     </div> -->
                 </div>
-                <div class="col-md-12" v-if="ordersSection">
+                <div class="col-md-12">
                     <hr>
                     <h2>Orders</h2>
                     <table class="col-md-12">
@@ -162,8 +161,9 @@ export default{
             activeMore: false,
             historyMore: false,
             orderMore: false,
-            ordersSection: false,
+            ordersSection: true,
             requestSection: false,
+            quotesSections: true,
         }
     },
     mounted(){

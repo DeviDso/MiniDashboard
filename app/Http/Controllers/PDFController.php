@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
-use App\Quotes;
+use App\Order;
 
 class PDFController extends Controller
 {
     public function generate(Request $r){
-        $data['quote'] = Quotes::with(['data', 'client'])->findOrFail($r->input('quote_id'));
+        $data['quote'] = Order::with(['data', 'client'])->findOrFail($r->input('quote_id'));
 
         $pdf = PDF::loadView('pdf.quote', $data);
         // $pdf->setOption('javascript-delay', 3000);
