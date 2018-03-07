@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <hr>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-12">
                     <h4>Products</h4>
                     <div v-if="showProducts">
                         <table class="col-md-12 orderProductTable">
@@ -37,24 +37,22 @@
                             </thead>
                             <tr v-for="product, index in quote.data">
                                 <td>{{ index+1 }}</td>
-                                <!-- <td v-if="product.name != ''">{{ product.name }}</td> -->
                                 <td><input type="text" class="form-control" v-model="product.name"></td>
-                                <!--  -->
-                                <!-- <td v-if="product.code != ''">{{ product.code }}</td> -->
-                                <td><input type="text" class="form-control" v-model="product.code"></td>
-                                <!--  -->
-                                <td><input type="number" class="form-control" v-model="product.price" step="0.01"></td>
-                                <td><input type="number" class="form-control" v-model="product.quantity = 1"></td>
+                                <td width="15%"><input type="text" class="form-control" v-model="product.code"></td>
+                                <td width="10%"><input type="number" class="form-control" v-model="product.price" step="0.01"></td>
+                                <td width="7%"><input type="number" class="form-control" v-model="product.quantity = 1"></td>
                                 <td><input type="text" class="form-control" v-model="product.note"></td>
-                                <td><input type="number" class="form-control" v-model="product.bruto" step="0.01" min="0"></td>
-                                <td><input type="number" class="form-control" v-model="product.netto" step="0.01" min="0"></td>
-                                <td><span v-on:click="removeItem(index)">X</span></td>
+                                <td width="10%"><input type="number" class="form-control" v-model="product.bruto" step="0.01" min="0"></td>
+                                <td width="10%"><input type="number" class="form-control" v-model="product.netto" step="0.01" min="0"></td>
+                                <td width="5%"><span v-on:click="removeItem(index)">X</span></td>
                             </tr>
                         </table>
                     </div>
                     <button class="btn btn-success" type="button" v-on:click="newProduct()">+ new product</button>
                 </div>
-                <div class="col-md-4 col-md-offset-1">
+                <div class="col-md-4">
+                    <br>
+                    <hr>
                     <label>Product search</label>
                     <input type="search" class="form-control" v-model="searchText" placeholder="Search product by code">
                     <div class="orderProducts">

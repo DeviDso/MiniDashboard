@@ -88301,8 +88301,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -88516,7 +88514,7 @@ var render = function() {
           _vm._v(" "),
           _vm._m(0, false, false),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-7" }, [
+          _c("div", { staticClass: "col-md-12" }, [
             _c("h4", [_vm._v("Products")]),
             _vm._v(" "),
             _vm.showProducts
@@ -88555,7 +88553,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "15%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -88579,7 +88577,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "10%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -88607,7 +88605,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "7%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -88659,7 +88657,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "10%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -88687,7 +88685,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "10%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -88715,7 +88713,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "5%" } }, [
                             _c(
                               "span",
                               {
@@ -88751,7 +88749,11 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 col-md-offset-1" }, [
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
             _c("label", [_vm._v("Product search")]),
             _vm._v(" "),
             _c("input", {
