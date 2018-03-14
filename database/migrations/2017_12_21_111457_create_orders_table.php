@@ -14,7 +14,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->start_from('40000');
             $table->integer('user_id')->unsigned();
             $table->integer('client_id')->unsigned();
             $table->integer('status_id')->unsigned()->nullable();

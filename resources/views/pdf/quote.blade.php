@@ -41,20 +41,25 @@
     @php
         $totalWeight = 0.00;
         $totalPrice = 0.00;
+        $netWeight = 0.00;
     @endphp
     <body>
+        <div style="text-align: right">
+            <img src="https://www.powerpartspro.com/template/img/logo.png">
+        </div>
         <table width="100%">
             <tr>
-                <td style="border-right: solid #ddd 1px; width: 5%!important;">
-                    <img src="https://www.powerpartspro.com/images/2012441997.png" height="55px">
-                </td>
-                <td style="width: 45%!important;font-size: 12px; border-right: solid #ddd 1px;">
+                <td style="width: 50%!important;font-size: 12px;">
                     <b>Power Parts Pro UAB</b><br>
                     Ateities pl. 31, 52167 Kaunas, Lithuania <br>
                     Tel.: +370 67700 900 <br>
-                    info@powerpartspro.co.uk
+                    info@powerpartspro.co.uk<br>
+                    VAT Tax ID LT100006906012 Co. ID 302784671<br>
+                    Bank: Swedbank AB, Address: Konstitucijos pr 20a, Vilnius<br>
+                    IBAN: LT317300010131882929 SWIFT: HABALT22<br>
+                    Bank code: 73000, Beneficiary: Power Parts Pro
                 </td>
-                <td style="font-size: 12px;">
+                <td style="font-size: 12px; border-left: solid 1px #ddd">
                     <b>{{ $quote->client->name }}</b><br>
                     {{ $quote->client->street . ' ' . $quote->client->post_code . ', ' . $quote->client->city . ', ' . $quote->client->country }} <br>
                     Tel.: {{ $quote->client->phone}} <br>
@@ -63,7 +68,8 @@
             </tr>
         </table>
         <div class="center" style="margin-top: 45px; margin-bottom: 45px">
-            {{-- {{ $quote->note }} --}}
+            <h3>QUATATION No. {{ $quote->id }}</h3><br>
+            Date: {{ substr($quote->created_at, 0, 10) }}
         </div>
         <table width="100%" style="font-size: 14px">
             <tr style="font-weight: 800">
@@ -80,6 +86,7 @@
                 @php
                     $totalWeight = $totalWeight + $d->bruto;
                     $totalPrice = $totalPrice + $d->price;
+                    $netWeight = $netWeight + $d->netto;
                 @endphp
                 <tr>
                     <td>{{ $index+1 }}.</td>
@@ -94,7 +101,7 @@
             @endforeach
         </table>
         <div class="full" style="position: absolute; bottom: 0">
-            <b style="text-decoration: underline">If the amount of the goods shipped is less than 100 &euro;, we will charge you 20 &euro; extra</b>
+            {{-- <b style="text-decoration: underline">If the amount of the goods shipped is less than 100 &euro;, we will charge you 20 &euro; extra</b> --}}
             <table class="bottom-table">
                 <tr>
                     <td width="25%">Net price:</td>
@@ -110,8 +117,8 @@
             </table>
             <table class="bottom-table">
                 <tr>
-                    <td width="25%">-</td>
-                    <td width="25%">-</td>
+                    <td width="25%">Net weight: {{ $netWeight }}</td>
+                    <td width="25%">Total weight: {{ $totalWeight }}</td>
                     <td width="25%">Transport cost: <b>{{ $quote->delivery_price }} &euro;</td>
                     <td width="25%">Handling & packing cost:</td>
                 </tr>
