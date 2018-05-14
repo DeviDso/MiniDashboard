@@ -23,7 +23,7 @@
             </div>
             <form v-on:submit="sendForm()">
                 <!-- <h1>New order</h1> -->
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="col-md-6">
                         <label>Client</label>
                         <!-- {{ quote }} -->
@@ -34,6 +34,17 @@
                     <div class="col-md-6">
                         <label>Delivery Price</label>
                         <input class="form-control" type="number" name="delivery_price" v-model="quote.delivery_price" step="0.01" min="0">
+                    </div>
+                    <div class="col-md-12">
+                        <label>Product search</label>
+                        <input type="search" class="form-control" v-model="searchText" placeholder="Search product by code">
+                        <div class="orderProducts">
+                            <ul v-if="showResults">
+                                <li v-for="product, index in productsList"  v-on:click="addToList(product, index)">
+                                    {{ product.name.substr(0, 25) }} <b>{{ product.code }}</b>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div v-if="showProducts" class="col-md-12">
                         <hr>
@@ -46,40 +57,26 @@
                                 <td>Price</td>
                                 <td>Quantity</td>
                                 <td>Note</td>
-                                <td>Bruto (Kg)</td>
-                                <td>Netto (Kg)</td>
+                                <td>Unit w.</td>
+                                <td>Total w.</td>
                                 <td></td>
                             </thead>
                             <tr v-for="product, index in quote.data">
                                 <td>{{ index+1 }}</td>
-                                <!-- <td v-if="product.name != ''">{{ product.name }}</td> -->
-                                <td><input type="text" class="form-control" v-model="product.name" required></td>
-                                <!--  -->
-                                <!-- <td v-if="product.code != ''">{{ product.code }}</td> -->
-                                <td><input type="text" class="form-control" v-model="product.code"></td>
-                                <!--  -->
-                                <td><input type="number" class="form-control" v-model="product.price" step="0.01"></td>
-                                <td><input type="number" class="form-control" v-model="product.quantity"></td>
+                                <td><input type="text" class="form-control" v-model="product.name"></td>
+                                <td width="15%"><input type="text" class="form-control" v-model="product.code"></td>
+                                <td width="10%"><input type="number" class="form-control" v-model="product.price" step="0.01"></td>
+                                <td width="7%"><input type="number" class="form-control" v-model="product.quantity = 1"></td>
                                 <td><input type="text" class="form-control" v-model="product.note"></td>
-                                <td><input type="number" class="form-control" v-model="product.bruto" step="0.01" min="0"></td>
-                                <td><input type="number" class="form-control" v-model="product.netto" step="0.01" min="0"></td>
-                                <td><span v-on:click="removeItem(index)">X</span></td>
+                                <td width="10%"><input type="number" class="form-control" v-model="product.bruto" step="0.01" min="0"></td>
+                                <td width="10%"><input type="number" class="form-control" v-model="product.netto" step="0.01" min="0"></td>
+                                <td width="5%"><span v-on:click="removeItem(index)">X</span></td>
                             </tr>
                         </table>
                     </div>
                     <button class="btn btn-info" type="button" v-on:click="newProduct()">+ new product</button>
                 </div>
-                <div class="col-md-4">
-                    <label>Product search</label>
-                    <input type="search" class="form-control" v-model="searchText" placeholder="Search product by code">
-                    <div class="orderProducts">
-                        <ul v-if="showResults">
-                            <li v-for="product, index in productsList"  v-on:click="addToList(product, index)">
-                                {{ product.name.substr(0, 25) }} <b>{{ product.code }}</b>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
                 <div class="col-md-12">
                     <hr>
                     <button type="submit" class="submitButton">Update</button>
@@ -191,6 +188,7 @@
                     this.productsList.splice(index, 1)
                     this.showProducts = true
                 }
+                this.searchText = '';
             },
             removeItem(index){
                 this.quote.data.splice(index, 1);

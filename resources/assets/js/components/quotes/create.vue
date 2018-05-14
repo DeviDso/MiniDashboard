@@ -18,7 +18,22 @@
                     <textarea class="form-control" v-model="quote.note" rows="4"></textarea>
                 </div>
                 <div class="col-md-12">
+                    <!-- <br> -->
                     <hr>
+                    <label>Product search</label>
+                    <input type="search" class="form-control" v-model="searchText" placeholder="Search product by code">
+                    <div class="orderProducts">
+                        <ul v-if="showResults">
+                            <div v-if="productsList.length == 0">
+                                Product is not in a warehouse, you can add it manualy!
+                                <br>
+                                <button class="btn btn-success" type="button" v-on:click="newProduct()">+ new product</button>
+                            </div>
+                            <li v-for="product, index in productsList"  v-on:click="addToList(product, index)">
+                                {{ product.name.substr(0, 25) }} <b>{{ product.code }}</b>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <h4>Products</h4>
@@ -31,8 +46,8 @@
                                 <td>Price</td>
                                 <td>Quantity</td>
                                 <td>Note</td>
-                                <td>Bruto (Kg)</td>
-                                <td>Netto (Kg)</td>
+                                <td>Unit w.</td>
+                                <td>Total w.</td>
                                 <td></td>
                             </thead>
                             <tr v-for="product, index in quote.data">
@@ -48,24 +63,9 @@
                             </tr>
                         </table>
                     </div>
-                    <button class="btn btn-success" type="button" v-on:click="newProduct()">+ new product</button>
-                </div>
-                <div class="col-md-4">
-                    <br>
-                    <hr>
-                    <label>Product search</label>
-                    <input type="search" class="form-control" v-model="searchText" placeholder="Search product by code">
-                    <div class="orderProducts">
-                        <ul v-if="showResults">
-                            <div v-if="productsList.length == 0">
-                                Product is not in a warehouse, you can add it manualy!
-                                <br>
-                                <button class="btn btn-success" type="button" v-on:click="newProduct()">+ new product</button>
-                            </div>
-                            <li v-for="product, index in productsList"  v-on:click="addToList(product, index)">
-                                {{ product.name.substr(0, 25) }} <b>{{ product.code }}</b>
-                            </li>
-                        </ul>
+                    <div class="col-md-12">
+                        <br>
+                        <button class="btn btn-success" type="button" v-on:click="newProduct()">+ new product</button>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -148,6 +148,7 @@ export default{
                 this.productsList.splice(index, 1)
                 this.showProducts = true
             }
+            this.searchText = '';
         },
         removeItem(index){
             this.quote.data.splice(index, 1);

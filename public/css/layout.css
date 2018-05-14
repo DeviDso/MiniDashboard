@@ -363,7 +363,7 @@ tr {
 }
 
 .orderProducts {
-  height: 300px;
+  height: auto;
   overflow: scroll;
   margin-top: 12px;
 }

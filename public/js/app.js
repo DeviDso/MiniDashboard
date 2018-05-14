@@ -86683,6 +86683,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -86771,6 +86777,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.productsList.splice(index, 1);
                 this.showProducts = true;
             }
+            this.searchText = '';
         },
         removeItem: function removeItem(index) {
             this.order.data.splice(index, 1);
@@ -86897,9 +86904,9 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "col-md-5" }, [
-              _c("label", [_vm._v("Client")]),
+              _c("label", [_vm._v("Clientz")]),
               _vm._v(" "),
               _c(
                 "select",
@@ -87017,6 +87024,65 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("label", [_vm._v("Product search")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.searchText,
+                      expression: "searchText"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "search",
+                    placeholder: "Search product by code"
+                  },
+                  domProps: { value: _vm.searchText },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.searchText = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "orderProducts" }, [
+                  _vm.showResults
+                    ? _c(
+                        "ul",
+                        _vm._l(_vm.productsList, function(product, index) {
+                          return _c(
+                            "li",
+                            {
+                              on: {
+                                click: function($event) {
+                                  _vm.addToList(product, index)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(product.name.substr(0, 25)) +
+                                  " "
+                              ),
+                              _c("b", [_vm._v(_vm._s(product.code))])
+                            ]
+                          )
+                        })
+                      )
+                    : _vm._e()
+                ])
+              ])
+            ]),
+            _vm._v(" "),
             _vm.showProducts
               ? _c("div", { staticClass: "col-md-12" }, [
                   _c("hr"),
@@ -87044,7 +87110,7 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control",
-                              attrs: { type: "text", required: "" },
+                              attrs: { type: "text" },
                               domProps: { value: product.name },
                               on: {
                                 input: function($event) {
@@ -87057,7 +87123,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "15%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -87081,7 +87147,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "10%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -87109,7 +87175,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "7%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -87161,7 +87227,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "10%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -87189,7 +87255,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "10%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -87217,7 +87283,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "5%" } }, [
                             _c(
                               "span",
                               {
@@ -87238,6 +87304,8 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
+            _vm._m(3, false, false),
+            _vm._v(" "),
             _c(
               "button",
               {
@@ -87253,61 +87321,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-4" }, [
-            _c("label", [_vm._v("Product search")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.searchText,
-                  expression: "searchText"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "search", placeholder: "Search product by code" },
-              domProps: { value: _vm.searchText },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.searchText = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "orderProducts" }, [
-              _vm.showResults
-                ? _c(
-                    "ul",
-                    _vm._l(_vm.productsList, function(product, index) {
-                      return _c(
-                        "li",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.addToList(product, index)
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(product.name.substr(0, 25)) +
-                              " "
-                          ),
-                          _c("b", [_vm._v(_vm._s(product.code))])
-                        ]
-                      )
-                    })
-                  )
-                : _vm._e()
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(3, false, false)
+          _vm._m(4, false, false)
         ]
       )
     ])
@@ -87369,6 +87383,12 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("td")
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [_c("hr")])
   },
   function() {
     var _vm = this
@@ -88371,6 +88391,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.productsList.splice(index, 1);
                 this.showProducts = true;
             }
+            this.searchText = '';
         },
         removeItem: function removeItem(index) {
             this.quote.data.splice(index, 1);
@@ -88512,7 +88533,87 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _vm._m(0, false, false),
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("hr"),
+            _vm._v(" "),
+            _c("label", [_vm._v("Product search")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.searchText,
+                  expression: "searchText"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "search", placeholder: "Search product by code" },
+              domProps: { value: _vm.searchText },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.searchText = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "orderProducts" }, [
+              _vm.showResults
+                ? _c(
+                    "ul",
+                    [
+                      _vm.productsList.length == 0
+                        ? _c("div", [
+                            _vm._v(
+                              "\n                            Product is not in a warehouse, you can add it manualy!\n                            "
+                            ),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.newProduct()
+                                  }
+                                }
+                              },
+                              [_vm._v("+ new product")]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._l(_vm.productsList, function(product, index) {
+                        return _c(
+                          "li",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.addToList(product, index)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(product.name.substr(0, 25)) +
+                                " "
+                            ),
+                            _c("b", [_vm._v(_vm._s(product.code))])
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                : _vm._e()
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-12" }, [
             _c("h4", [_vm._v("Products")]),
@@ -88523,7 +88624,7 @@ var render = function() {
                     "table",
                     { staticClass: "col-md-12 orderProductTable" },
                     [
-                      _vm._m(1, false, false),
+                      _vm._m(0, false, false),
                       _vm._v(" "),
                       _vm._l(_vm.quote.data, function(product, index) {
                         return _c("tr", [
@@ -88734,118 +88835,32 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.newProduct()
-                  }
-                }
-              },
-              [_vm._v("+ new product")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4" }, [
-            _c("br"),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c("label", [_vm._v("Product search")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "button",
                 {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.searchText,
-                  expression: "searchText"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "search", placeholder: "Search product by code" },
-              domProps: { value: _vm.searchText },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+                  staticClass: "btn btn-success",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.newProduct()
+                    }
                   }
-                  _vm.searchText = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "orderProducts" }, [
-              _vm.showResults
-                ? _c(
-                    "ul",
-                    [
-                      _vm.productsList.length == 0
-                        ? _c("div", [
-                            _vm._v(
-                              "\n                            Product is not in a warehouse, you can add it manualy!\n                            "
-                            ),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-success",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.newProduct()
-                                  }
-                                }
-                              },
-                              [_vm._v("+ new product")]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm._l(_vm.productsList, function(product, index) {
-                        return _c(
-                          "li",
-                          {
-                            on: {
-                              click: function($event) {
-                                _vm.addToList(product, index)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(product.name.substr(0, 25)) +
-                                " "
-                            ),
-                            _c("b", [_vm._v(_vm._s(product.code))])
-                          ]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                : _vm._e()
+                },
+                [_vm._v("+ new product")]
+              )
             ])
           ]),
           _vm._v(" "),
-          _vm._m(2, false, false)
+          _vm._m(1, false, false)
         ]
       )
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [_c("hr")])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -88863,9 +88878,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("td", [_vm._v("Note")]),
       _vm._v(" "),
-      _c("td", [_vm._v("Bruto (Kg)")]),
+      _c("td", [_vm._v("Unit w.")]),
       _vm._v(" "),
-      _c("td", [_vm._v("Netto (Kg)")]),
+      _c("td", [_vm._v("Total w.")]),
       _vm._v(" "),
       _c("td")
     ])
@@ -89310,9 +89325,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -89415,6 +89427,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.productsList.splice(index, 1);
                 this.showProducts = true;
             }
+            this.searchText = '';
         },
         removeItem: function removeItem(index) {
             this.quote.data.splice(index, 1);
@@ -89548,7 +89561,7 @@ var render = function() {
           }
         },
         [
-          _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "col-md-6" }, [
               _c("label", [_vm._v("Client")]),
               _vm._v(" "),
@@ -89624,6 +89637,63 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("label", [_vm._v("Product search")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.searchText,
+                    expression: "searchText"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "search",
+                  placeholder: "Search product by code"
+                },
+                domProps: { value: _vm.searchText },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.searchText = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "orderProducts" }, [
+                _vm.showResults
+                  ? _c(
+                      "ul",
+                      _vm._l(_vm.productsList, function(product, index) {
+                        return _c(
+                          "li",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.addToList(product, index)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(product.name.substr(0, 25)) +
+                                " "
+                            ),
+                            _c("b", [_vm._v(_vm._s(product.code))])
+                          ]
+                        )
+                      })
+                    )
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
             _vm.showProducts
               ? _c("div", { staticClass: "col-md-12" }, [
                   _c("hr"),
@@ -89651,7 +89721,7 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control",
-                              attrs: { type: "text", required: "" },
+                              attrs: { type: "text" },
                               domProps: { value: product.name },
                               on: {
                                 input: function($event) {
@@ -89664,7 +89734,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "15%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -89688,7 +89758,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "10%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -89716,19 +89786,19 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "7%" } }, [
                             _c("input", {
                               directives: [
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: product.quantity,
-                                  expression: "product.quantity"
+                                  value: (product.quantity = 1),
+                                  expression: "product.quantity = 1"
                                 }
                               ],
                               staticClass: "form-control",
                               attrs: { type: "number" },
-                              domProps: { value: product.quantity },
+                              domProps: { value: (product.quantity = 1) },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
@@ -89736,7 +89806,7 @@ var render = function() {
                                   }
                                   _vm.$set(
                                     product,
-                                    "quantity",
+                                    "quantity = 1",
                                     $event.target.value
                                   )
                                 }
@@ -89768,7 +89838,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "10%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -89796,7 +89866,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "10%" } }, [
                             _c("input", {
                               directives: [
                                 {
@@ -89824,7 +89894,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("td", [
+                          _c("td", { attrs: { width: "5%" } }, [
                             _c(
                               "span",
                               {
@@ -89858,60 +89928,6 @@ var render = function() {
               },
               [_vm._v("+ new product")]
             )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4" }, [
-            _c("label", [_vm._v("Product search")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.searchText,
-                  expression: "searchText"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "search", placeholder: "Search product by code" },
-              domProps: { value: _vm.searchText },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.searchText = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "orderProducts" }, [
-              _vm.showResults
-                ? _c(
-                    "ul",
-                    _vm._l(_vm.productsList, function(product, index) {
-                      return _c(
-                        "li",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.addToList(product, index)
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(product.name.substr(0, 25)) +
-                              " "
-                          ),
-                          _c("b", [_vm._v(_vm._s(product.code))])
-                        ]
-                      )
-                    })
-                  )
-                : _vm._e()
-            ])
           ]),
           _vm._v(" "),
           _vm._m(3, false, false)
@@ -89974,9 +89990,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("td", [_vm._v("Note")]),
       _vm._v(" "),
-      _c("td", [_vm._v("Bruto (Kg)")]),
+      _c("td", [_vm._v("Unit w.")]),
       _vm._v(" "),
-      _c("td", [_vm._v("Netto (Kg)")]),
+      _c("td", [_vm._v("Total w.")]),
       _vm._v(" "),
       _c("td")
     ])
