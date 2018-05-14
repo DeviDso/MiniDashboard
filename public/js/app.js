@@ -86689,6 +86689,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -86847,6 +86851,31 @@ var render = function() {
               id: "pdfen",
               target: "print_popup",
               action: "/generate/pdf/quote/english",
+              method: "post",
+              onsubmit:
+                "window.open('about:blank','print_popup','width=1000,height=800');"
+            }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "quote_id" },
+              domProps: { value: _vm.order.id }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: this.csrf }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: {
+              id: "pdflt",
+              target: "print_popup",
+              action: "/generate/pdf/quote/lithuanian",
               method: "post",
               onsubmit:
                 "window.open('about:blank','print_popup','width=1000,height=800');"
@@ -87348,7 +87377,7 @@ var staticRenderFns = [
         "button",
         {
           staticClass: "btn btn-primary",
-          attrs: { type: "submite", onclick: "$('#pdfen').submit()" }
+          attrs: { type: "submite", onclick: "$('#pdflt').submit()" }
         },
         [_vm._v("Lietuviškai")]
       )
@@ -89325,6 +89354,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -89512,6 +89545,31 @@ var render = function() {
               id: "pdfen",
               target: "print_popup",
               action: "/generate/pdf/quote/english",
+              method: "post",
+              onsubmit:
+                "window.open('about:blank','print_popup','width=1000,height=800');"
+            }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "quote_id" },
+              domProps: { value: _vm.quote.id }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: this.csrf }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: {
+              id: "pdflt",
+              target: "print_popup",
+              action: "/generate/pdf/quote/lithuanian",
               method: "post",
               onsubmit:
                 "window.open('about:blank','print_popup','width=1000,height=800');"
@@ -89965,7 +90023,7 @@ var staticRenderFns = [
         "button",
         {
           staticClass: "btn btn-primary",
-          attrs: { type: "submite", onclick: "$('#pdfen').submit()" }
+          attrs: { type: "submite", onclick: "$('#pdflt').submit()" }
         },
         [_vm._v("Lietuviškai")]
       ),

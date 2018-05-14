@@ -8,6 +8,10 @@
                     <input type="hidden" name="quote_id" :value="quote.id">
                     <input type="hidden" name="_token" :value="this.csrf">
                 </form>
+                <form id="pdflt" target="print_popup" action="/generate/pdf/quote/lithuanian" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+                    <input type="hidden" name="quote_id" :value="quote.id">
+                    <input type="hidden" name="_token" :value="this.csrf">
+                </form>
             </div>
             <div class="col-md-6 text-right">
                 <button type="button" class="btn btn-danger" v-on:click="deleteQuote(quote.id)">Delete quote</button>
@@ -18,7 +22,7 @@
             </div>
             <div class="col-md-12">
                 <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">English</button>
-                <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">Lietuviškai</button>
+                <button type="submite" class="btn btn-primary" onclick="$('#pdflt').submit()">Lietuviškai</button>
                 <hr>
             </div>
             <form v-on:submit="sendForm()">

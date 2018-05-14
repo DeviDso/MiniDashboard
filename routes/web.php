@@ -19,7 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/generate/pdf/quote/english', 'PDFController@generate')->name('generateQuotePDFen');
+Route::post('/generate/pdf/quote/english', 'PDFController@generateEN')->name('generateQuotePDFen');
+Route::post('/generate/pdf/quote/lithuanian', 'PDFController@generateLT')->name('generateQuotePDFlt');
 
 
 // Route::get('/by', function(){

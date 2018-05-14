@@ -6,10 +6,7 @@
         {{-- <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> --}}
         <style>
         /* @import url('https://fonts.googleapis.com/css?family=Open+Sans'); */
-            body {
-                font-family: DejaVu Sans, sans-serif;
-                line-height: 15px!important;
-            }
+              body { font-family: DejaVu Sans, sans-serif; }
             .center{
                 text-align: center
             }
@@ -20,6 +17,9 @@
             .half{
                 width: 50%;
                 float: left;
+            }
+            table{
+                font-size: 12px!important;
             }
             table tr th{
                 font-weight: 400;
@@ -47,17 +47,17 @@
             <img src="http://desam.lt/ppp-logo.png" height="75">
             {{-- <br> --}}
             <p style="font-size: 14px; line-height: 19px">
-                Power Parts Pro UAB Company ID 302784671 VAT TAX ID LT100006906012 Tel. 0037060884059<br>
-                Registration adress: Ateities pl. 31, 52167, Kaunas Payments: Bank name - Swedbank AB<br>
-                Account number IBAN: LT31 7300 0101 3188 2929 BIC / SWIFT – HABALT22<br>
+                Power Parts Pro UAB Įmonės kodas: 302784671, PVM kodas: LT100006906012, Tel. +37060884059<br>
+                Adresas: Ateities pl. 31, 52167, Kaunas Bankas - Swedbank AB<br>
+                IBAN: LT31 7300 0101 3188 2929 BIC / SWIFT – HABALT22<br>
             </p>
         </div>
         <table width="100%" style="font-size: 14px; text-align: center; margin-top: 10px" class="main">
             <tr>
-                <td>Document type</td>
-                <td>Proforma invoice</td>
-                <td>Document No.</td>
-                <td>Document date</td>
+                <td>Dokumentas</td>
+                <td>Sąskita</td>
+                <td>Sąskaitos nr.</td>
+                <td>Sąskaitos data</td>
             </tr>
             <tr>
                 <td></td>
@@ -69,16 +69,16 @@
         <table width="100%" style="margin-top: 15px" class="main">
             <tr>
                 <td style="width: 60%!important;font-size: 12px;">
-                    <b>Customer:</b><br><br>
+                    <b>Kleintas:</b><br><br>
                     {{ $quote->client->name }}<br>
                     Tel.: {{ $quote->client->phone}} <br>
-                    Email: {{ $quote->client->email }} <br><br>
+                    El. paštas: {{ $quote->client->email }} <br><br>
                     {{-- Address:<br>
                     {{ $quote->client->street . ' ' . $quote->client->post_code . ', ' . $quote->client->city . ', ' . $quote->client->country }} <br> --}}
 
                 </td>
                 <td style="font-size: 12px; border-left: solid 1px #ddd">
-                    <b>Delivery to:</b><br><br>
+                    <b>Pristatymo adresas:</b><br><br>
                     {{ $quote->client->name }}<br>
                     {{ $quote->client->street . ' ' . $quote->client->post_code . ', ' . $quote->client->city . ', ' . $quote->client->country }} <br>
                     &nbsp;
@@ -91,16 +91,16 @@
         </div> --}}
         <table width="100%" style="font-size: 14px; margin-top: 25px">
             <tr style="font-weight: 800">
-                <th>Part no.</th>
-                <th>Description</th>
+                <th>Produkto nr.</th>
+                <th>Aprašymas</th>
 
-                <th>Quantity</th>
+                <th>Kiekis</th>
                 {{-- <th>Delivery</th> --}}
 
-                <th>Unit weight</th>
-                <th>Total weight</th>
-                <th>Price</th>
-                <th>Total price</th>
+                <th>Vnt. svoris</th>
+                <th>Viso svoris</th>
+                <th>Kaina</th>
+                <th>Viso kaina</th>
             </tr>
             @foreach($quote->data as $index => $d)
                 @php
@@ -143,27 +143,27 @@
         <div class="Something">
             <table class="botz" width="100%">
                 <tr>
-                    <td width="13%"><b>Terms:</b></td>
+                    <td width="13%"><b>Sąlygos:</b></td>
                     <td width="47%" style="border-left: none!important">100% advance payment</td>
-                    <td width="20%"><b>Carrier:</b></td>
+                    <td width="20%"><b>Kurjeris:</b></td>
                     <td width="15%" style="border-left: none!important">-</td>
                 </tr>
                 <tr>
-                    <td><b>Payment:</b></td>
+                    <td><b>Apmokėjimas:</b></td>
                     <td style="border-left: none!important">T/T bank transfer</td>
-                    <td><b>Packing:</b></td>
+                    <td><b>Pakavimas:</b></td>
                     <td style="border-left: none!important">Original packing</td>
                 </tr>
                 <tr>
-                    <td><b>Valid to:</b></td>
+                    <td><b>Galioja iki:</b></td>
                     <td style="border-left: none!important">2018 04 21</td>
-                    <td><b>Total amount</b></td>
+                    <td><b>Viso suma:</b></td>
                     <td style="font-size: 16px; font-weight: 800">{{ number_format((float)$finalPrice, 2, '.', '') }} &euro;</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
-                    <td><b>Total incl. 21% tax</b></td>
+                    <td><b>Įsk. 21% PVM</b></td>
                     <td style="font-size: 16px; font-weight: 800">{{ number_format((float)$finalPrice + $finalPrice*0.21, 2, '.', '') }} &euro;</td>
                 </tr>
             </table>

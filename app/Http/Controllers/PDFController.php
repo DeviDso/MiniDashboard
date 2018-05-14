@@ -8,10 +8,18 @@ use App\Order;
 
 class PDFController extends Controller
 {
-    public function generate(Request $r){
+    public function generateEN(Request $r){
         $data['quote'] = Order::with(['data', 'client'])->findOrFail($r->input('quote_id'));
 
         $pdf = PDF::loadView('pdf.quote', $data);
+        // $pdf->setOption('javascript-delay', 3000);
+        return $pdf->stream('invoice.pdf');
+    }
+
+    public function generateLT(Request $r){
+        $data['quote'] = Order::with(['data', 'client'])->findOrFail($r->input('quote_id'));
+
+        $pdf = PDF::loadView('pdf.quoteLT', $data);
         // $pdf->setOption('javascript-delay', 3000);
         return $pdf->stream('invoice.pdf');
     }

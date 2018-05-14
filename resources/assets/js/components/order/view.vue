@@ -7,6 +7,10 @@
             <input type="hidden" name="quote_id" :value="order.id">
             <input type="hidden" name="_token" :value="this.csrf">
         </form>
+        <form id="pdflt" target="print_popup" action="/generate/pdf/quote/lithuanian" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+            <input type="hidden" name="quote_id" :value="order.id">
+            <input type="hidden" name="_token" :value="this.csrf">
+        </form>
         <div class="alert alert-info text-center">
             If you made any changes don't forget to update order data before generating a new PDF
         </div>
@@ -14,7 +18,7 @@
     <div class="col-md-6">
         <h4>PDF</h4>
         <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">English</button>
-        <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">Lietuviškai</button>
+        <button type="submite" class="btn btn-primary" onclick="$('#pdflt').submit()">Lietuviškai</button>
     </div>
     <div class="col-md-6 text-right">
         <h4>Actions</h4>
