@@ -19,7 +19,7 @@ class PDFController extends Controller
     public function generateLT(Request $r){
         $data['quote'] = Order::with(['data', 'client'])->findOrFail($r->input('quote_id'));
 
-        $pdf = PDF::loadView('pdf.quoteLT', $data);
+        $pdf = PDF::loadView('pdf.quote-lithuanian', $data);
         // $pdf->setOption('javascript-delay', 3000);
         return $pdf->stream('invoice.pdf');
     }
