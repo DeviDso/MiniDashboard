@@ -137,7 +137,7 @@
                 font-size: 14px;
                 border-collapse: collapse;
             }
-            
+
         </style>
         <div class="Something">
             <table class="botz" width="100%">
@@ -163,7 +163,7 @@
                     <td></td>
                     <td></td>
                     <td><b>Total incl. 21% tax</b></td>
-                    <td style="font-size: 16px; font-weight: 800">{{ number_format((float)$finalPrice*0.21, 2, '.', '') }} &euro;</td>
+                    <td style="font-size: 16px; font-weight: 800">{{ number_format((float)$finalPrice + $finalPrice*0.21, 2, '.', '') }} &euro;</td>
                 </tr>
             </table>
             <p style="font-size: 12px; text-align: center">Terms and conditions along with warranty info on www.powerpartspro.co.uk. All Manufacturers,Numbers,Simbols and Descriptions are used for Reference Purpose Only and it is not implied that any Part Listed is the Product of these Manufacturers</p>
