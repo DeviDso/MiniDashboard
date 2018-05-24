@@ -6,7 +6,10 @@
         {{-- <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> --}}
         <style>
         /* @import url('https://fonts.googleapis.com/css?family=Open+Sans'); */
-              body { font-family: DejaVu Sans, sans-serif; }
+            body {
+                font-family: DejaVu Sans, sans-serif;
+                line-height: 15px!important;
+            }
             .center{
                 text-align: center
             }
@@ -18,20 +21,17 @@
                 width: 50%;
                 float: left;
             }
-            table{
-                font-size: 12px!important;
-            }
             table tr th{
                 font-weight: 400;
                 /* background: #333; */
                 color: #333;
-                border-bottom: solid 1px #444;
+                /* border-bottom: solid 1px #ddd; */
             }
             table tr:nth-child(even){
-                /* background: #f6f6f6; */
+                background: #f6f6f6;
             }
             table.main{
-                border: 0.9px solid #ddd;
+                /* border: 0.9px solid #ddd; */
             }
         </style>
 
@@ -45,62 +45,46 @@
     <body>
         <div style="width: 100%; text-align: center">
             <img src="http://desam.lt/ppp-logo.png" height="75">
-            {{-- <br> --}}
-            <p style="font-size: 14px; line-height: 19px">
-                Power Parts Pro UAB Įmonės kodas: 302784671, PVM kodas: LT100006906012, Tel. +37060884059<br>
-                Adresas: Ateities pl. 31, 52167, Kaunas Bankas - Swedbank AB<br>
-                IBAN: LT31 7300 0101 3188 2929 BIC / SWIFT – HABALT22<br>
-            </p>
         </div>
-        <table width="100%" style="font-size: 14px; text-align: center; margin-top: 10px" class="main">
-            <tr>
-                <td>Dokumentas</td>
-                <td>Sąskita</td>
-                <td>Sąskaitos nr.</td>
-                <td>Sąskaitos data</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td>{{ $quote->id }}</td>
-                <td>{{ substr($quote->created_at, 0, 10) }}</td>
-            </tr>
-        </table>
-        <table width="100%" style="margin-top: 15px" class="main">
-            <tr>
-                <td style="width: 60%!important;font-size: 12px;">
-                    <b>Kleintas:</b><br><br>
-                    {{ $quote->client->name }}<br>
-                    Tel.: {{ $quote->client->phone}} <br>
-                    El. paštas: {{ $quote->client->email }} <br><br>
-                    {{-- Address:<br>
-                    {{ $quote->client->street . ' ' . $quote->client->post_code . ', ' . $quote->client->city . ', ' . $quote->client->country }} <br> --}}
-
-                </td>
-                <td style="font-size: 12px; border-left: solid 1px #ddd">
-                    <b>Pristatymo adresas:</b><br><br>
-                    {{ $quote->client->name }}<br>
-                    {{ $quote->client->street . ' ' . $quote->client->post_code . ', ' . $quote->client->city . ', ' . $quote->client->country }} <br>
-                    &nbsp;
-                </td>
-            </tr>
-        </table>
-        {{-- <div class="center" style="margin-top: 45px; margin-bottom: 45px">
-            <h3>QUATATION No. {{ $quote->id }}</h3><br>
-            Date: {{ substr($quote->created_at, 0, 10) }}
-        </div> --}}
-        <table width="100%" style="font-size: 14px; margin-top: 25px">
-            <tr style="font-weight: 800">
-                <th>Produkto nr.</th>
-                <th>Aprašymas</th>
-
-                <th>Kiekis</th>
-                {{-- <th>Delivery</th> --}}
-
-                <th>Vnt. svoris</th>
-                <th>Viso svoris</th>
-                <th>Kaina</th>
-                <th>Viso kaina</th>
+        <div class="center" style="margin-top: 35px">
+            <h5>Nr. {{ $quote->id }}</h5>
+            <h6 style="margin-top: -15px">{{ substr($quote->created_at, 0, 10) }}</h6>
+        </div>
+        <div id="top_table">
+            <table width="100%" class="main">
+                <tr>
+                    <td style="width: 50%!important;font-size: 11px;">
+                        <h2>{{ $quote->client->name }}</h2>
+                        <b>PVM</b>: {{ $quote->client->vat }}<br>
+                        <b>Tel</b>: {{ $quote->client->phone}} <br>
+                        <b>El. paštas</b>: {{ $quote->client->email }} <br>
+                        <b>Adresas:</b><br>
+                        {{ $quote->client->street . ' ' . $quote->client->post_code . ', ' . $quote->client->city . ', ' . $quote->client->country }} <br>
+                        <b>Pristatymo adresas:</b><br>
+                        {{ $quote->client->delivery_street . ' ' . $quote->client->delivery_post_code . ', ' . $quote->client->delivery_city . ', ' . $quote->client->delivery_country }} <br>
+                    </td>
+                    <td style="font-size: 11px">
+                        <h2>Power Parts Pro UAB</h2>
+                        <b>Įm. kodas:</b> 302784671<br>
+                        <b>PVM:</b> LT100006906012<br>
+                        <b>Tel:</b> 0037060884059<br>
+                        <b>Reg. adresas</b>: Ateities pl. 31, 52167, Kaunas, Lithuania<br>
+                        <b>Bankas:</b> Swedbank AB<br>
+                        <b>Sąsk. nr:</b> LT31 7300 0101 3188 2929<br>
+                        <b>BIC/SWIFT:</b> HABALT22
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <table width="100%" style="font-size: 12px; margin-top: 25px">
+            <tr style="background: #555!important; color: #fff!important">
+                <th style="font-weight: 600">Detalės nr.</th>
+                <th style="font-weight: 600">Aprašymas</th>
+                <th style="font-weight: 600">Kiekis</th>
+                <th style="font-weight: 600">Vnt. svoris</th>
+                <th style="font-weight: 600">Viso svoris</th>
+                <th style="font-weight: 600">Kaina</th>
+                <th style="font-weight: 600">Viso kaina</th>
             </tr>
             @foreach($quote->data as $index => $d)
                 @php
@@ -110,15 +94,10 @@
                     $finalPrice = $finalPrice + $d->price;
                 @endphp
                 <tr>
-                    {{-- <td>{{ $index+1 }}.</td> --}}
                     <td>{{ $d->code }}</td>§
                     <td>{{ $d->name }}</td>
-
                     <td>{{ $d->quantity }}</td>
-                    {{-- <td>{{ ($d->product_id) ? 'In stock' : 'Not available' }}</td> --}}
-
                     <td>{{ ($d->bruto != '') ? $d->bruto : '-' }}</td>
-                    {{-- <td>{{ ($d->netto != '') ? $d->netto : '-' }}</td> --}}
                     <td>{{ sprintf('%0.2f', $totalWeight) }}</td>
                     <td>{{ $d->price }} &euro;</td>
                     <td>{{ sprintf('%0.2f', $totalPrice * $d->quantity) }} &euro;</td>
@@ -128,6 +107,33 @@
                     $totalPrice = 0.00;
                 @endphp
             @endforeach
+            <tr style="background: none!important; font-size: 12px">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="font-weight: 600">Total:</td>
+                <td style="font-size: 14px">{{ number_format((float)$finalPrice, 2, '.', '') }} &euro;</td>
+            </tr>
+            <tr style="background: none!important; font-size: 12px">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="font-weight: 600">VAT 21%:</td>
+                <td style="font-size: 14px">{{ number_format($finalPrice*0.21, 2, '.', '') }} &euro;</td>
+            </tr>
+            <tr style="background: none!important; font-size: 12px">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="font-weight: 600">Total inc. VAT:</td>
+                <td style="font-size: 14px">{{ number_format($finalPrice + $finalPrice*0.21, 2, '.', '') }} &euro;</td>
+            </tr>
         </table>
         <style>
             .Something{
@@ -141,70 +147,30 @@
 
         </style>
         <div class="Something">
-            <table class="botz" width="100%">
-                <tr>
-                    <td width="13%"><b>Sąlygos:</b></td>
-                    <td width="47%" style="border-left: none!important">100% advance payment</td>
-                    <td width="20%"><b>Kurjeris:</b></td>
-                    <td width="15%" style="border-left: none!important">-</td>
+
+            <br><hr style="background:#dedede; color:#dedede">
+            <table class="botz" width="100%" style="font-size: 12px; text-align: left">
+                <tr style="background: none!important;">
+                    <td><b>Apmokėti iki:</b></td>
+                    <td style="border-left: none!important"><?php echo date('Y-m-d', strtotime($quote->created_at. ' +' .$quote->client->credit_amount. ' days')); ?></td>
+                    <td><b>Kurjeris:</b></td>
+                    <td style="border-left: none!important">{{ $quote->client->courier_account}}</td>
+                    <td><b>Sąlygos:</b></td>
+                    <td>{{ $quote->client->payment_term}}</td>
                 </tr>
-                <tr>
-                    <td><b>Apmokėjimas:</b></td>
+                {{-- <tr style="background: none!important">>
+                    <td><b>Payment:</b></td>
                     <td style="border-left: none!important">T/T bank transfer</td>
-                    <td><b>Pakavimas:</b></td>
+                    <td><b>Packing:</b></td>
                     <td style="border-left: none!important">Original packing</td>
                 </tr>
-                <tr>
-                    <td><b>Galioja iki:</b></td>
+                <tr style="background: none!important">>
+                    <td><b>Valid to:</b></td>
                     <td style="border-left: none!important">2018 04 21</td>
-                    <td><b>Viso suma:</b></td>
-                    <td style="font-size: 16px; font-weight: 800">{{ number_format((float)$finalPrice, 2, '.', '') }} &euro;</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td><b>Įsk. 21% PVM</b></td>
-                    <td style="font-size: 16px; font-weight: 800">{{ number_format((float)$finalPrice + $finalPrice*0.21, 2, '.', '') }} &euro;</td>
-                </tr>
-            </table>
-            <p style="font-size: 12px; text-align: center">Terms and conditions along with warranty info on www.powerpartspro.co.uk. All Manufacturers,Numbers,Simbols and Descriptions are used for Reference Purpose Only and it is not implied that any Part Listed is the Product of these Manufacturers</p>
+                </tr> --}}
 
-        </div>
+            </table>
+            <p style="font-size: 10px; text-align: center">Terms and conditions along with warranty info on www.powerpartspro.co.uk. All Manufacturers,Numbers,Simbols and Descriptions are used for Reference Purpose Only and it is not implied that any Part Listed is the Product of these Manufacturers</p>
 
-        {{-- <div class="full" style="position: absolute; bottom: 0">
-            </div> --}}
-        {{-- <div class="full" style="position: absolute; bottom: 0">
-            <b style="text-decoration: underline">If the amount of the goods shipped is less than 100 &euro;, we will charge you 20 &euro; extra</b>
-            <table class="bottom-table">
-                <tr>
-                    <td width="25%">Net price:</td>
-                    <td width="25%">Terms:</td>
-                    <td width="25%">Delivery as reported unless sold</td>
-                    <td width="25%">Validity 30 days</td>
-                </tr>
-            </table>
-            <table class="bottom-table">
-                <tr>
-                    <td width="100%">Payment: At order confirmation</td>
-                </tr>
-            </table>
-            <table class="bottom-table">
-                <tr>
-                    <td width="25%">Net weight: {{ $netWeight }}</td>
-                    <td width="25%">Total weight: {{ $totalWeight }}</td>
-                    <td width="25%">Transport cost: <b>{{ $quote->delivery_price }} &euro;</td>
-                    <td width="25%">Handling & packing cost:</td>
-                </tr>
-            </table>
-            <table class="bottom-table">
-                <tr>
-                    <td width="25%">Goods amount: <b>{{ number_format((float)$totalPrice, 2, '.', '') }} &euro;</b></td>
-                    <td width="25%">Amount: <b>{{ number_format((float)$totalPrice, 2, '.', '') }} &euro;</b></td>
-                    <td width="25%">-</td>
-                    <td width="25%">Total: <b>{{ number_format((float)$totalPrice+$quote->delivery_price, 2, '.', '') }} &euro;</b></td>
-                </tr>
-            </table>
-            <p>Terms and conditions along with warranty info on www.powerpartspro.co.uk. All Manufacturers,Numbers,Simbols and Descriptions are used for Reference Purpose Only and it is not implied that any Part Listed is the Product of these Manufacturers</p>
-        </div> --}}
     </body>
 </html>
