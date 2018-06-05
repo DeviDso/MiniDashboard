@@ -23,4 +23,12 @@ class PDFController extends Controller
         // $pdf->setOption('javascript-delay', 3000);
         return $pdf->stream('invoice.pdf');
     }
+
+    public function vaztarastis(Request $r){
+        $data['order'] = Order::with(['data', 'client'])->findOrFail($r->input('order_id'));
+        $data['vaztarastis'] = $r->all();
+
+        $pdf = PDF::loadView('pdf.vaztarastis', $data);
+        return $pdf->stream('vaztarastis-.pdf');
+    }
 }

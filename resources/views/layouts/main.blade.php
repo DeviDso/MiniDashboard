@@ -68,6 +68,7 @@
                         <ul class="sub">
                             <router-link :to="{name: 'productCreate'}"><li>Add new</li></router-link>
                             <router-link :to="{name: 'productIndex'}"><li>All products</li></router-link>
+                            <router-link :to="{name: 'categoriesView'}"><li>Categories</li></router-link>
                         </ul>
                     </li>
                     <router-link :to="{name: 'settingsProfile'}">

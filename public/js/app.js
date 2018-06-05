@@ -28754,6 +28754,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_quotes_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_quotes_index_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_quotes_view_vue__ = __webpack_require__(303);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_quotes_view_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_quotes_view_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_product_categories_vue__ = __webpack_require__(323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_product_categories_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_product_categories_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -28816,7 +28818,8 @@ toastr.options = {
 
 
 
-var routes = [{ path: '/', components: { home: __WEBPACK_IMPORTED_MODULE_3__components_home_index_vue___default.a }, name: 'Home' }, { path: '/client/index', component: __WEBPACK_IMPORTED_MODULE_5__components_client_index_vue___default.a, name: 'clientIndex' }, { path: '/client/create', component: __WEBPACK_IMPORTED_MODULE_4__components_client_create_vue___default.a, name: 'clientCreate' }, { path: '/client/view/:id', component: __WEBPACK_IMPORTED_MODULE_6__components_client_view_vue___default.a, name: 'clientView' }, { path: '/clients/edit/:id', component: __WEBPACK_IMPORTED_MODULE_7__components_client_edit_vue___default.a, name: 'clientEdit' }, { path: '/request/index', component: __WEBPACK_IMPORTED_MODULE_8__components_request_index_vue___default.a, name: 'requestIndex' }, { path: '/request/create', component: __WEBPACK_IMPORTED_MODULE_9__components_request_create_vue___default.a, name: 'requestCreate' }, { path: '/request/create/:id', component: __WEBPACK_IMPORTED_MODULE_10__components_request_createId_vue___default.a, name: 'requestCreateId' }, { path: '/request/view/:id', component: __WEBPACK_IMPORTED_MODULE_11__components_request_view_vue___default.a, name: 'requestView' }, { path: '/product/index', component: __WEBPACK_IMPORTED_MODULE_12__components_product_index_vue___default.a, name: 'productIndex' }, { path: '/product/view/:id', component: __WEBPACK_IMPORTED_MODULE_14__components_product_view_vue___default.a, name: 'productView' }, { path: '/product/create', component: __WEBPACK_IMPORTED_MODULE_13__components_product_create_vue___default.a, name: 'productCreate' }, { path: '/order/index', component: __WEBPACK_IMPORTED_MODULE_15__components_order_index_vue___default.a, name: 'orderIndex' }, { path: '/order/create', component: __WEBPACK_IMPORTED_MODULE_16__components_order_create_vue___default.a, name: 'orderCreate' }, { path: '/order/create/:id', component: __WEBPACK_IMPORTED_MODULE_17__components_order_createId_vue___default.a, name: 'orderCreateId' }, { path: '/order/view/:id', component: __WEBPACK_IMPORTED_MODULE_18__components_order_view_vue___default.a, name: 'orderView' }, { path: '/search', component: __WEBPACK_IMPORTED_MODULE_20__components_searchPage_vue___default.a, name: 'search' }, { path: '/settings/profile', component: __WEBPACK_IMPORTED_MODULE_21__components_settings_profile_vue___default.a, name: 'settingsProfile' }, { path: '/quotes/new', component: __WEBPACK_IMPORTED_MODULE_22__components_quotes_create_vue___default.a, name: 'quotesCreate' }, { path: '/quotes/index', component: __WEBPACK_IMPORTED_MODULE_23__components_quotes_index_vue___default.a, name: 'quotesIndex' }, { path: '/quotes/view/:id', component: __WEBPACK_IMPORTED_MODULE_24__components_quotes_view_vue___default.a, name: 'quotesView' }];
+
+var routes = [{ path: '/', components: { home: __WEBPACK_IMPORTED_MODULE_3__components_home_index_vue___default.a }, name: 'Home' }, { path: '/client/index', component: __WEBPACK_IMPORTED_MODULE_5__components_client_index_vue___default.a, name: 'clientIndex' }, { path: '/client/create', component: __WEBPACK_IMPORTED_MODULE_4__components_client_create_vue___default.a, name: 'clientCreate' }, { path: '/client/view/:id', component: __WEBPACK_IMPORTED_MODULE_6__components_client_view_vue___default.a, name: 'clientView' }, { path: '/clients/edit/:id', component: __WEBPACK_IMPORTED_MODULE_7__components_client_edit_vue___default.a, name: 'clientEdit' }, { path: '/request/index', component: __WEBPACK_IMPORTED_MODULE_8__components_request_index_vue___default.a, name: 'requestIndex' }, { path: '/request/create', component: __WEBPACK_IMPORTED_MODULE_9__components_request_create_vue___default.a, name: 'requestCreate' }, { path: '/request/create/:id', component: __WEBPACK_IMPORTED_MODULE_10__components_request_createId_vue___default.a, name: 'requestCreateId' }, { path: '/request/view/:id', component: __WEBPACK_IMPORTED_MODULE_11__components_request_view_vue___default.a, name: 'requestView' }, { path: '/product/index', component: __WEBPACK_IMPORTED_MODULE_12__components_product_index_vue___default.a, name: 'productIndex' }, { path: '/product/view/:id', component: __WEBPACK_IMPORTED_MODULE_14__components_product_view_vue___default.a, name: 'productView' }, { path: '/product/create', component: __WEBPACK_IMPORTED_MODULE_13__components_product_create_vue___default.a, name: 'productCreate' }, { path: '/order/index', component: __WEBPACK_IMPORTED_MODULE_15__components_order_index_vue___default.a, name: 'orderIndex' }, { path: '/order/create', component: __WEBPACK_IMPORTED_MODULE_16__components_order_create_vue___default.a, name: 'orderCreate' }, { path: '/order/create/:id', component: __WEBPACK_IMPORTED_MODULE_17__components_order_createId_vue___default.a, name: 'orderCreateId' }, { path: '/order/view/:id', component: __WEBPACK_IMPORTED_MODULE_18__components_order_view_vue___default.a, name: 'orderView' }, { path: '/search', component: __WEBPACK_IMPORTED_MODULE_20__components_searchPage_vue___default.a, name: 'search' }, { path: '/settings/profile', component: __WEBPACK_IMPORTED_MODULE_21__components_settings_profile_vue___default.a, name: 'settingsProfile' }, { path: '/quotes/new', component: __WEBPACK_IMPORTED_MODULE_22__components_quotes_create_vue___default.a, name: 'quotesCreate' }, { path: '/quotes/index', component: __WEBPACK_IMPORTED_MODULE_23__components_quotes_index_vue___default.a, name: 'quotesIndex' }, { path: '/quotes/view/:id', component: __WEBPACK_IMPORTED_MODULE_24__components_quotes_view_vue___default.a, name: 'quotesView' }, { path: '/categories/view/:id', component: __WEBPACK_IMPORTED_MODULE_25__components_product_categories_vue___default.a, name: 'categoriesView' }];
 
 Vue.mixin({
     components: {
@@ -86693,10 +86696,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            vaztarastis: [],
             csrf: csrf,
             client: [],
             products: [],
@@ -86801,6 +86859,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     console.log(err);
                 });
             }
+        },
+        vaztarastis: function vaztarastis() {
+            alert(1);
         }
     },
     computed: {
@@ -86901,7 +86962,367 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0, false, false),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("h4", [_vm._v("PDF")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submite", onclick: "$('#pdfen').submit()" }
+          },
+          [_vm._v("English")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submite", onclick: "$('#pdflt').submit()" }
+          },
+          [_vm._v("Lietuviškai")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: {
+              type: "button",
+              "data-toggle": "modal",
+              "data-target": "#exampleModal"
+            }
+          },
+          [_vm._v("\n          Važtaraštis\n        ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "exampleModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(0, false, false),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          _vm.updateClient()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c(
+                          "form",
+                          {
+                            attrs: {
+                              id: "vaztarastisForm",
+                              target: "print_popup",
+                              action: "/generate/pdf/vaztarastis",
+                              method: "post",
+                              onsubmit:
+                                "window.open('about:blank','print_popup','width=1000,height=800');"
+                            }
+                          },
+                          [
+                            _c("input", {
+                              attrs: { type: "hidden", name: "order_id" },
+                              domProps: { value: _vm.order.id }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: { type: "hidden", name: "_token" },
+                              domProps: { value: this.csrf }
+                            }),
+                            _vm._v(" "),
+                            _c("h3", [_vm._v("Vežėjas")]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: (_vm.vaztarastis.vezejo_pavadinimas =
+                                      "UAB ''Power Parts Pro''"),
+                                    expression:
+                                      "vaztarastis.vezejo_pavadinimas = 'UAB \\'\\'Power Parts Pro\\'\\''"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  name: "vezejo_pavadinimas",
+                                  placeholder: "Įmonės pavadinimas"
+                                },
+                                domProps: {
+                                  value: (_vm.vaztarastis.vezejo_pavadinimas =
+                                    "UAB ''Power Parts Pro''")
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.vaztarastis,
+                                      "vezejo_pavadinimas = 'UAB ''Power Parts Pro'''",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: (_vm.vaztarastis.vezejo_kodas =
+                                      "302786671"),
+                                    expression:
+                                      "vaztarastis.vezejo_kodas =  '302786671'"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  name: "vezejo_kodas",
+                                  placeholder: "Įmonės kodas"
+                                },
+                                domProps: {
+                                  value: (_vm.vaztarastis.vezejo_kodas =
+                                    "302786671")
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.vaztarastis,
+                                      "vezejo_kodas =  '302786671'",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: (_vm.vaztarastis.vezejo_adresas =
+                                      "Ateities pl 31, Kaunas"),
+                                    expression:
+                                      "vaztarastis.vezejo_adresas = 'Ateities pl 31, Kaunas' "
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  name: "vezejo_adresas",
+                                  placeholder: "Įmonės adresas"
+                                },
+                                domProps: {
+                                  value: (_vm.vaztarastis.vezejo_adresas =
+                                    "Ateities pl 31, Kaunas")
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.vaztarastis,
+                                      "vezejo_adresas = 'Ateities pl 31, Kaunas' ",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _c("h3", [_vm._v("Transportas")]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.vaztarastis.transporto_nr,
+                                    expression: "vaztarastis.transporto_nr"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  name: "transporto_nr",
+                                  placeholder: "Transporto valstybinis numeris"
+                                },
+                                domProps: {
+                                  value: _vm.vaztarastis.transporto_nr
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.vaztarastis,
+                                      "transporto_nr",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.vaztarastis.transporto_modelis,
+                                    expression: "vaztarastis.transporto_modelis"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  name: "transporto_modelis",
+                                  placeholder: "Transporto modelis"
+                                },
+                                domProps: {
+                                  value: _vm.vaztarastis.transporto_modelis
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.vaztarastis,
+                                      "transporto_modelis",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _c("h3", [_vm._v("Pasikrovimas/Išsikrovimas")]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.vaztarastis.parkovimo_vieta,
+                                    expression: "vaztarastis.parkovimo_vieta"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  name: "pakrovimo_vieta",
+                                  placeholder: "Pasikrovimo vieta"
+                                },
+                                domProps: {
+                                  value: _vm.vaztarastis.parkovimo_vieta
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.vaztarastis,
+                                      "parkovimo_vieta",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.vaztarastis.iskrovimo_vieta,
+                                    expression: "vaztarastis.iskrovimo_vieta"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  name: "iskrovimo_vieta",
+                                  placeholder: "Išsikrovimo vieta"
+                                },
+                                domProps: {
+                                  value: _vm.vaztarastis.iskrovimo_vieta
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.vaztarastis,
+                                      "iskrovimo_vieta",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(1, false, false)
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6 text-right" }, [
         _c("h4", [_vm._v("Actions")]),
@@ -86921,7 +87342,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._m(1, false, false),
+      _vm._m(2, false, false),
       _vm._v(" "),
       _c(
         "form",
@@ -86935,7 +87356,7 @@ var render = function() {
         [
           _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "col-md-5" }, [
-              _c("label", [_vm._v("Clientz")]),
+              _c("label", [_vm._v("Client")]),
               _vm._v(" "),
               _c(
                 "select",
@@ -87122,7 +87543,7 @@ var render = function() {
                     "table",
                     { staticClass: "col-md-12 orderProductTable" },
                     [
-                      _vm._m(2, false, false),
+                      _vm._m(3, false, false),
                       _vm._v(" "),
                       _vm._l(_vm.order.data, function(product, index) {
                         return _c("tr", [
@@ -87333,7 +87754,7 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _vm._m(3, false, false),
+            _vm._m(4, false, false),
             _vm._v(" "),
             _c(
               "button",
@@ -87350,7 +87771,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(4, false, false)
+          _vm._m(5, false, false)
         ]
       )
     ])
@@ -87361,25 +87782,48 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("h4", [_vm._v("PDF")]),
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Važtaraščio generavimas")]
+      ),
       _vm._v(" "),
       _c(
         "button",
         {
-          staticClass: "btn btn-primary",
-          attrs: { type: "submite", onclick: "$('#pdfen').submit()" }
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
         },
-        [_vm._v("English")]
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Uždaryti")]
       ),
       _vm._v(" "),
       _c(
         "button",
         {
           staticClass: "btn btn-primary",
-          attrs: { type: "submite", onclick: "$('#pdflt').submit()" }
+          attrs: { type: "button", onclick: "$('#vaztarastisForm').submit()" }
         },
-        [_vm._v("Lietuviškai")]
+        [_vm._v("Generuoti")]
       )
     ])
   },
@@ -90088,6 +90532,224 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(324)
+/* template */
+var __vue_template__ = __webpack_require__(325)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/product/categories.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-08458393", Component.options)
+  } else {
+    hotAPI.reload("data-v-08458393", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 324 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            loading: true,
+            products: []
+        };
+    },
+    mounted: function mounted() {
+        var app = this;
+
+        axios.get('/api/V1/categories').then(function (res) {
+            app.products = res.data;
+            app.loading = false;
+        }).catch(function (err) {
+            toastr.error('Failed to load! ' + err);
+        });
+    },
+
+    methods: {
+        openCategory: function openCategory(id) {
+            this.$router.push({ name: 'productView', params: { id: id } });
+        }
+    }
+});
+
+/***/ }),
+/* 325 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "desa-full" }, [
+    _c("div", { staticClass: "desa-container" }, [
+      _c("h1", [_vm._v("Categories")]),
+      _vm._v(" "),
+      _vm.loading ? _c("h2", [_vm._v("Loading...")]) : _vm._e(),
+      _vm._v(" "),
+      !_vm.loading
+        ? _c(
+            "table",
+            { staticClass: "col-md-12" },
+            [
+              _vm._m(0, false, false),
+              _vm._v(" "),
+              _vm._l(_vm.paginate(_vm.categories), function(category, index) {
+                return _c(
+                  "tr",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.openCategory(category.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("td", [_vm._v(_vm._s(index + 1))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(category.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("-")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("-")])
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-12" },
+        [
+          _c("paginate", {
+            attrs: {
+              "page-count": _vm.totalPages,
+              "click-handler": _vm.pageResult,
+              "prev-text": "Prev",
+              "next-text": "Next",
+              "container-class": "pagination"
+            }
+          })
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("td", [_vm._v("#")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Products")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Action")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-08458393", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

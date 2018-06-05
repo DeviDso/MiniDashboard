@@ -11,6 +11,7 @@
             <input type="hidden" name="quote_id" :value="order.id">
             <input type="hidden" name="_token" :value="this.csrf">
         </form>
+
         <div class="alert alert-info text-center">
             If you made any changes don't forget to update order data before generating a new PDF
         </div>
@@ -19,6 +20,59 @@
         <h4>PDF</h4>
         <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">English</button>
         <button type="submite" class="btn btn-primary" onclick="$('#pdflt').submit()">Lietuviškai</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Važtaraštis
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Važtaraščio generavimas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form v-on:submit="updateClient()">
+              <div class="modal-body">
+                  <form id="vaztarastisForm" target="print_popup" action="/generate/pdf/vaztarastis" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+                      <input type="hidden" name="order_id" :value="order.id">
+                      <input type="hidden" name="_token" :value="this.csrf">
+                      <h3>Vežėjas</h3>
+                      <div>
+                          <input type="text" name="vezejo_pavadinimas" class="form-control" v-model="vaztarastis.vezejo_pavadinimas = 'UAB \'\'Power Parts Pro\'\''" placeholder="Įmonės pavadinimas">
+                      </div><br>
+                      <div>
+                          <input type="text" name="vezejo_kodas" class="form-control" v-model="vaztarastis.vezejo_kodas =  '302786671'" placeholder="Įmonės kodas">
+                      </div><br>
+                      <div>
+                          <input type="text" name="vezejo_adresas" class="form-control" v-model="vaztarastis.vezejo_adresas = 'Ateities pl 31, Kaunas' " placeholder="Įmonės adresas">
+                      </div>
+                      <hr>
+                      <h3>Transportas</h3>
+                      <div>
+                          <input type="text" name="transporto_nr" class="form-control" v-model="vaztarastis.transporto_nr" placeholder="Transporto valstybinis numeris">
+                      </div><br>
+                      <div>
+                          <input type="text" name="transporto_modelis" class="form-control" v-model="vaztarastis.transporto_modelis" placeholder="Transporto modelis">
+                      </div>
+                      <hr>
+                      <h3>Pasikrovimas/Išsikrovimas</h3>
+                      <div>
+                          <input type="text" name="pakrovimo_vieta" class="form-control" v-model="vaztarastis.parkovimo_vieta" placeholder="Pasikrovimo vieta">
+                      </div><br>
+                      <div>
+                          <input type="text" name="iskrovimo_vieta" class="form-control" v-model="vaztarastis.iskrovimo_vieta" placeholder="Išsikrovimo vieta">
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Uždaryti</button>
+                <button type="button" class="btn btn-primary" onclick="$('#vaztarastisForm').submit()">Generuoti</button>
+              </div>
+                              </form>
+            </div>
+          </div>
+        </div>
     </div>
     <div class="col-md-6 text-right">
         <h4>Actions</h4>
@@ -31,7 +85,7 @@
         <!-- <h1>New order</h1> -->
         <div class="col-md-12">
             <div class="col-md-5">
-                <label>Clientz</label>
+                <label>Client</label>
                 <!-- {{ order }} -->
                 <select v-model="order.client_id" class="form-control" disabled>
                     <option v-bind:value="order.client_id">{{ order.client.name }}</option>
@@ -106,6 +160,7 @@
 export default{
 data(){
     return{
+        vaztarastis: [],
         csrf: csrf,
         client: [],
         products: [],
@@ -214,6 +269,9 @@ methods:{
                 console.log(err);
             });
         }
+    },
+    vaztarastis(){
+        alert(1);
     }
 },
 computed:{

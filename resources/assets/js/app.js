@@ -59,6 +59,7 @@ import settingsProfile from './components/settings/profile.vue';
 import quotesCreate from './components/quotes/create.vue';
 import quotesIndex from './components/quotes/index.vue';
 import quotesView from './components/quotes/view.vue';
+import categoriesView from './components/product/categories.vue';
 
 const routes = [
     {path: '/',components: {home : homeIndex},name: 'Home'},
@@ -82,6 +83,7 @@ const routes = [
     {path: '/quotes/new', component:quotesCreate, name: 'quotesCreate'},
     {path: '/quotes/index', component:quotesIndex, name: 'quotesIndex'},
     {path: '/quotes/view/:id', component:quotesView, name: 'quotesView'},
+    {path: '/categories/view/:id', component:categoriesView, name: 'categoriesView'},
 ]
 
 Vue.mixin({
