@@ -29,18 +29,23 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'order_id' => 'required',
+            'user_id' => 'required',
+            'client_id' => 'required',
             ]);
 
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
 
-        $order = Order::findOrFail($request->input('order_id'));
-        $order->update([
-            'confirmed' => 1,
-            'status_id' => 1,
-        ]);
+        $client = Client::find($request->input('client_id'));
+        $order = $client->orders()->create($request->all());
+
+        $order->confirmed = 1;
+        $order->save();
+
+        if($request->input('data')){
+            $orderData = $order->data()->createMany($request->input('data'));
+        }
 
         return $order;
     }

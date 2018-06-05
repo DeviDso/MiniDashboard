@@ -366,6 +366,10 @@ tr {
   height: auto;
   overflow: scroll;
   margin-top: 12px;
+  position: absolute;
+  z-index: 999;
+  background: white;
+  width: 95%;
 }
 
 .orderProductTable tr {
