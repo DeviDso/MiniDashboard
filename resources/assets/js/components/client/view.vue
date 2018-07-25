@@ -117,7 +117,7 @@
                         </thead>
                         <tr v-for="(order, index) in orders(client.orders)" v-on:click="openOrder(order.id)">
                             <td>{{ index+1 }}</td>
-                            <td>{{ order.status.name }}</td>
+                            <td>{{ (order.status) ? order.status.name : '' }}</td>
                             <td>{{ order.data.length }}</td>
                             <td>{{ countOrderValue(order.data) }} &euro;</td>
                             <td>{{ order.created_at.substr(0,10) }}</td>

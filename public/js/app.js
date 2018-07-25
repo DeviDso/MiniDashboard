@@ -81565,7 +81565,9 @@ var render = function() {
                   [
                     _c("td", [_vm._v(_vm._s(index + 1))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(order.status.name))]),
+                    _c("td", [
+                      _vm._v(_vm._s(order.status ? order.status.name : ""))
+                    ]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(order.data.length))]),
                     _vm._v(" "),
@@ -85498,8 +85500,6 @@ var render = function() {
               [_vm._v("Client")]
             ),
             _vm._v(" "),
-            _c("td", [_vm._v("Status")]),
-            _vm._v(" "),
             _c("td", [_vm._v("Date")])
           ]),
           _vm._v(" "),
@@ -85517,8 +85517,6 @@ var render = function() {
                 _c("td", [_vm._v(_vm._s(order.id))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(order.client.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(order.status.name))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(order.created_at.substr(0, 10)))])
               ]
