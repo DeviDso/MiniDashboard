@@ -111,6 +111,8 @@
                 },
                 order: {
                     order_id: this.$route.params.id,
+                    client_id: '',
+                    user_id: user_id,
                 }
             }
         },
@@ -128,6 +130,7 @@
                 app.products = products.data;
 
                 app.quoteData.client_id = quote.data.client_id;
+                app.order.client_id = quote.data.client_id;
                 app.quoteData.client = quote.data.client;
 
                 console.log(app.orderData);
@@ -139,7 +142,7 @@
             createOrder(){
                 var app = this;
 
-                axios.post('/api/V1/orders', app.order).then(function(res){
+                axios.post('/api/V1/orders', app.quote).then(function(res){
                     app.$router.push({name:'orderView', params:{id:app.order.order_id}})
                     toastr.success('Order from quote successfully created!');
                 }).catch(function(err){

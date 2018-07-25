@@ -84780,6 +84780,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -84803,6 +84804,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        deleteProduct: function deleteProduct(id) {
+            var app = this;
+
+            if (confirm('Do you realy want to delete this product?')) {
+                axios.delete('/api/V1/products/' + id).then(function (res) {
+                    app.$router.push({ name: 'productIndex' });
+                    toastr.success('Product was deleted!');
+                }).catch(function (err) {
+                    console.log(err);
+                    toastr.error('Something wrong, try again.');
+                });
+            }
+        },
         sendForm: function sendForm() {
             event.preventDefault();
 
@@ -85213,7 +85227,29 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _vm._m(2, false, false)
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "submitButton", attrs: { type: "submit" } },
+              [_vm._v("Update")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.deleteProduct(_vm.product.id)
+                  }
+                }
+              },
+              [_vm._v("Delete")]
+            )
+          ])
         ]
       )
     ])
@@ -85238,18 +85274,6 @@ var staticRenderFns = [
       _c("hr"),
       _vm._v(" "),
       _c("h4", [_vm._v("Weight")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("hr"),
-      _vm._v(" "),
-      _c("button", { staticClass: "submitButton", attrs: { type: "submit" } }, [
-        _vm._v("Update")
-      ])
     ])
   }
 ]
@@ -90044,7 +90068,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 data: []
             },
             order: {
-                order_id: this.$route.params.id
+                order_id: this.$route.params.id,
+                client_id: '',
+                user_id: user_id
             }
         };
     },
@@ -90060,6 +90086,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             app.products = products.data;
 
             app.quoteData.client_id = quote.data.client_id;
+            app.order.client_id = quote.data.client_id;
             app.quoteData.client = quote.data.client;
 
             console.log(app.orderData);
@@ -90072,7 +90099,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createOrder: function createOrder() {
             var app = this;
 
-            axios.post('/api/V1/orders', app.order).then(function (res) {
+            axios.post('/api/V1/orders', app.quote).then(function (res) {
                 app.$router.push({ name: 'orderView', params: { id: app.order.order_id } });
                 toastr.success('Order from quote successfully created!');
             }).catch(function (err) {

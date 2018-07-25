@@ -63,6 +63,7 @@
                 <div class="col-md-12">
                     <hr>
                     <button type="submit" class="submitButton">Update</button>
+                    <button type="button" class="btn btn-danger" v-on:click="deleteProduct(product.id)">Delete</button>
                 </div>
             </form>
         </div>
@@ -95,6 +96,19 @@ export default{
 
     },
     methods:{
+         deleteProduct(id){
+              var app = this;
+
+              if(confirm('Do you realy want to delete this product?')){
+                  axios.delete('/api/V1/products/' +id).then(function(res){
+                     app.$router.push({name: 'productIndex'});
+                     toastr.success('Product was deleted!');
+                  }).catch(function(err){
+                     console.log(err);
+                     toastr.error('Something wrong, try again.');
+                  });
+              }
+         },
         sendForm(){
             event.preventDefault();
 
