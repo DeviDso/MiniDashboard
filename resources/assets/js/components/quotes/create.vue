@@ -83,7 +83,7 @@ export default{
         return {
             quote: {
                 user_id: user_id,
-                client_id: '',
+                client_id: this.$route.params.id,
                 delivery_price: '',
                 data: [],
             },
@@ -158,9 +158,19 @@ export default{
     computed:{
         productsList(){
             this.showResults = true;
-            return this.products.filter(product => {
-                return product.code.includes(this.searchText);
+
+            var temp = [];
+
+            this.products.forEach((item) => {
+               if(temp.length == 10) return temp;
+               (item.name.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
+               (item.code.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
             });
+
+            return temp;
+            // return this.products.filter(product => {
+            //     return product.code.includes(this.searchText);
+            // });
         }
     },
     watch:{

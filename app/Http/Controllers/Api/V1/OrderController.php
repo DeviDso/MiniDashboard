@@ -17,7 +17,7 @@ class OrderController extends Controller
      */
     public function index(Request $r)
     {
-        return Order::where('confirmed', 1)->with(['client', 'status', 'data'])->get();
+        return Order::where('confirmed', 1)->with(['client', 'status', 'data'])->orderBy('created_at', 'DSC')->get();
     }
 
     /**

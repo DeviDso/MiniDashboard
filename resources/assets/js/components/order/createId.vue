@@ -3,40 +3,30 @@
         <div class="desa-container">
             <form v-on:submit="sendForm()">
                 <h1>New order</h1>
-                <div class="col-md-8">
-                    <div class="col-md-6">
-                        <label>Client</label>
-                        <select v-model="order.client_id" class="form-control" required>
-                            <option v-bind:value="client.id">{{ client.name }}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label>Order status</label>
-                        <select v-model="order.status_id" class="form-control" required>
-                            <option v-for="status in orderStatus" v-bind:value="status.id">{{ status.name }}</option>
-                        </select>
-                    </div>
-                    <div v-if="showProducts">
-                        <label>Products</label>
-                        <table class="col-md-12 orderProductTable">
-                            <thead>
-                                <td>Product</td>
-                                <td>Code</td>
-                                <td>Price</td>
-                                <td>Quantity</td>
-                                <td></td>
-                            </thead>
-                            <tr v-for="product, index in order.data">
-                                <td>{{ product.name }}</td>
-                                <td>{{ product.code }}</td>
-                                <td><input type="number" v-model="product.price" step="0.01"></td>
-                                <td><input type="number" v-model="product.quantity = 1"></td>
-                                <td><span v-on:click="removeItem(index)">X</span></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="col-md-4">
+                 <div class="col-md-4">
+                     <label>Client</label>
+                     <select v-model="order.client_id" class="form-control" required>
+                         <option v-for="client in clients" v-bind:value="client.id">{{ client.name }}</option>
+                     </select>
+                 </div>
+                 <div class="col-md-4">
+                     <label>Order status</label>
+                     <select v-model="order.status_id" class="form-control" required>
+                         <option v-for="status in orderStatus" v-bind:value="status.id">{{ status.name }}</option>
+                     </select>
+                 </div>
+                 <div class="col-md-4">
+                     <label>Delivery price (&euro;)</label>
+                     <input class="form-control" type="number" name="delivery_price" v-model="order.delivery_price" step="0.01" min="0">
+                 </div>
+                 <div class="col-md-4">
+                    <label>Note</label>
+                    <textarea class="form-control" v-model="order.note" rows="5"></textarea>
+                 </div>
+                 <div class="col-md-12">
+                    <hr>
+                 </div>
+                <div class="col-md-12">
                     <label>Product search</label>
                     <input type="search" class="form-control" v-model="searchText" placeholder="Search product by code">
                     <div class="orderProducts">
@@ -45,6 +35,39 @@
                                 {{ product.name.substr(0, 25) }} <b>{{ product.code }}</b>
                             </li>
                         </ul>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h4>Products</h4>
+                    <div v-if="showProducts">
+                        <table class="col-md-12 orderProductTable">
+                            <thead>
+                                <td>#</td>
+                                <td>Product</td>
+                                <td>Code</td>
+                                <td>Price</td>
+                                <td>Quantity</td>
+                                <td>Note</td>
+                                <td>Unit w.</td>
+                                <td>Total w.</td>
+                                <td></td>
+                            </thead>
+                            <tr v-for="product, index in order.data">
+                                <td>{{ index+1 }}</td>
+                                <td><input type="text" class="form-control" v-model="product.name"></td>
+                                <td width="15%"><input type="text" class="form-control" v-model="product.code"></td>
+                                <td width="10%"><input type="number" class="form-control" v-model="product.price" step="0.01"></td>
+                                <td width="7%"><input type="number" class="form-control" v-model="product.quantity = 1"></td>
+                                <td><input type="text" class="form-control" v-model="product.note"></td>
+                                <td width="10%"><input type="number" class="form-control" v-model="product.bruto" step="0.01" min="0"></td>
+                                <td width="10%"><input type="number" class="form-control" v-model="product.netto" step="0.01" min="0"></td>
+                                <td width="5%"><span v-on:click="removeItem(index)">X</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <br>
+                        <button class="btn btn-success" type="button" v-on:click="newProduct()">+ new product</button>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -58,33 +81,33 @@
 <script>
     export default{
         data(){
+            var today = new Date().toJSON().slice(0,10).replace(/-/g,'/');
             return{
-                client: [],
-                products: [],
-                orderStatus: [],
-                orderProducts: [],
+                clients: [],
+                order: {
+                    user_id: user_id,
+                    client_id: this.$route.params.id,
+                    delivery_price: '',
+                    data: [],
+                },
                 searchText: '',
                 showResults: false,
                 showProducts: false,
-                order: {
-                    user_id: user_id,
-                    client_id: '',
-                    status_id: '',
-                    data: [],
-                },
-                orderData: []
+                clients: [],
+                products: [],
+                orderData: [],
+                orderProducts: [],
             }
         },
         mounted(){
             var app = this;
 
             axios.all([
-                axios.get('/api/V1/clients/' +this.$route.params.id),
+                axios.get('/api/V1/clients'),
                 axios.get('/api/V1/orderStatus'),
                 axios.get('/api/V1/products'),
-            ]).then(axios.spread((client, orderStatus, products) => {
-                app.order.client_id = client.data.id;
-                app.client = client.data;
+            ]).then(axios.spread((clients, orderStatus, products) => {
+                app.clients = clients.data;
                 app.orderStatus = orderStatus.data;
                 app.products = products.data;
             })).catch(function(err){
@@ -92,6 +115,19 @@
             });
         },
         methods:{
+            newProduct(){
+                var item = {
+                    product_id: '',
+                    quantity: 1,
+                    name: '',
+                    price: 1,
+                    code: '',
+                }
+
+                this.order.data.push(item)
+                // this.productsList.splice(index, 1)
+                this.showProducts = true
+            },
             addToList(product, index){
                 if(!this.order.data.includes(product.code)){
                     console.log(product);
@@ -105,6 +141,8 @@
                     this.order.data.push(item)
                     this.productsList.splice(index, 1)
                     this.showProducts = true
+
+                    this.searchText = '';
                 }
             },
             removeItem(index){
@@ -134,9 +172,19 @@
         computed:{
             productsList(){
                 this.showResults = true;
-                return this.products.filter(product => {
-                    return product.code.includes(this.searchText);
+
+                var temp = [];
+
+                this.products.forEach((item) => {
+                    if(temp.length == 10) return temp;
+                    (item.name.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
+                    (item.code.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
                 });
+
+                return temp;
+                // return this.products.filter(product => {
+                //     return product.code.includes(this.searchText);
+                // });
             }
         },
         watch:{

@@ -19,6 +19,8 @@ class CreateClientsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('vat')->nullable();
+            $table->string('registration_id')->nullable();
+            $table->string('vat_status')->nullable();
             $table->string('city')->nullable();
             $table->string('street')->nullable();
             $table->string('post_code')->nullable();
@@ -31,6 +33,7 @@ class CreateClientsTable extends Migration
             $table->string('courier_account')->nullable();
             $table->integer('credit_amount')->nullable();
             $table->string('contact_person')->nullable();
+            $table->string('contact_person_phone')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });

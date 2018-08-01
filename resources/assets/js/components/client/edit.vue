@@ -35,24 +35,26 @@
                     <h2>Delivery & credit</h2>
                 </div>
                 <div class="col-md-4">
-                    <label>Credit amount</label>
-                    <select v-model="client.credit_amount" class="form-control" required>
-                        <option :value="5">5 days</option>
-                        <option :value="7">7 days</option>
-                        <option :value="10">10 days</option>
-                        <option :value="14">14 days</option>
-                        <option :value="30">30 days</option>
-                        <option :value="45">45 days</option>
-                        <option :value="90">90 days</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
                     <label>Payment term</label>
-                    <select v-model="client.payment_term" class="form-control" required>
+                    <select v-model="client.payment_term" class="form-control" required v-on:change="creditCheck()">
                         <option value="Advance payment">Advance payment</option>
                         <option value="Payment before delivery">Payment before delivery</option>
                         <option value="Credit">Credit</option>
                     </select>
+                </div>
+                <div class="col-md-4">
+                    <div v-if="credit_status">
+                       <label>Credit amount</label>
+                       <select v-model="client.credit_amount" class="form-control" required>
+                           <option :value="5">5 days</option>
+                           <option :value="7">7 days</option>
+                           <option :value="10">10 days</option>
+                           <option :value="14">14 days</option>
+                           <option :value="30">30 days</option>
+                           <option :value="45">45 days</option>
+                           <option :value="90">90 days</option>
+                       </select>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <label>Courier account</label>
@@ -83,6 +85,7 @@
                     <div class="col-md-12">
                         <hr>
                         <h2>Delivery address</h2>
+                        <button type="button" class="btn btn-default" v-on:click="copyAddress()">Copy from address</button>
                     </div>
                     <div class="col-md-3">
                         <label>Street</label>
@@ -119,7 +122,8 @@ export default{
             client: {
                 user_id: user_id,
             },
-            countries: []
+            countries: [],
+            credit_status: false,
         }
     },
     mounted(){
@@ -127,12 +131,31 @@ export default{
 
         axios.get('/api/V1/clients/' +this.$route.params.id).then(function(res){
             app.client = res.data;
-            console.log(res.data);
+            // console.log(res.data);
+            (app.client.payment_term == 'Credit') ? app.credit_status = true : app.credit_status = false;
         }).catch(function(err){
             console.log(err);
         });
+
+
     },
     methods:{
+         creditCheck(){
+            var app = this;
+            if (app.client.payment_term == 'Credit'){
+               app.credit_status = true
+            } else{
+               app.credit_status = false
+               app.client.credit_amount = ''
+            }
+         },
+         copyAddress(){
+             var app = this;
+             app.client.delivery_street = app.client.street;
+             app.client.delivery_post_code = app.client.post_code;
+             app.client.delivery_city = app.client.city;
+             app.client.delivery_country = app.client.country;
+         },
         updateClient(){
             var app = this;
             var id = this.$route.params.id;
@@ -147,6 +170,6 @@ export default{
                 toastr.error(err);
             });
         }
-    }
+    },
 }
 </script>

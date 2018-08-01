@@ -34,10 +34,12 @@
                         <select v-model="quote.client_id" class="form-control" disabled>
                             <option v-bind:value="quote.client_id">{{ quoteData.client.name }}</option>
                         </select>
-                    </div>
-                    <div class="col-md-6">
                         <label>Delivery Price</label>
                         <input class="form-control" type="number" name="delivery_price" v-model="quote.delivery_price" step="0.01" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Note</label>
+                        <textarea class="form-control" v-model="quote.note" rows="5"></textarea>
                     </div>
                     <div class="col-md-12">
                         <label>Product search</label>
@@ -78,7 +80,9 @@
                             </tr>
                         </table>
                     </div>
-                    <button class="btn btn-info" type="button" v-on:click="newProduct()">+ new product</button>
+                    <div class="col-md-12">
+                       <button class="btn btn-info" type="button" v-on:click="newProduct()">+ new product</button>
+                    </div>
                 </div>
 
                 <div class="col-md-12">
@@ -221,9 +225,19 @@
         computed:{
             productsList(){
                 this.showResults = true;
-                return this.products.filter(product => {
-                    return product.code.includes(this.searchText);
+
+                var temp = [];
+
+                this.products.forEach((item) => {
+                    if(temp.length == 10) return temp;
+                    (item.name.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
+                    (item.code.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
                 });
+
+                return temp;
+                // return this.products.filter(product => {
+                //     return product.code.includes(this.searchText);
+                // });
             }
         },
         watch:{

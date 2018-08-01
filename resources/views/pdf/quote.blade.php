@@ -116,7 +116,10 @@
                 <td style="font-weight: 600">Total:</td>
                 <td style="font-size: 14px">{{ number_format((float)$finalPrice, 2, '.', '') }} &euro;</td>
             </tr>
-            <tr style="background: none!important; font-size: 12px">
+            @php
+               if($quote->client->vat_status == 'LT'){
+            @endphp
+            <tr style="background: none!important; font-size: 12px" id="vat">
                 <td></td>
                 <td></td>
                 <td></td>
@@ -125,7 +128,7 @@
                 <td style="font-weight: 600">VAT 21%:</td>
                 <td style="font-size: 14px">{{ number_format($finalPrice*0.21, 2, '.', '') }} &euro;</td>
             </tr>
-            <tr style="background: none!important; font-size: 12px">
+            <tr style="background: none!important; font-size: 12px" id="totalVAT">
                 <td></td>
                 <td></td>
                 <td></td>
@@ -134,7 +137,11 @@
                 <td style="font-weight: 600">Total inc. VAT:</td>
                 <td style="font-size: 14px">{{ number_format($finalPrice + $finalPrice*0.21, 2, '.', '') }} &euro;</td>
             </tr>
+            @php
+               }
+            @endphp
         </table>
+
         <style>
             .Something{
                 position: absolute;
@@ -148,13 +155,14 @@
         </style>
         <div class="Something">
             <span style="font-size: 12px">
-                <b>Valid until:</b>  <?php echo date('Y-m-d', strtotime($quote->created_at. ' +' .$quote->client->credit_amount. ' days')); ?>
+                {{-- <b>Valid until:</b>   --}}
+                <?php //echo date('Y-m-d', strtotime($quote->created_at. ' +' .$quote->client->credit_amount. ' days')); ?>
             </span>
             <br><hr style="background:#dedede; color:#dedede">
             <table class="botz" width="100%" style="font-size: 12px; text-align: left">
                 <tr style="background: none!important;">
                     <td><b>Terms:</b></td>
-                    <td style="border-left: none!important">100% advance payment</td>
+                    <td style="border-left: none!important">{{ ($quote->client->payment_term == 'Credit') ? $quote->client->credit_amount . ' days credit' : '' }}</td>
                     <td><b>Carrier:</b></td>
                     <td style="border-left: none!important">{{ $quote->client->courier_account}}</td>
                     <td><b>Payment:</b></td>

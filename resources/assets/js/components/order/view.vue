@@ -16,7 +16,7 @@
             If you made any changes don't forget to update order data before generating a new PDF
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <h4>PDF</h4>
         <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">English</button>
         <button type="submite" class="btn btn-primary" onclick="$('#pdflt').submit()">Lietuviškai</button>
@@ -74,7 +74,11 @@
           </div>
         </div>
     </div>
-    <div class="col-md-6 text-right">
+    <div class="col-md-5">
+      <label>Note</label>
+      <textarea class="form-control" v-model="order.note" rows="3"></textarea>
+    </div>
+    <div class="col-md-3 text-right">
         <h4>Actions</h4>
         <button type="button" class="btn btn-danger" v-on:click="deleteOrder(order.id)">Delete order</button>
     </div>
@@ -145,7 +149,12 @@
             <div class="col-md-12">
                 <hr>
             </div>
-            <button class="btn btn-info" type="button" v-on:click="newProduct()">+ new product</button>
+            <div class="col-md-6">
+               <button class="btn btn-info" type="button" v-on:click="newProduct()">+ new product</button>
+            </div>
+            <div class="col-md-6 text-right">
+               <b>Total weight</b>: {{ totalWeight }} kg
+            </div>
         </div>
 
         <div class="col-md-12">
@@ -170,6 +179,7 @@ data(){
         showResults: false,
         showProducts: true,
         order: [],
+        totalWeight: 0.00,
         orderData: {
             user_id: user_id,
             client_id: '',
@@ -277,15 +287,25 @@ methods:{
 computed:{
     productsList(){
         this.showResults = true;
-        return this.products.filter(product => {
-            return product.code.includes(this.searchText);
-        });
+
+       var temp = [];
+
+      this.products.forEach((item) => {
+         if(temp.length == 10) return temp;
+         (item.name.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
+         (item.code.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
+      });
+
+      return temp;
+        // return this.products.filter(product => {
+        //     return product.code.includes(this.searchText);
+        // });
     }
 },
 watch:{
     searchText(){
         (this.searchText != '')? this.showResults = true : this.showResults = false;
-    }
+    },
 }
 }
 </script>

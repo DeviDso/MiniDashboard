@@ -21,10 +21,11 @@
                 </table>
                 <div class="col-md-12">
                     <hr>
+                    <h2>Payment & Delivery</h2>
                     <table class="clientInfo text-center">
                         <tr>
                             <td style="width: 33%!important"><i class="fa fa-calendar-plus-o"></i>{{ client.payment_term }}</td>
-                            <td style="width: 33%!important"><i class="fa fa-credit-card"></i>{{ client.credit_amount }} days</td>
+                            <td style="width: 33%!important" v-if="client.credit_amount"><i class="fa fa-credit-card"></i>{{ client.credit_amount }} days credit</td>
                             <td style="width: 33%!important"><i class="fa fa-truck"></i>{{ client.courier_account }}</td>
                         </tr>
                     </table>
