@@ -47,7 +47,7 @@
             <img src="http://desam.lt/ppp-logo.png" height="75">
         </div>
         <div class="center" style="margin-top: 35px">
-            <h5>QUATATION No. {{ $quote->id }}</h5>
+            <h5>Užsakymo nr. {{ $quote->id }}</h5>
             <h6 style="margin-top: -15px">{{ substr($quote->created_at, 0, 10) }}</h6>
         </div>
         <div id="top_table">
@@ -55,22 +55,22 @@
                 <tr>
                     <td style="width: 50%!important;font-size: 11px;">
                         <h2>{{ $quote->client->name }}</h2>
-                        <b>VAT</b>: {{ $quote->client->vat }}<br>
+                        <b>PVM</b>: {{ $quote->client->vat }}<br>
                         <b>Tel</b>: {{ $quote->client->phone}} <br>
-                        <b>Email</b>: {{ $quote->client->email }} <br>
-                        <b>Address:</b><br>
+                        <b>El. paštas</b>: {{ $quote->client->email }} <br>
+                        <b>Adresas:</b><br>
                         {{ $quote->client->street . ' ' . $quote->client->post_code . ', ' . $quote->client->city . ', ' . $quote->client->country }} <br>
-                        <b>Delivery address:</b><br>
+                        <b>Pristatymo adresas:</b><br>
                         {{ $quote->client->delivery_street . ' ' . $quote->client->delivery_post_code . ', ' . $quote->client->delivery_city . ', ' . $quote->client->delivery_country }} <br>
                     </td>
                     <td style="font-size: 11px">
                         <h2>Power Parts Pro UAB</h2>
-                        <b>Reg. ID:</b> 302784671<br>
-                        <b>VAT:</b> LT100006906012<br>
+                        <b>Įm. kodas:</b> 302784671<br>
+                        <b>PVM:</b> LT100006906012<br>
                         <b>Tel:</b> 0037060884059<br>
-                        <b>Registration adress</b>: Ateities pl. 31, 52167, Kaunas, Lithuania<br>
-                        <b>Bank:</b> Swedbank AB<br>
-                        <b>IBAN:</b> LT31 7300 0101 3188 2929<br>
+                        <b>Reg. adresas</b>: Ateities pl. 31, 52167, Kaunas, Lithuania<br>
+                        <b>Bankas:</b> Swedbank AB<br>
+                        <b>Sąsk. nr:</b> LT31 7300 0101 3188 2929<br>
                         <b>BIC/SWIFT:</b> HABALT22
                     </td>
                 </tr>
@@ -78,13 +78,13 @@
         </div>
         <table width="100%" style="font-size: 12px; margin-top: 25px">
             <tr style="background: #555!important; color: #fff!important">
-                <th style="font-weight: 600">Item no.</th>
-                <th style="font-weight: 600">Description</th>
-                <th style="font-weight: 600">Quantity</th>
-                <th style="font-weight: 600">Unit weight</th>
-                <th style="font-weight: 600">Total weight</th>
-                <th style="font-weight: 600">Price</th>
-                <th style="font-weight: 600">Total price</th>
+                <th style="font-weight: 600">Detalės nr.</th>
+                <th style="font-weight: 600">Aprašymas</th>
+                <th style="font-weight: 600">Kiekis</th>
+                <th style="font-weight: 600">Vnt. svoris</th>
+                <th style="font-weight: 600">Viso svoris</th>
+                <th style="font-weight: 600">Kaina</th>
+                <th style="font-weight: 600">Viso kaina</th>
             </tr>
             @foreach($quote->data as $index => $d)
                 @php
@@ -113,7 +113,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td style="font-weight: 600">Delivery price:</td>
+                <td style="font-weight: 600">Pristatymo kaina:</td>
                 <td style="font-size: 14px">{{ number_format((float)$quote->delivery_price, 2, '.', '') }} {{ ($currency == 'EUR') ? '&euro;' : '$'}}</td>
             </tr>
             <tr style="background: none!important; font-size: 12px">
@@ -125,32 +125,25 @@
                 <td style="font-weight: 600">Total:</td>
                 <td style="font-size: 14px">{{ number_format((float)$finalPrice + $quote->delivery_price, 2, '.', '') }} {{ ($currency == 'EUR') ? '&euro;' : '$'}}</td>
             </tr>
-            @php
-               if($quote->client->vat_status == 'LT'){
-            @endphp
-            <tr style="background: none!important; font-size: 12px" id="vat">
+            <tr style="background: none!important; font-size: 12px">
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td style="font-weight: 600">VAT 21%:</td>
+                <td style="font-weight: 600">PVM 21%:</td>
                 <td style="font-size: 14px">{{ number_format($finalPrice*0.21, 2, '.', '') }} {{ ($currency == 'EUR') ? '&euro;' : '$'}}</td>
             </tr>
-            <tr style="background: none!important; font-size: 12px" id="totalVAT">
+            <tr style="background: none!important; font-size: 12px">
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td style="font-weight: 600">Total inc. VAT:</td>{{$currency}}
+                <td style="font-weight: 600">Viso su PVM:</td>
                 <td style="font-size: 14px">{{ number_format($finalPrice + $finalPrice*0.21 + $quote->delivery_price, 2, '.', '') }} {{ ($currency == 'EUR') ? '&euro;' : '$'}}</td>
             </tr>
-            @php
-               }
-            @endphp
         </table>
-
         <style>
             .Something{
                 position: absolute;
@@ -163,18 +156,17 @@
 
         </style>
         <div class="Something">
-            <span style="font-size: 12px">
-                {{-- <b>Valid until:</b>   --}}
-                <?php //echo date('Y-m-d', strtotime($quote->created_at. ' +' .$quote->client->credit_amount. ' days')); ?>
-            </span>
+
             <br><hr style="background:#dedede; color:#dedede">
             <table class="botz" width="100%" style="font-size: 12px; text-align: left">
                 <tr style="background: none!important;">
-                    <td><b>Terms:</b></td>
-                    <td style="border-left: none!important">{{ ($quote->client->payment_term == 'Credit') ? $quote->client->credit_amount . ' days credit' : '' }}</td>
-                    <td><b>Carrier:</b></td>
+                    {{-- <td><b>Apmokėti iki:</b></td> --}}
+                    <td style="border-left: none!important">
+                        <?php //echo date('Y-m-d', strtotime($quote->created_at. ' +' .$quote->client->credit_amount. ' days')); ?>
+                    </td>
+                    <td><b>Kurjeris:</b></td>
                     <td style="border-left: none!important">{{ $quote->client->courier_account}}</td>
-                    <td><b>Payment:</b></td>
+                    <td><b>Sąlygos:</b></td>
                     <td>{{ $quote->client->payment_term}}</td>
                 </tr>
                 {{-- <tr style="background: none!important">>

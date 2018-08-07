@@ -34,6 +34,7 @@ class CreateClientsTable extends Migration
             $table->integer('credit_amount')->nullable();
             $table->string('contact_person')->nullable();
             $table->string('contact_person_phone')->nullable();
+            $table->string('company_type')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });

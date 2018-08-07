@@ -47,7 +47,7 @@
             <img src="http://desam.lt/ppp-logo.png" height="75">
         </div>
         <div class="center" style="margin-top: 35px">
-            <h5>QUATATION No. {{ $quote->id }}</h5>
+            <h5>Order no. {{ $quote->id }}</h5>
             <h6 style="margin-top: -15px">{{ substr($quote->created_at, 0, 10) }}</h6>
         </div>
         <div id="top_table">
@@ -170,12 +170,12 @@
             <br><hr style="background:#dedede; color:#dedede">
             <table class="botz" width="100%" style="font-size: 12px; text-align: left">
                 <tr style="background: none!important;">
-                    <td><b>Terms:</b></td>
-                    <td style="border-left: none!important">{{ ($quote->client->payment_term == 'Credit') ? $quote->client->credit_amount . ' days credit' : '' }}</td>
                     <td><b>Carrier:</b></td>
-                    <td style="border-left: none!important">{{ $quote->client->courier_account}}</td>
+                    <td style="border-left: none!important">{{ $quote->courier}}</td>
                     <td><b>Payment:</b></td>
-                    <td>{{ $quote->client->payment_term}}</td>
+                    <td>{{ $quote->payment_term}}</td>
+                    <td><b>Terms:</b></td>
+                    <td style="border-left: none!important">{{ ($quote->payment_term == 'Credit') ? $quote->credit_term . ' days credit' : '' }}</td>
                 </tr>
                 {{-- <tr style="background: none!important">>
                     <td><b>Payment:</b></td>

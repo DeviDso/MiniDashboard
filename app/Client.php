@@ -8,7 +8,7 @@ class Client extends Model
 {
     protected $fillable = ['name', 'phone', 'email', 'street', 'city', 'post_code', 'country', 'contact_person',
      'delivery_street', 'delivery_city', 'delivery_post_code', 'delivery_country', 'note', 'courier_account',
-     'credit_amount', 'payment_term', 'vat'];
+     'credit_amount', 'payment_term', 'vat', 'vat_status', 'company_type'];
 
     public function user(){
         return $this->belongsTo(User::class);

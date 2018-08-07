@@ -17,7 +17,7 @@ class QuotesController extends Controller
      */
     public function index()
     {
-        return Order::where('confirmed', 0)->with(['data', 'client'])->get();
+        return Order::where('confirmed', 0)->with(['data', 'client', 'user'])->get();
     }
 
     /**
@@ -56,7 +56,7 @@ class QuotesController extends Controller
     public function show($id)
     {
         return Order::where('id', $id)
-                ->with(['data', 'client'])
+                ->with(['data', 'client', 'user'])
                 ->firstOrFail();
     }
 

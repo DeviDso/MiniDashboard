@@ -6,6 +6,10 @@
                 <h1>Edit client information</h1>
                 <!-- Company info -->
                 <div class="col-md-4">
+                    <label>Company type</label>
+                    <input type="text" class="form-control" v-model="client.company_type" placeholder="UAB" required>
+                </div>
+                <div class="col-md-4">
                     <label>Company name</label>
                     <input type="text" class="form-control" v-model="client.name" placeholder="Tesla, Inc." required>
                 </div>
@@ -25,6 +29,15 @@
                     <label>VAT</label>
                     <input type="text" class="form-control" v-model="client.vat" placeholder="LT100006906012">
                     <a href="http://ec.europa.eu/taxation_customs/vies/" target="_blank">Check VAT</a>
+                </div>
+                <div class="col-md-4">
+                    <label>VAT STATUS</label>
+                    <select v-model="client.vat_status" class="form-control" required>
+                        <option v-bind:value="client.vat_status">{{ client.vat_status }}</option>
+                        <option value="EU" v-if="client.vat_status != 'EU'">EU</option>
+                        <option value="LT" v-if="client.vat_status != 'LT'">LT</option>
+                        <option value="NON EU" v-if="client.vat_status != 'NON EU'">NON EU</option>
+                    </select>
                 </div>
                 <div class="col-md-4">
                     <label>Note</label>

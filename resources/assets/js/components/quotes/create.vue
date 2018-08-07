@@ -46,8 +46,8 @@
                                 <td>Price</td>
                                 <td>Quantity</td>
                                 <td>Note</td>
-                                <td>Unit w.</td>
-                                <td>Total w.</td>
+                                <td>Bruto (kg)</td>
+                                <td>Netto (kg)</td>
                                 <td></td>
                             </thead>
                             <tr v-for="product, index in quote.data">

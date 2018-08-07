@@ -10,6 +10,7 @@
                     <td v-on:click="sortClient()">Client</td>
                     <td>Products</td>
                     <td>Delivery price</td>
+                    <td>User</td>
                     <td>Date</td>
                 </thead>
                 <tr v-for="quote in paginate(quotes)" v-on:click="openQuote(quote.id)">
@@ -17,6 +18,7 @@
                     <td>{{ quote.client.name }}</td>
                     <td>{{ quote.data.length }}</td>
                     <td>{{ quote.delivery_price }} &euro;</td>
+                    <td>{{ quote.user.name }}</td>
                     <td>{{ quote.created_at.substr(0,10) }}</td>
                 </tr>
             </table>

@@ -47,7 +47,7 @@
             <img src="http://desam.lt/ppp-logo.png" height="75">
         </div>
         <div class="center" style="margin-top: 35px">
-            <h5>Nr. {{ $quote->id }}</h5>
+            <h5>Pasiūlymo nr. {{ $quote->id }}</h5>
             <h6 style="margin-top: -15px">{{ substr($quote->created_at, 0, 10) }}</h6>
         </div>
         <div id="top_table">
@@ -99,8 +99,8 @@
                     <td>{{ $d->quantity }}</td>
                     <td>{{ ($d->bruto != '') ? $d->bruto : '-' }}</td>
                     <td>{{ sprintf('%0.2f', $totalWeight) }}</td>
-                    <td>{{ $d->price }} &euro;</td>
-                    <td>{{ sprintf('%0.2f', $totalPrice * $d->quantity) }} &euro;</td>
+                    <td>{{ $d->price }} {{ ($currency == 'EUR') ? '&euro;' : '$'}}</td>
+                    <td>{{ sprintf('%0.2f', $totalPrice * $d->quantity) }} {{ ($currency == 'EUR') ? '&euro;' : '$'}}</td>
                 </tr>
                 @php
                     $totalWeight = 0.00;
@@ -113,8 +113,17 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td style="font-weight: 600">Pristatymo kaina:</td>
+                <td style="font-size: 14px">{{ number_format((float)$quote->delivery_price, 2, '.', '') }} {{ ($currency == 'EUR') ? '&euro;' : '$'}}</td>
+            </tr>
+            <tr style="background: none!important; font-size: 12px">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td style="font-weight: 600">Total:</td>
-                <td style="font-size: 14px">{{ number_format((float)$finalPrice, 2, '.', '') }} &euro;</td>
+                <td style="font-size: 14px">{{ number_format((float)$finalPrice + $quote->delivery_price, 2, '.', '') }} {{ ($currency == 'EUR') ? '&euro;' : '$'}}</td>
             </tr>
             <tr style="background: none!important; font-size: 12px">
                 <td></td>
@@ -122,8 +131,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td style="font-weight: 600">VAT 21%:</td>
-                <td style="font-size: 14px">{{ number_format($finalPrice*0.21, 2, '.', '') }} &euro;</td>
+                <td style="font-weight: 600">PVM 21%:</td>
+                <td style="font-size: 14px">{{ number_format($finalPrice*0.21, 2, '.', '') }} {{ ($currency == 'EUR') ? '&euro;' : '$'}}</td>
             </tr>
             <tr style="background: none!important; font-size: 12px">
                 <td></td>
@@ -131,8 +140,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td style="font-weight: 600">Total inc. VAT:</td>
-                <td style="font-size: 14px">{{ number_format($finalPrice + $finalPrice*0.21, 2, '.', '') }} &euro;</td>
+                <td style="font-weight: 600">Viso su PVM:</td>
+                <td style="font-size: 14px">{{ number_format($finalPrice + $finalPrice*0.21 + $quote->delivery_price, 2, '.', '') }} {{ ($currency == 'EUR') ? '&euro;' : '$'}}</td>
             </tr>
         </table>
         <style>
@@ -151,8 +160,10 @@
             <br><hr style="background:#dedede; color:#dedede">
             <table class="botz" width="100%" style="font-size: 12px; text-align: left">
                 <tr style="background: none!important;">
-                    <td><b>Apmokėti iki:</b></td>
-                    <td style="border-left: none!important"><?php echo date('Y-m-d', strtotime($quote->created_at. ' +' .$quote->client->credit_amount. ' days')); ?></td>
+                    {{-- <td><b>Apmokėti iki:</b></td> --}}
+                    <td style="border-left: none!important">
+                        <?php //echo date('Y-m-d', strtotime($quote->created_at. ' +' .$quote->client->credit_amount. ' days')); ?>
+                    </td>
                     <td><b>Kurjeris:</b></td>
                     <td style="border-left: none!important">{{ $quote->client->courier_account}}</td>
                     <td><b>Sąlygos:</b></td>

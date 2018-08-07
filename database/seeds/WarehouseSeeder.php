@@ -13,8 +13,8 @@ class WarehouseSeeder extends Seeder
     public function run()
     {
         $status = [
-            ['name' => 'Kaunas'],
-            ['name' => 'Telšiai'],
+            ['name' => 'Main'],
+            // ['name' => 'Telšiai'],
         ];
         foreach($status as $rec){
             Warehouse::create($rec);

@@ -2,15 +2,21 @@
     <div class="desa-full">
         <button class="backButton" v-on:click="goBack()">Go back</button>
         <div class="desa-container">
+            <div class="col-md-12">
+                <h4>Created by: <b>{{ quote.user.name }}</b></h4>
+                <hr>
+            </div>
             <div class="col-md-6">
-                <button type="submite" class="btn btn-success" v-on:click="createOrder()">Create order</button>
+                <button type="submite" class="btn btn-success" v-on:click="createOrder()">Convert into order</button>
                 <form id="pdfen" target="print_popup" action="/generate/pdf/quote/english" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
                     <input type="hidden" name="quote_id" :value="quote.id">
                     <input type="hidden" name="_token" :value="this.csrf">
+                    <input type="hidden" name="currency" :value="currency">
                 </form>
                 <form id="pdflt" target="print_popup" action="/generate/pdf/quote/lithuanian" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
                     <input type="hidden" name="quote_id" :value="quote.id">
                     <input type="hidden" name="_token" :value="this.csrf">
+                    <input type="hidden" name="currency" :value="currency">
                 </form>
             </div>
             <div class="col-md-6 text-right">
@@ -19,6 +25,10 @@
             <div class="col-md-12">
                 <hr>
                 <h4>PDF</h4>
+                Currency:
+                <input type="radio" value="EUR" v-model="currency" checked>EUR
+                <input type="radio" value="USD" v-model="currency">USD
+                <br><br>
             </div>
             <div class="col-md-12">
                 <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">English</button>
@@ -36,6 +46,10 @@
                         </select>
                         <label>Delivery Price</label>
                         <input class="form-control" type="number" name="delivery_price" v-model="quote.delivery_price" step="0.01" min="0">
+                        <!-- <label>Order status</label>
+                        <select v-model="quote.status_id" class="form-control" required>
+                            <option v-for="status in orderStatus" v-bind:value="status.id">{{ status.name }}</option>
+                        </select> -->
                     </div>
                     <div class="col-md-6">
                         <label>Note</label>
@@ -63,8 +77,8 @@
                                 <td>Price</td>
                                 <td>Quantity</td>
                                 <td>Note</td>
-                                <td>Unit w.</td>
-                                <td>Total w.</td>
+                                <td>Bruto (kg)</td>
+                                <td>Netto (kg)</td>
                                 <td></td>
                             </thead>
                             <tr v-for="product, index in quote.data">
@@ -79,6 +93,12 @@
                                 <td width="5%"><span v-on:click="removeItem(index)">X</span></td>
                             </tr>
                         </table>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                        <div class="text-right">
+                            <b>Total weight</b>: {{ totalWeight }} kg
+                        </div>
                     </div>
                     <div class="col-md-12">
                        <button class="btn btn-info" type="button" v-on:click="newProduct()">+ new product</button>
@@ -105,7 +125,9 @@
                 searchText: '',
                 showResults: false,
                 showProducts: true,
+                currency: 'EUR',
                 quote: [],
+                totalWeight: 0.00,
                 quoteData: {
                     user_id: user_id,
                     client_id: '',
@@ -126,23 +148,39 @@
 
             axios.all([
                 axios.get('/api/V1/quotes/' + app.$route.params.id),
-                // axios.get('/api/V1/orderStatus'),
+                axios.get('/api/V1/orderStatus'),
                 axios.get('/api/V1/products'),
-            ]).then(axios.spread((quote, products) => {
+                // axios.get('/api/V1/orderStatus'),
+            ]).then(axios.spread((quote, status, products) => {
                 app.quote = quote.data;
-                // app.orderStatus = orderStatus.data;
+                app.orderStatus = status.data;
                 app.products = products.data;
 
                 app.quoteData.client_id = quote.data.client_id;
                 app.order.client_id = quote.data.client_id;
                 app.quoteData.client = quote.data.client;
-
-                console.log(app.orderData);
+                app.countTotalWeight()
+                // console.log(app.orderData);
             })).catch(function(err){
                 toastr.error('Failed to load! ' +err);
             });
         },
         methods:{
+            countTotalWeight(){
+                console.log("Counting total weight")
+                var app = this
+
+                app.totalWeight = parseFloat(0)
+
+                app.quote.data.forEach(item => {
+                    if(item.bruto != null){
+                        app.totalWeight =  app.totalWeight + parseFloat(item.bruto)
+                    }
+
+                    console.log(item.bruto)
+                })
+                app.totalWeight = app.totalWeight.toFixed(2)
+            },
             createOrder(){
                 var app = this;
 
@@ -220,6 +258,7 @@
                         console.log(err);
                     });
                 }
+                app.countTotalWeight()
             }
         },
         computed:{
@@ -247,3 +286,9 @@
         }
     }
 </script>
+<style media="screen">
+    input[type="radio"]{
+        margin-left: 7px;
+        margin-right: 3px;
+    }
+</style>

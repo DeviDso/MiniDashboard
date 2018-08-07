@@ -2,7 +2,7 @@
     <div>
         <div class="col-md-9">
             <div class="desa-container">
-                <h1>{{ client.name }}</h1>
+                <h1>{{ client.company_type }}, {{ client.name }}</h1>
                 <p>{{ client.note }}</p>
                 <hr>
                 <table class="clientInfo">
@@ -236,7 +236,7 @@ export default{
         },
         newOrder(){
             var app = this;
-            app.$router.push({name: 'orderCreateId', params:{id:app.$route.params.id}});
+            app.$router.push({name: 'orderCreate', params:{id:app.$route.params.id}});
         },
         active(list){
             var temp = [];

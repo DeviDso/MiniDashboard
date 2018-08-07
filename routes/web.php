@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/generate/pdf/quote/english', 'PDFController@generateEN')->name('generateQuotePDFen');
 Route::post('/generate/pdf/quote/lithuanian', 'PDFController@generateLT')->name('generateQuotePDFlt');
+Route::post('/generate/pdf/order/english', 'PDFController@generateOrderEN')->name('generateOrderPDFen');
+Route::post('/generate/pdf/order/lithuanian', 'PDFController@generateOrderLT')->name('generateOrderPDFlt');
 Route::post('/generate/pdf/vaztarastis', 'PDFController@vaztarastis')->name('generateVaztarastis');
 
 

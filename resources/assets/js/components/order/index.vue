@@ -9,12 +9,14 @@
                     <td v-on:click="sortID()">#</td>
                     <td v-on:click="sortClient()">Client</td>
                     <td>Status</td>
+                    <td>Created by</td>
                     <td>Date</td>
                 </thead>
                 <tr v-for="order in paginate(orders)" v-on:click="openOrder(order.id)">
                     <td>{{ order.id }}</td>
                     <td>{{ order.client.name }}</td>
                     <td>{{ (order.status) ? order.status.name : '' }}</td>
+                    <td>{{ order.user.name }}</td>
                     <td>{{ order.created_at.substr(0,10) }}</td>
                 </tr>
             </table>

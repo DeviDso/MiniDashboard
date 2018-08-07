@@ -26,6 +26,15 @@
                     <a href="http://ec.europa.eu/taxation_customs/vies/" target="_blank">Check VAT</a>
                 </div>
                 <div class="col-md-4">
+                    <label>VAT STATUS</label>
+                    <select v-model="client.vat_status" class="form-control" required>
+                        <option v-bind:value="client.vat_status">{{ client.vat_status }}</option>
+                        <option value="EU" v-if="client.vat_status != 'EU'">EU</option>
+                        <option value="LT" v-if="client.vat_status != 'LT'">LT</option>
+                        <option value="NON EU" v-if="client.vat_status != 'NON EU'">NON EU</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
                     <label>Note</label>
                     <textarea v-model="client.note" rows="2" class="form-control"></textarea>
                 </div>
@@ -129,6 +138,7 @@ export default{
                 delivery_city: '',
                 credit_amount: 5,
                 payment_term: 'advance',
+                vat_status: 'EU'
             },
             countries: [],
             delivery: true,

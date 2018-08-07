@@ -17,7 +17,7 @@ class OrderController extends Controller
      */
     public function index(Request $r)
     {
-        return Order::where('confirmed', 1)->with(['client', 'status', 'data'])->orderBy('created_at', 'DSC')->get();
+        return Order::where('confirmed', 1)->with(['client', 'status', 'data', 'user'])->orderBy('created_at', 'DSC')->get();
     }
 
     /**
@@ -58,9 +58,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        return Order::with('client')
+        return Order::with(['client', 'user'])
                 ->where('id', $id)
-                ->with(['status', 'data', 'data.product'])
+                ->with(['status', 'data', 'data.product',])
                 ->firstOrFail();
     }
 

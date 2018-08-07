@@ -17,11 +17,37 @@
                  </div>
                  <div class="col-md-4">
                      <label>Delivery price (&euro;)</label>
-                     <input class="form-control" type="number" name="delivery_price" v-model="order.delivery_price" step="0.01" min="0">
+                     <input class="form-control" type="number" name="delivery_price" v-model="order.delivery_price" step="0.01" min="0" required>
                  </div>
                  <div class="col-md-4">
                     <label>Note</label>
                     <textarea class="form-control" v-model="order.note" rows="5"></textarea>
+                 </div>
+                 <div class="col-md-4">
+                     <label>Payment term</label>
+                     <select v-model="order.payment_term" class="form-control" required v-on:change="creditCheck()">
+                         <option value="Advance payment">Advance payment</option>
+                         <option value="Payment before delivery">Payment before delivery</option>
+                         <option value="Credit">Credit</option>
+                     </select>
+                 </div>
+                 <div class="col-md-4">
+                     <label>Courier account</label>
+                     <input type="text" class="form-control" v-model="order.courier_account" placeholder="DHL">
+                 </div>
+                 <div class="col-md-4">
+                     <div v-if="credit_status">
+                        <label>Credit amount</label>
+                        <select v-model="order.credit_term" class="form-control" required>
+                            <option :value="5">5 days</option>
+                            <option :value="7">7 days</option>
+                            <option :value="10">10 days</option>
+                            <option :value="14">14 days</option>
+                            <option :value="30">30 days</option>
+                            <option :value="45">45 days</option>
+                            <option :value="90">90 days</option>
+                        </select>
+                     </div>
                  </div>
                  <div class="col-md-12">
                     <hr>
@@ -48,8 +74,8 @@
                                 <td>Price</td>
                                 <td>Quantity</td>
                                 <td>Note</td>
-                                <td>Unit w.</td>
-                                <td>Total w.</td>
+                                <td>Bruto (kg)</td>
+                                <td>Netto (kg)</td>
                                 <td></td>
                             </thead>
                             <tr v-for="product, index in order.data">
@@ -86,9 +112,10 @@
                 clients: [],
                 order: {
                     user_id: user_id,
-                    client_id: '',
+                    client_id: this.$route.params.id,
                     delivery_price: '',
                     data: [],
+                    payment_term: ''
                 },
                 searchText: '',
                 showResults: false,
@@ -97,6 +124,7 @@
                 products: [],
                 orderData: [],
                 orderProducts: [],
+                credit_status: false,
             }
         },
         mounted(){
@@ -115,6 +143,15 @@
             });
         },
         methods:{
+            creditCheck(){
+                var app = this;
+                if (app.order.payment_term == 'Credit'){
+                   app.credit_status = true
+                } else{
+                   app.credit_status = false
+                   app.order.credit_amount = ''
+                }
+            },
             newProduct(){
                 var item = {
                     product_id: '',

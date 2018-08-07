@@ -3,21 +3,29 @@
 <button class="backButton" v-on:click="goBack()">Go back</button>
 <div class="desa-container">
     <div class="col-md-12">
-        <form id="pdfen" target="print_popup" action="/generate/pdf/quote/english" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+        <h4>Created by: <b>{{ order.user.name }}</b></h4>
+    </div>
+    <div class="col-md-12">
+        <form id="pdfen" target="print_popup" action="/generate/pdf/order/english" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
             <input type="hidden" name="quote_id" :value="order.id">
             <input type="hidden" name="_token" :value="this.csrf">
+            <input type="hidden" name="currency" :value="currency">
         </form>
-        <form id="pdflt" target="print_popup" action="/generate/pdf/quote/lithuanian" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+        <form id="pdflt" target="print_popup" action="/generate/pdf/order/lithuanian" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
             <input type="hidden" name="quote_id" :value="order.id">
             <input type="hidden" name="_token" :value="this.csrf">
+            <input type="hidden" name="currency" :value="currency">
         </form>
-
         <div class="alert alert-info text-center">
             If you made any changes don't forget to update order data before generating a new PDF
         </div>
     </div>
     <div class="col-md-4">
         <h4>PDF</h4>
+        Currency:
+        <input type="radio" value="EUR" v-model="currency" checked>EUR
+        <input type="radio" value="USD" v-model="currency">USD
+        <br><br>
         <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">English</button>
         <button type="submite" class="btn btn-primary" onclick="$('#pdflt').submit()">Lietuviškai</button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -40,7 +48,7 @@
                       <h3>Vežėjas</h3>
                       <div>
                           <input type="text" name="vezejo_pavadinimas" class="form-control" v-model="vaztarastis.vezejo_pavadinimas = 'UAB \'\'Power Parts Pro\'\''" placeholder="Įmonės pavadinimas">
-                      </div><br>
+                      </div>
                       <div>
                           <input type="text" name="vezejo_kodas" class="form-control" v-model="vaztarastis.vezejo_kodas =  '302786671'" placeholder="Įmonės kodas">
                       </div><br>
@@ -69,25 +77,23 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Uždaryti</button>
                 <button type="button" class="btn btn-primary" onclick="$('#vaztarastisForm').submit()">Generuoti</button>
               </div>
-                              </form>
+                </form>
             </div>
           </div>
         </div>
     </div>
     <div class="col-md-5">
-      <label>Note</label>
-      <textarea class="form-control" v-model="order.note" rows="3"></textarea>
+        <label>Note</label>
+        <textarea class="form-control" v-model="order.note" rows="3"></textarea>
     </div>
     <div class="col-md-3 text-right">
         <h4>Actions</h4>
         <button type="button" class="btn btn-danger" v-on:click="deleteOrder(order.id)">Delete order</button>
     </div>
-    <div class="col-md-12">
-        <hr>
-    </div>
     <form v-on:submit="sendForm()">
         <!-- <h1>New order</h1> -->
         <div class="col-md-12">
+            <hr>
             <div class="col-md-5">
                 <label>Client</label>
                 <!-- {{ order }} -->
@@ -104,6 +110,35 @@
             <div class="col-md-3">
                 <label>Delivery Price</label>
                 <input class="form-control" type="number" name="delivery_price" v-model="order.delivery_price" step="0.01" min="0">
+            </div>
+            <div class="col-md-5">
+                <label>Payment term</label>
+                <select v-model="order.payment_term" class="form-control" required v-on:change="creditCheck()">
+                    <option value="Advance payment">Advance payment</option>
+                    <option value="Payment before delivery">Payment before delivery</option>
+                    <option value="Credit">Credit</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <div v-if="credit_status">
+                   <label>Credit amount</label>
+                   <select v-model="order.credit_term" class="form-control" required>
+                       <option :value="5">5 days</option>
+                       <option :value="7">7 days</option>
+                       <option :value="10">10 days</option>
+                       <option :value="14">14 days</option>
+                       <option :value="30">30 days</option>
+                       <option :value="45">45 days</option>
+                       <option :value="90">90 days</option>
+                   </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>Courier</label>
+                <input type="text" class="form-control" v-model="order.courier" placeholder="DHL">
+            </div>
+            <div class="col-md-12">
+                <hr>
             </div>
             <div class="col-md-12">
                 <div class="col-md-12">
@@ -129,8 +164,8 @@
                         <td>Price</td>
                         <td>Quantity</td>
                         <td>Note</td>
-                        <td>Bruto (Kg)</td>
-                        <td>Netto (Kg)</td>
+                        <td>Bruto (kg)</td>
+                        <td>Netto (kg)</td>
                         <td></td>
                     </thead>
                     <tr v-for="product, index in order.data">
@@ -148,13 +183,11 @@
             </div>
             <div class="col-md-12">
                 <hr>
+                <div class="text-right">
+                    <b>Total weight</b>: {{ totalWeight }} kg
+                </div>
             </div>
-            <div class="col-md-6">
-               <button class="btn btn-info" type="button" v-on:click="newProduct()">+ new product</button>
-            </div>
-            <div class="col-md-6 text-right">
-               <b>Total weight</b>: {{ totalWeight }} kg
-            </div>
+            <button class="btn btn-info" type="button" v-on:click="newProduct()">+ new product</button>
         </div>
 
         <div class="col-md-12">
@@ -179,7 +212,8 @@ data(){
         showResults: false,
         showProducts: true,
         order: [],
-        totalWeight: 0.00,
+        currency: 'EUR',
+        credit_status: false,
         orderData: {
             user_id: user_id,
             client_id: '',
@@ -188,6 +222,7 @@ data(){
             data: [],
             status_id:  1
         },
+        totalWeight: 0.00,
     }
 },
 mounted(){
@@ -207,12 +242,38 @@ mounted(){
         app.orderData.client = order.data.client;
 
         order.status_id = 1;
+        (app.order.payment_term == 'Credit') ? app.credit_status = true : app.credit_status = false;
+        app.countTotalWeight()
     })).catch(function(err){
         toastr.error('Failed to load! ' +err);
     });
 
 },
 methods:{
+    creditCheck(){
+        var app = this;
+        if (app.order.payment_term == 'Credit'){
+           app.credit_status = true
+        } else{
+           app.credit_status = false
+           app.order.credit_term = ''
+        }
+    },
+    countTotalWeight(){
+        console.log("Counting total weight")
+        var app = this
+
+        app.totalWeight = parseFloat(0)
+
+        app.order.data.forEach(item => {
+            if(item.bruto != null){
+                app.totalWeight =  app.totalWeight + parseFloat(item.bruto)
+            }
+
+            console.log(item.bruto)
+        })
+        app.totalWeight = app.totalWeight.toFixed(2)
+    },
     deleteOrder(id){
         var app = this;
 
@@ -279,6 +340,7 @@ methods:{
                 console.log(err);
             });
         }
+    app.countTotalWeight()
     },
     vaztarastis(){
         alert(1);
@@ -288,15 +350,15 @@ computed:{
     productsList(){
         this.showResults = true;
 
-       var temp = [];
+        var temp = [];
 
-      this.products.forEach((item) => {
-         if(temp.length == 10) return temp;
-         (item.name.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
-         (item.code.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
-      });
+        this.products.forEach((item) => {
+            if(temp.length == 10) return temp;
+            (item.name.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
+            (item.code.toLowerCase().includes(this.searchText)) ? temp.push(item) : false;
+        });
 
-      return temp;
+        return temp;
         // return this.products.filter(product => {
         //     return product.code.includes(this.searchText);
         // });
@@ -305,7 +367,13 @@ computed:{
 watch:{
     searchText(){
         (this.searchText != '')? this.showResults = true : this.showResults = false;
-    },
+    }
 }
 }
 </script>
+<style media="screen">
+    input[type="radio"]{
+        margin-left: 7px;
+        margin-right: 3px;
+    }
+</style>

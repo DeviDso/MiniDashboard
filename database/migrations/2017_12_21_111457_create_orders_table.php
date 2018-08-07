@@ -23,6 +23,10 @@ class CreateOrdersTable extends Migration
             $table->foreign('status_id')->references('id')->on('order_status')->onDelete('cascade');
             $table->decimal('delivery_price', 12, 2);
             $table->text('note')->nullable();
+            $table->date('deadline')->nullable();
+            $table->string('payment_term')->nullable();
+            $table->string('credit_term')->nullable();
+            $table->string('courier')->nullable();
             $table->integer('confirmed')->default(0);
             $table->timestamps();
         });
