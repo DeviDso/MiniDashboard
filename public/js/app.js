@@ -87832,6 +87832,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -87855,6 +87882,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 note: '',
                 data: [],
                 status_id: 1
+            },
+            pdfData: {
+                _token: this.csrf,
+                quote_id: '',
+                pdfType: '',
+                currency: this.currency
             },
             totalWeight: 0.00
         };
@@ -87897,7 +87930,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             app.order.data.forEach(function (item) {
                 if (item.bruto != null) {
-                    app.totalWeight = app.totalWeight + parseFloat(item.bruto);
+                    app.totalWeight = app.totalWeight + parseFloat(item.bruto) * parseInt(item.quantity);
                 }
 
                 console.log(item.bruto);
@@ -87917,13 +87950,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         },
-        generatePDF: function generatePDF(id) {
-            axios.post('/api/V1/pdf', this.orderData).then(function (res) {
-                console.log(res);
-            }).catch(function () {
-                console.log(err);
-            });
-        },
+
+        // generatePDF(id){
+        //     axios.post('/api/V1/pdf', this.orderData).then(function(res){
+        //         console.log(res);
+        //     }).catch(function(){
+        //         console.log(err);
+        //     });
+        // },
         newProduct: function newProduct() {
             var item = {
                 product_id: '',
@@ -91149,7 +91183,7 @@ var render = function() {
           "form",
           {
             attrs: {
-              id: "pdfen",
+              id: "orderEn",
               target: "print_popup",
               action: "/generate/pdf/order/english",
               method: "post",
@@ -91179,9 +91213,129 @@ var render = function() {
           "form",
           {
             attrs: {
-              id: "pdflt",
+              id: "orderLt",
               target: "print_popup",
               action: "/generate/pdf/order/lithuanian",
+              method: "post",
+              onsubmit:
+                "window.open('about:blank','print_popup','width=1000,height=800');"
+            }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "quote_id" },
+              domProps: { value: _vm.order.id }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: this.csrf }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "currency" },
+              domProps: { value: _vm.currency }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: {
+              id: "preInvoiceEn",
+              target: "print_popup",
+              action: "/generate/pdf/pre-invoice/english",
+              method: "post",
+              onsubmit:
+                "window.open('about:blank','print_popup','width=1000,height=800');"
+            }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "quote_id" },
+              domProps: { value: _vm.order.id }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: this.csrf }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "currency" },
+              domProps: { value: _vm.currency }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: {
+              id: "preInvoiceLt",
+              target: "print_popup",
+              action: "/generate/pdf/pre-invoice/lithuanian",
+              method: "post",
+              onsubmit:
+                "window.open('about:blank','print_popup','width=1000,height=800');"
+            }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "quote_id" },
+              domProps: { value: _vm.order.id }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: this.csrf }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "currency" },
+              domProps: { value: _vm.currency }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: {
+              id: "invoiceLt",
+              target: "print_popup",
+              action: "/generate/pdf/invoice/lithuanian",
+              method: "post",
+              onsubmit:
+                "window.open('about:blank','print_popup','width=1000,height=800');"
+            }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "quote_id" },
+              domProps: { value: _vm.order.id }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: this.csrf }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "currency" },
+              domProps: { value: _vm.currency }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: {
+              id: "invoiceEn",
+              target: "print_popup",
+              action: "/generate/pdf/invoice/english",
               method: "post",
               onsubmit:
                 "window.open('about:blank','print_popup','width=1000,height=800');"
@@ -91258,18 +91412,60 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-primary",
-            attrs: { type: "submite", onclick: "$('#pdfen').submit()" }
+            attrs: { type: "submite", onclick: "$('#orderEn').submit()" }
           },
-          [_vm._v("English")]
+          [_vm._v("Order")]
         ),
         _vm._v(" "),
         _c(
           "button",
           {
             staticClass: "btn btn-primary",
-            attrs: { type: "submite", onclick: "$('#pdflt').submit()" }
+            attrs: { type: "submite", onclick: "$('#orderLt').submit()" }
           },
-          [_vm._v("Lietuviškai")]
+          [_vm._v("Order (LT)")]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submite", onclick: "$('#preInvoiceEn').submit()" }
+          },
+          [_vm._v("Performa invoice")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submite", onclick: "$('#preInvoiceLt').submit()" }
+          },
+          [_vm._v("Performa invoice (LT)")]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submite", onclick: "$('#invoiceEn').submit()" }
+          },
+          [_vm._v("Invoice")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submite", onclick: "$('#invoiceLt').submit()" }
+          },
+          [_vm._v("Invoice (LT)")]
         ),
         _vm._v(" "),
         _c(

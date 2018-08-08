@@ -6,16 +6,37 @@
         <h4>Created by: <b>{{ order.user.name }}</b></h4>
     </div>
     <div class="col-md-12">
-        <form id="pdfen" target="print_popup" action="/generate/pdf/order/english" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+        <form id="orderEn" target="print_popup" action="/generate/pdf/order/english" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
             <input type="hidden" name="quote_id" :value="order.id">
             <input type="hidden" name="_token" :value="this.csrf">
             <input type="hidden" name="currency" :value="currency">
         </form>
-        <form id="pdflt" target="print_popup" action="/generate/pdf/order/lithuanian" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+        <form id="orderLt" target="print_popup" action="/generate/pdf/order/lithuanian" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
             <input type="hidden" name="quote_id" :value="order.id">
             <input type="hidden" name="_token" :value="this.csrf">
             <input type="hidden" name="currency" :value="currency">
         </form>
+        <form id="preInvoiceEn" target="print_popup" action="/generate/pdf/pre-invoice/english" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+            <input type="hidden" name="quote_id" :value="order.id">
+            <input type="hidden" name="_token" :value="this.csrf">
+            <input type="hidden" name="currency" :value="currency">
+        </form>
+        <form id="preInvoiceLt" target="print_popup" action="/generate/pdf/pre-invoice/lithuanian" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+            <input type="hidden" name="quote_id" :value="order.id">
+            <input type="hidden" name="_token" :value="this.csrf">
+            <input type="hidden" name="currency" :value="currency">
+        </form>
+        <form id="invoiceLt" target="print_popup" action="/generate/pdf/invoice/lithuanian" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+            <input type="hidden" name="quote_id" :value="order.id">
+            <input type="hidden" name="_token" :value="this.csrf">
+            <input type="hidden" name="currency" :value="currency">
+        </form>
+        <form id="invoiceEn" target="print_popup" action="/generate/pdf/invoice/english" method="post" onsubmit="window.open('about:blank','print_popup','width=1000,height=800');">
+            <input type="hidden" name="quote_id" :value="order.id">
+            <input type="hidden" name="_token" :value="this.csrf">
+            <input type="hidden" name="currency" :value="currency">
+        </form>
+
         <div class="alert alert-info text-center">
             If you made any changes don't forget to update order data before generating a new PDF
         </div>
@@ -26,8 +47,14 @@
         <input type="radio" value="EUR" v-model="currency" checked>EUR
         <input type="radio" value="USD" v-model="currency">USD
         <br><br>
-        <button type="submite" class="btn btn-primary" onclick="$('#pdfen').submit()">English</button>
-        <button type="submite" class="btn btn-primary" onclick="$('#pdflt').submit()">Lietuviškai</button>
+        <button type="submite" class="btn btn-primary" onclick="$('#orderEn').submit()">Order</button>
+        <button type="submite" class="btn btn-primary" onclick="$('#orderLt').submit()">Order (LT)</button>
+        <br><br>
+        <button type="submite" class="btn btn-primary" onclick="$('#preInvoiceEn').submit()">Performa invoice</button>
+        <button type="submite" class="btn btn-primary" onclick="$('#preInvoiceLt').submit()">Performa invoice (LT)</button>
+        <br><br>
+        <button type="submite" class="btn btn-primary" onclick="$('#invoiceEn').submit()">Invoice</button>
+        <button type="submite" class="btn btn-primary" onclick="$('#invoiceLt').submit()">Invoice (LT)</button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
           Važtaraštis
         </button>
@@ -222,6 +249,12 @@ data(){
             data: [],
             status_id:  1
         },
+        pdfData: {
+            _token: this.csrf,
+            quote_id: '',
+            pdfType: '',
+            currency: this.currency
+        },
         totalWeight: 0.00,
     }
 },
@@ -267,7 +300,7 @@ methods:{
 
         app.order.data.forEach(item => {
             if(item.bruto != null){
-                app.totalWeight =  app.totalWeight + parseFloat(item.bruto)
+                app.totalWeight =  app.totalWeight + (parseFloat(item.bruto) * parseInt(item.quantity))
             }
 
             console.log(item.bruto)
@@ -287,13 +320,13 @@ methods:{
             });
         }
     },
-    generatePDF(id){
-        axios.post('/api/V1/pdf', this.orderData).then(function(res){
-            console.log(res);
-        }).catch(function(){
-            console.log(err);
-        });
-    },
+    // generatePDF(id){
+    //     axios.post('/api/V1/pdf', this.orderData).then(function(res){
+    //         console.log(res);
+    //     }).catch(function(){
+    //         console.log(err);
+    //     });
+    // },
     newProduct(){
         var item = {
             product_id: '',

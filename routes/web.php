@@ -23,6 +23,10 @@ Route::post('/generate/pdf/quote/english', 'PDFController@generateEN')->name('ge
 Route::post('/generate/pdf/quote/lithuanian', 'PDFController@generateLT')->name('generateQuotePDFlt');
 Route::post('/generate/pdf/order/english', 'PDFController@generateOrderEN')->name('generateOrderPDFen');
 Route::post('/generate/pdf/order/lithuanian', 'PDFController@generateOrderLT')->name('generateOrderPDFlt');
+Route::post('/generate/pdf/pre-invoice/english', 'PDFController@generatePreInvoiceEN')->name('generatePreInvoicePDFen');
+Route::post('/generate/pdf/pre-invoice/lithuanian', 'PDFController@generatePreInvoiceLT')->name('generatePreInvoicePDFlt');
+Route::post('/generate/pdf/invoice/english', 'PDFController@generateInvoiceEN')->name('generatePreInvoicePDFen');
+Route::post('/generate/pdf/invoice/lithuanian', 'PDFController@generateInvoiceLT')->name('generatePreInvoicePDFlt');
 Route::post('/generate/pdf/vaztarastis', 'PDFController@vaztarastis')->name('generateVaztarastis');
 
 
