@@ -76,6 +76,11 @@
                             <i class="fa fa-gears"></i> Settings
                         </li>
                     </router-link>
+                    <router-link :to="{name: 'importProductsView'}">
+                        <li class="menu-item">
+                            <i class="fa fa-upload"></i> Import
+                        </li>
+                    </router-link>
                     <li class="menu-item" onclick="(confirm('Do you realy want to log out?')) ? document.getElementById('logout-form').submit() : false;">
                         <i class="fa fa-sign-out"></i> Logout
                     </li>

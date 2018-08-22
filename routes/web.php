@@ -28,7 +28,7 @@ Route::post('/generate/pdf/pre-invoice/lithuanian', 'PDFController@generatePreIn
 Route::post('/generate/pdf/invoice/english', 'PDFController@generateInvoiceEN')->name('generatePreInvoicePDFen');
 Route::post('/generate/pdf/invoice/lithuanian', 'PDFController@generateInvoiceLT')->name('generatePreInvoicePDFlt');
 Route::post('/generate/pdf/vaztarastis', 'PDFController@vaztarastis')->name('generateVaztarastis');
-
+Route::post('/import/products', 'ImportController@products');
 
 // Route::get('/by', function(){
 //     $country1 = 'PL';
