@@ -25,12 +25,11 @@
         var formData = new FormData();
         var csvFile = document.querySelector('#csv_file')
         formData.append("csv_file", csvFile.files[0])
-
-
         axios.post('import/products', formData, {headers: {
       'Content-Type': 'multipart/form-data'
     }}).then(res =>{
-          console.log(res)
+      this.$router.push({name: 'home', params:{}});
+      toastr.success('Products imported successfully!');
         }).catch(err => {
             console.log(err)
         });
